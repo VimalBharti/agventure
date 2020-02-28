@@ -1,0 +1,222 @@
+@import "./vuetify.min.css";
+@import "~@mdi/font/css/materialdesignicons.min.css";
+
+.box-shadow {
+    -webkit-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+    -moz-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+}
+a {
+    text-decoration: none;
+}
+.relative {
+    position: relative;
+}
+.border-bottom {
+    border-bottom: 1px solid #efefef !important;
+}
+// Navbar
+.main-navbar {
+    border-bottom: 1px solid #efefef !important;
+    background: #fff !important;
+}
+.auth-dropdown-menu {
+    margin-top: 12px;
+    border: 1px solid;
+    padding: 0px;
+}
+p.background-line {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin: 20px 0 30px 0;
+
+    &::before {
+        border-top: 2px solid #dfdfdf;
+        content: "";
+        margin: 0 auto; /* this centers the line to the full width specified */
+        position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+        top: 50%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 95%;
+        z-index: -1;
+    }
+    span {
+        background: #fff;
+        padding: 0 15px;
+    }
+}
+
+// left-sidebar
+.left-sidebar {
+    background: #fff;
+    padding: 0px;
+    min-height: 86vh;
+    .sidebar-links {
+        h6 {
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+            margin-left: 2rem;
+            color: #aaa;
+            &::before {
+                border-top: 1px solid #efefef;
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 0;
+                bottom: 0;
+                width: 85%;
+                z-index: -1;
+            }
+        }
+    }
+    .notification {
+        background: rgb(13, 126, 126);
+        color: #fff;
+        font-weight: bold;
+        border-radius: 100%;
+        padding: 1px 5px;
+        position: absolute;
+        top: 0;
+        left: 40px;
+    }
+}
+// Right Sidebar
+.right-sidebar {
+    background: #fff;
+    max-height: 86vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+// Add New Post Links
+.post-type-tabs {
+    // display: flex;
+    background: #fff;
+    margin-bottom: 12px;
+
+    .tab-icons {
+        text-align: center;
+    }
+    label {
+        cursor: pointer;
+    }
+}
+.post-btn {
+    background: grey;
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: #fff;
+}
+.single-tabs {
+    background: #fff;
+    padding: 1.2rem;
+    cursor: pointer;
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+.main-container {
+    max-height: 86vh;
+    overflow: hidden;
+    .center-post-container {
+        max-height: 86vh;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+// Home Page All Post
+video {
+    width: 100%;
+}
+.center-post-area {
+    .post-auth-details {
+        .auth-name {
+            color: #222;
+        }
+    }
+    .img-box {
+        padding: 0px;
+        margin-top: 12px;
+    }
+    .post-body {
+        margin-bottom: 0px;
+    }
+}
+.public-user-hover-detail {
+    display: flex;
+    .a-link {
+        width: 50%;
+        text-align: center;
+        border: 1px solid #efefef;
+        padding: 8px;
+        a {
+            color: #333;
+        }
+    }
+}
+
+// Register Page
+.register {
+    min-height: 86vh;
+    .register-input-form {
+        padding: 2.5em;
+        margin-top: 5%;
+        h3 {
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .tag-text {
+            font-size: 14px;
+            color: #777;
+            line-height: 20px;
+        }
+    }
+    .forgot-password {
+        margin-top: 2em;
+        a {
+            font-size: 14px;
+            color: #888;
+            text-decoration: none;
+            &:hover {
+                color: #555;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// Public profile
+.blur-bg {
+    -webkit-filter: blur(4px); /* Safari 6.0 - 9.0 */
+    filter: blur(4px);
+    position: relative;
+    margin-bottom: 5em;
+}
+.user-avatar-box-public {
+    position: absolute;
+    top: 80px;
+    .link-button-public {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .auth-image-public {
+        border: 2px solid #fff;
+    }
+}
