@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <v-row class="main-container">
-        <!-- sidebar -->
-        @include('_partials.sidebar')
+    <v-container>
+        <v-row class="main-container">
+            <!-- sidebar -->
+            @include('_partials.sidebar')
 
-        <v-col cols="10" class="grey lighten-5 center-post-container">
-            <v-container>
+            <v-col cols="10" class="grey lighten-5 center-post-container">
                 <v-row>
                     <v-col>                        
                         <!-- <v-list three-line>
@@ -41,7 +41,6 @@
                                 @endforeach
                             </template>
                         </v-list> -->
-                        <h2>Chat Inbox</h2>
                         <chat :user="{{ auth()->user() }}"></chat>
                     </v-col>
                     <!-- <v-col cols="5">
@@ -72,8 +71,7 @@
                         </v-card>
                     </v-col> -->
                 </v-row>
-            </v-container>
-        </v-col>
-    
-    </v-row>
+            </v-col>
+        </v-row>
+    </v-container>
 @endsection

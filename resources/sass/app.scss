@@ -1,6 +1,8 @@
 @import "./vuetify.min.css";
 @import "~@mdi/font/css/materialdesignicons.min.css";
-
+#app {
+    background: #fafafa;
+}
 .box-shadow {
     -webkit-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
     -moz-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
@@ -17,7 +19,8 @@ a {
 }
 // Navbar
 .main-navbar {
-    border-bottom: 1px solid #efefef !important;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
     background: #fff !important;
 }
 .auth-dropdown-menu {
@@ -51,10 +54,13 @@ p.background-line {
 
 // left-sidebar
 .left-sidebar {
-    background: #fff;
+    // background: #fff;
     padding: 0px;
     min-height: 86vh;
     .sidebar-links {
+        .sidebar-link-box {
+            background: #fafafa;
+        }
         h6 {
             margin-top: 1rem;
             position: relative;
@@ -86,7 +92,7 @@ p.background-line {
 }
 // Right Sidebar
 .right-sidebar {
-    background: #fff;
+    background: #fafafa;
     max-height: 86vh;
     overflow-y: scroll;
     -ms-overflow-style: none;
@@ -111,6 +117,7 @@ p.background-line {
 .post-btn {
     background: grey;
     padding: 6px 12px;
+    font-size: 12px;
     border-radius: 5px;
     color: #fff;
 }
@@ -210,8 +217,6 @@ video {
     margin-bottom: 5em;
 }
 .user-avatar-box-public {
-    position: absolute;
-    top: 80px;
     .link-button-public {
         display: flex;
         justify-content: space-evenly;
@@ -219,4 +224,11 @@ video {
     .auth-image-public {
         border: 2px solid #fff;
     }
+}
+.cover-profile {
+    height: 180px;
+    position: relative;
+}
+.public-profile-main-container {
+    margin-top: -100px;
 }

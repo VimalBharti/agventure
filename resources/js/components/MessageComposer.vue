@@ -1,6 +1,6 @@
 <template>
   <div class="composer">
-    <textarea v-model="message" @keydown.enter="send" placeholder="Message ..."></textarea>
+    <textarea v-model="message" @keydown.enter="send" placeholder="Type message here ..."></textarea>
   </div>
 </template>
 
@@ -26,11 +26,12 @@ export default {
 
 <style lang="scss" scoped>
 .composer textarea {
-  width: 96%;
-  margin: 10px;
+  width: 100%;
+  margin-top: 10px;
   resize: none;
   border-radius: 3px;
   border: 1px solid lightgray;
   padding: 6px;
+  background: #fff;
 }
 </style>

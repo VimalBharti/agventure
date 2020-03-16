@@ -1,22 +1,30 @@
 <template>
   <div class="contacts-list">
-    <ul>
-      <li
+    <template>
+      <v-subheader>Unread Messages</v-subheader>
+      <v-list-item
         v-for="contact in sortedContacts"
         :key="contact.id"
         @click="selectContact(contact)"
-        :class="{ 'selected' : contact == selected }"
+        :class="{ selected: contact == selected }"
+        id="single-user-list"
+        v-if="contact.unread"
       >
-        <div class="avatar">
-          <img :src="contact.image" :alt="contact.name" />
-        </div>
-        <div class="contact">
-          <p class="name">{{ contact.name }}</p>
-          <p class="email">{{ contact.email }}</p>
-        </div>
-        <span class="status" v-if="contact.unread">{{contact.unread}}</span>
-      </li>
-    </ul>
+        <v-list-item-avatar>
+          <img :src="`/storage/profile/${contact.image}`" :alt="contact.name" />
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ contact.name }}</v-list-item-title>
+        </v-list-item-content>
+
+        <v-list-item-icon v-if="contact.unread">
+          <v-btn fab x-small dark color="green">
+            <span>{{ contact.unread }}</span>
+          </v-btn>
+        </v-list-item-icon>
+      </v-list-item>
+    </template>
   </div>
 </template>
 
@@ -55,11 +63,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#single-user-list {
+  border-bottom: 1px solid #efefef;
+}
 .contacts-list {
-  flex: 2;
   min-height: 72vh;
   overflow: scroll;
-  border-left: 1px solid #a6a6a6;
+  border-left: 1px solid #efefef;
+  background: #fff;
   ul {
     list-style-type: none;
     padding-left: 0;

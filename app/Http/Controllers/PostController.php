@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\PostDetail;
 use App\Video;
+use App\Like;
 use Auth;
 use Storage;
 use DB;
@@ -16,7 +17,7 @@ class PostController extends Controller
     // Main Home Page
     public function home(){
         // $posts = Post::orderBy('created_at', 'desc')->get();
-        $posts = Post::with('postdetails')->orderBy('created_at', 'desc')->get();
+        $posts = Post::with('postdetails', 'likes')->orderBy('created_at', 'desc')->get();
         return view('welcome', compact('posts', 'details'));
     }
 
@@ -56,7 +57,7 @@ class PostController extends Controller
 
     // Post save by axios
     public function getAllPosts(){
-        $posts = Post::with('postdetails', 'user')->orderBy('created_at', 'desc')->get();
+        $posts = Post::with('postdetails', 'user', 'likes')->orderBy('created_at', 'desc')->get();
         return response()->json($posts);
     }
     public function imageUpload(Request $request){
@@ -79,6 +80,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+
     // Likes system
     public function isLikedByMe($id)
     {
@@ -89,22 +91,31 @@ class PostController extends Controller
         return 'false';
     }
 
-    public function like(Post $post)
+    public function like(Request $request)
     {
-        $existing_like = Like::withTrashed()->wherePostId($post->id)->whereUserId(Auth::id())->first();
+        $existing_like = Like::where(['user_id' => Auth::id(), 'post_id' => $request->id])->first();
 
-        if (is_null($existing_like)) {
+        if ($existing_like) {
+            Like::where(['user_id' => Auth::id(), 'post_id' => $request->id])->delete();
+        } else {
             Like::create([
-                'post_id' => $post->id,
+                'post_id' => $request->id,
                 'user_id' => Auth::id()
             ]);
-        } else {
-            if (is_null($existing_like->deleted_at)) {
-                $existing_like->delete();
-            } else {
-                $existing_like->restore();
-            }
         }
+            
         return redirect()->back();
     }
+
+    public function likePost(Post $post)
+    {
+        Auth::user()->likes()->attach($post->id);
+            return back();
+    }
+
+    public function unlikePost(Post $post){
+        Auth::user()->likes()->detach($post->id);
+        return back();
+    }
+
 }

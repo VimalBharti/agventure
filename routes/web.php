@@ -32,7 +32,8 @@ Route::get('/contacts', 'HomeController@get');
 Route::get('/conversation/{id}', 'HomeController@getMessageFor');
 Route::post('/conversation/send', 'HomeController@send');
 
-
+// Blog
+Route::get('articles', 'BlogController@index')->name('blog');
 
 // Post
 Route::group(['middleware' => 'auth', 'prefix' => 'post'], function(){
@@ -46,9 +47,13 @@ Route::post('/images-upload', 'PostController@imageUpload');
 Route::get('post/{id}/islikedbyme', 'PostController@isLikedByMe');
 Route::post('post/like', 'PostController@like')->name('like.dislike');
 
+Route::post('like/{post}','PostsController@likePost');
+Route::post('unlike/{post}','PostsController@unlikePost');
+
 
 // Admin
 Route::get('/admin/dashboard', 'AdminController@index');
 
 // Public Profile
-Route::get('/account/{id}', 'UserController@profile')->name('public-profile');
+Route::get('/{username}', 'UserController@profile')->name('public-profile');
+

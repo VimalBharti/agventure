@@ -20,83 +20,38 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>
-                <v-menu
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :nudge-width="200"
-                  offset-x
-                  open-on-hover
-                >
-                  <template v-slot:activator="{ on }">
-                    <a class="auth-name" v-on="on">{{post.user.name}}</a>
-                  </template>
-
-                  <v-card max-width="344">
-                    <v-list>
-                      <v-list-item>
-                        <v-list-item-avatar>
-                          <img :src="`/storage/profile/${post.user.image}`" />
-                        </v-list-item-avatar>
-                        <v-list-item-content>
-                          <v-list-item-title>{{post.user.name}}</v-list-item-title>
-                          <v-list-item-subtitle>
-                            <span>@</span>
-                            {{post.user.username}}
-                          </v-list-item-subtitle>
-                        </v-list-item-content>
-                      </v-list-item>
-                    </v-list>
-
-                    <v-divider></v-divider>
-
-                    <v-card-text>
-                      <p>{{post.user.about}}</p>
-                    </v-card-text>
-
-                    <v-divider></v-divider>
-
-                    <div class="public-user-hover-detail">
-                      <div class="a-link">
-                        <a href="#">
-                          <v-icon>mdi-account-check</v-icon>Connect
-                        </a>
-                      </div>
-                      <div class="a-link">
-                        <a href="#">
-                          <v-icon>mdi-message-text-outline</v-icon>Message
-                        </a>
-                      </div>
-                    </div>
-                  </v-card>
-                </v-menu>
+                <a :href="`${post.user.username}`" class="auth-name">{{ post.user.name }}</a>
               </v-list-item-title>
-              <v-list-item-subtitle>{{post.created_at}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ post.created_at | formatDate }}</v-list-item-subtitle>
             </v-list-item-content>
+            <v-list-item-action>
+              <v-btn icon @click="addtofav()">
+                <v-icon>mdi-bookmark-check</v-icon>
+              </v-btn>
+            </v-list-item-action>
+            <v-list-item-action>
+              <v-btn icon>
+                <v-icon>mdi-share-variant</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </v-list-item>
 
-          <v-container v-if="post.body">
-            <p class="post-body">{{post.body}}</p>
-          </v-container>
-
-          <!-- <v-container>
-            <v-row>
-              <v-col v-for="image in post.postdetails" :key="image.id">
-                <v-img
-                  :src="`/storage/uploads/${image.filename}`"
-                  aspect-ratio="1"
-                  :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                ></v-img>
-              </v-col>
-            </v-row>
-          </v-container>-->
           <div class="gallery">
             <div class="gallery-panel" v-for="image in post.postdetails" :key="image.id">
               <img
                 :src="`/storage/uploads/${image.filename}`"
-                :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                :lazy-src="
+                                    `https://picsum.photos/10/6?image=${n * 5 +
+                                        10}`
+                                "
               />
             </div>
           </div>
+          <v-container v-if="post.body">
+            <p class="post-body">{{ post.body }}</p>
+          </v-container>
+
+          <div class="post-response"></div>
         </v-card>
       </v-col>
     </v-row>
@@ -107,20 +62,37 @@
 export default {
   data: () => ({
     posts: null,
-    errors: [],
-    col6: "6"
+    errors: []
   }),
 
   // Fetch all post when compnent is created.
   created() {
-    axios
-      .get("/get_all")
-      .then(response => {
-        this.posts = response.data;
-      })
-      .catch(e => {
-        this.error.push(e);
-      });
+    this.fetchData();
+  },
+  // updated() {
+  //   this.fetchData();
+  // },
+  methods: {
+    fetchData() {
+      axios
+        .get("/get_all")
+        .then(response => {
+          this.posts = response.data;
+        })
+        .catch(e => {
+          this.error.push(e);
+        });
+    },
+    addtofav() {
+      axios
+        .post("/like")
+        .then(response => {
+          console.log("add to favourite");
+        })
+        .catch(e => {
+          this.error.push(e);
+        });
+    }
   }
 };
 </script>
@@ -132,22 +104,26 @@ export default {
   //   grid-gap: 1rem;
   max-width: 100rem;
   padding: 0 5px;
-  max-height: 21vw;
+  max-height: 17vw;
   overflow: hidden;
 }
 .gallery-panel {
   padding: 0.3rem;
   img {
     width: 100%;
-    height: 20vw;
+    height: 16vw;
     object-fit: cover;
     object-position: center top;
     border-radius: 0.55rem;
   }
 }
 .post-body {
+  margin-left: 0.5rem;
   font-size: 15px;
   line-height: 21px;
   color: #444;
+}
+.likeBtn {
+  cursor: pointer;
 }
 </style>

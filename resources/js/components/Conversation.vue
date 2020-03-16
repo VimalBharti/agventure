@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 .conversation {
-  flex: 5;
+  flex: 4;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -51,6 +51,7 @@ export default {
     padding: 10px;
     margin: 0;
     border-bottom: 1px dashed lightgray;
+    background: #fff;
   }
 }
 </style>

@@ -1,6 +1,26 @@
 <template>
   <div class="imagePost">
-    <v-textarea v-model="body" label="About Post..." solo flat rows="1" auto-grow></v-textarea>
+    <h4>
+      <v-icon small>mdi-pencil</v-icon>
+      <span>Share an update!</span>
+    </h4>
+    <v-divider></v-divider>
+
+    <v-row>
+      <v-col cols="1">
+        <v-list-item-avatar color="grey">
+          <v-img
+            :src="`/storage/profile/${user.image}`"
+            lazy-src="https://picsum.photos/10/6"
+            aspect-ratio="1"
+            class="grey lighten-2"
+          ></v-img>
+        </v-list-item-avatar>
+      </v-col>
+      <v-col cols="11">
+        <v-textarea v-model="body" label="Whats on your mind?" solo flat rows="1" auto-grow></v-textarea>
+      </v-col>
+    </v-row>
 
     <div
       class="uploader"
@@ -9,36 +29,33 @@
       @dragover.prevent
       @drop="onDrop"
       :class="{ dragging: isDragging }"
+      v-show="photos.length"
     >
-      <div v-show="!photos.length">
-        <p>Drag your images here</p>
-        <div>OR</div>
-        <div class="file-input">
-          <label for="file">Select a file</label>
-          <input type="file" id="file" @change="onInputChange" multiple />
-        </div>
-      </div>
-
-      <div class="upload-control">
-        <label for="file">Select a file</label>
-        <button @click="upload">Upload</button>
-      </div>
-
-      <div class="images-preview" v-show="photos.length">
+      <div class="images-preview">
         <div class="img-wrapper" v-for="(image, index) in photos" :key="index">
           <img :src="image" :alt="`Agventure ${index}`" />
           <div class="details">
-            <span class="name" v-text="files[index].name"></span>
+            <!-- <span class="name" v-text="files[index].name"></span> -->
             <span class="size" v-text="getFileSize(files[index].size)"></span>
           </div>
         </div>
       </div>
     </div>
+    <v-divider></v-divider>
+    <v-row class="upload-control">
+      <label for="file">
+        <v-icon>mdi-camera</v-icon>
+      </label>
+      <input type="file" id="file" @change="onInputChange" multiple />
+      <v-spacer></v-spacer>
+      <v-btn outlined @click="upload" small>Share</v-btn>
+    </v-row>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["user"],
   data: () => ({
     isDragging: false,
     dragCount: 0,
@@ -111,9 +128,10 @@ export default {
       axios
         .post("/images-upload", formData)
         .then(response => {
-          this.$toastr.s("Images uploaded successfully");
+          this.$toastr.s("Post shared successfully");
           this.photos = [];
           this.files = [];
+          this.body = [];
         })
         .catch(error => {
           console.log(error);
@@ -125,69 +143,42 @@ export default {
 
 <style lang="scss" scoped>
 @import "~vue-toastr/src/vue-toastr.scss";
+
+h4 {
+  padding-bottom: 12px;
+  font-weight: normal;
+}
 .uploader {
   width: 100%;
-  background: #2196f3;
+  background: #fafafa;
   color: #fff;
-  padding: 40px 15px;
+  padding: 10px;
   text-align: center;
-  border-radius: 10px;
-  border: 3px dashed #fff;
+  border-radius: 4px;
+  border: 1px solid #dedede;
   font-size: 20px;
   position: relative;
 
   &.dragging {
     background: #fff;
-    color: #2196f3;
-    border: 3px dashed #2196f3;
-
-    .file-input label {
-      background: #2196f3;
-      color: #fff;
-    }
-  }
-
-  .file-input {
-    width: 200px;
-    margin: auto;
-    height: 68px;
-    position: relative;
-
-    label,
-    input {
-      background: #fff;
-      color: #3196f3;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      top: 0;
-      padding: 10px;
-      border-radius: 4px;
-      margin-top: 7px;
-      cursor: pointer;
-    }
-    input {
-      opacity: 0;
-      z-index: -2;
-    }
+    border: 1px dashed #888;
   }
   .images-preview {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
 
     .img-wrapper {
-      width: 160px;
+      width: 10vw;
+      margin-bottom: 1.6em;
       display: flex;
       flex-direction: column;
-      margin: 10px;
-      height: 150px;
+      margin: 5px;
       justify-content: space-between;
       background: #fff;
-      box-shadow: 5px 5px 20px #3e3737;
+      box-shadow: 0px 0px 1px #3e3737;
 
       img {
-        max-height: 100px;
+        max-height: 120px;
       }
     }
     .details {
@@ -202,33 +193,25 @@ export default {
         overflow: hidden;
         height: 18px;
       }
+      .size {
+        font-size: 11px;
+        color: #777;
+      }
     }
   }
-  .upload-control {
-    position: absolute;
-    width: 100%;
-    background: #fff;
-    top: 0;
-    left: 0;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    padding: 10px;
-    padding-bottom: 4px;
-    text-align: right;
-
-    button,
-    label {
-      background: #2196f3;
-      border: 2px solid #03a9fa;
-      border-radius: 3px;
-      columns: #fff;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    label {
-      padding: 2px 5px;
-      margin-right: 10px;
-    }
+}
+.upload-control {
+  padding-top: 15px;
+  padding-right: 12px;
+  padding-left: 12px;
+  label {
+    cursor: pointer;
+    margin-right: 12px;
+  }
+  input {
+    opacity: 0;
+    visibility: hidden;
+    z-index: -2;
   }
 }
 </style>

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+        <v-container>
     <v-row class="main-container">
         <!-- sidebar -->
         @include('_partials.sidebar')
 
         <v-col cols="10" class="grey lighten-5 center-post-container">
-            <v-container>
                 <v-row>
                     <v-col cols="8">
                         @foreach($user->posts as $post)
@@ -45,8 +45,8 @@
                         </v-card>
                     </v-col>
                 </v-row>
-            </v-container>
         </v-col>
     
     </v-row>
+            </v-container>
 @endsection

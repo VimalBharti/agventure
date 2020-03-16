@@ -1,25 +1,7 @@
 <v-col cols="2" class="left-sidebar d-none d-md-block d-lg-block">
     @guest
-      <div class="sidebar-links">
-        <h6>All Category</h6>
-        <v-list dense nav>
-          <v-list-item link>
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-buffer</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>Dashboard</v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>My Account</v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-        </v-list>
+      <div class="sidebar-links mt-6">
+        <podcast></podcast>
       </div>
     @else
       <div class="user-profile-detail pl-4 mt-4">
@@ -30,7 +12,7 @@
 
           <v-list-item-content>
             <v-list-item-title>{{Auth::user()->name}}</v-list-item-title>
-            <v-list-item-subtitle>
+            <v-list-item-subtitle class="caption">
               {{Auth::user()->city}}, {{Auth::user()->country}}
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -38,7 +20,7 @@
       </div>
       <div class="sidebar-links">
         <h6>Main</h6>
-        <v-list dense nav>
+        <v-list dense nav class="sidebar-link-box">
           <v-list-item href="/">
             <v-list-item-icon>
               <v-icon class="grey--text">mdi-buffer</v-icon>
@@ -74,11 +56,21 @@
               </v-list-item-title>
             </v-list-content>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon class="grey--text">mdi-bookmark-check</v-icon>
+            </v-list-item-icon>
+            <v-list-content>
+              <v-list-item-title>
+                Saved Post
+              </v-list-item-title>
+            </v-list-content>
+          </v-list-item>
         </v-list>
       </div>
       <div class="sidebar-links">
         <h6>Other</h6>
-        <v-list dense nav>
+        <v-list dense nav class="sidebar-link-box">
           <v-list-item link>
             <v-list-item-icon>
               <v-icon class="grey--text">mdi-account-multiple-plus</v-icon>
@@ -102,7 +94,6 @@
               </v-list-item-title>
             </v-list-content>
           </v-list-item>
-
         </v-list>
       </div>
     @endguest

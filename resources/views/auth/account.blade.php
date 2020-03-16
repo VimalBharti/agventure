@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <v-row class="main-container">
-        <!-- sidebar -->
-        @include('_partials.sidebar')
-
-        <v-col cols="10" class="grey lighten-5 center-post-container">
-            <v-container>
+    <v-container>
+        <v-row class="main-container">
+            <!-- sidebar -->
+            @include('_partials.sidebar')
+            <v-col cols="" class="grey lighten-5 center-post-container">
                 <v-row>
                     <v-col cols="8">
                         <v-card
@@ -183,8 +182,7 @@
                         </v-card>
                     </v-col>
                 </v-row>
-            </v-container>
-        </v-col>
-    
-    </v-row>
+            </v-col>
+        </v-row>
+    </v-container>
 @endsection

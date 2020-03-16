@@ -7,6 +7,7 @@ use App\User;
 use App\Inbox;
 use Auth;
 use App\Events\NewMessage;
+use Session;
 
 
 class HomeController extends Controller
@@ -85,9 +86,15 @@ class HomeController extends Controller
         $inbox->message = $request->message;
         $inbox->receiver_id = $request->receiver_id;
         $inbox->save();
+
+        session()->flash('notify', 'Message sent');
+
         return redirect()->back();
     }
 
+
+    // Message App Start
+    
     public function get(){
         // get all user except the Auth user
         $contacts = User::where('id', '!=', auth()->id())->get();
