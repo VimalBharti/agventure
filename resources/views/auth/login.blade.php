@@ -9,7 +9,7 @@
     >
         <v-col lg="4" md="4" sm="12" xs="12">
             <v-card flat class="register-input-form">
-                <h1>Welcome Back</h1>
+                <h1>Welcome Back {{ isset($url) ? ucwords($url) : ""}}</h1>
                 <p class="tag-text">Don't miss your next opportunity. Sign in to stay updated on your agriculture world.</p>
 
                 <form method="POST" action="{{ route('login') }}">

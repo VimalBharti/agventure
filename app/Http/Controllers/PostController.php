@@ -7,6 +7,7 @@ use App\Post;
 use App\PostDetail;
 use App\Video;
 use App\Like;
+use App\Community;
 use Auth;
 use Storage;
 use DB;
@@ -17,14 +18,24 @@ class PostController extends Controller
     // Main Home Page
     public function home(){
         // $posts = Post::orderBy('created_at', 'desc')->get();
-        $posts = Post::with('postdetails', 'likes')->orderBy('created_at', 'desc')->get();
-        return view('welcome', compact('posts', 'details'));
+        $user = Auth::user();
+        $communities = Community::with('posts')->paginate(4);
+        $posts = Post::with('postdetails', 'community')->orderBy('created_at', 'desc')->paginate(25);
+        return view('welcome', compact('posts', 'details', 'communities', 'user'));
+    }
+
+    public function newPost()
+    {
+        $user = Auth::user();
+        $communities = Community::all();
+        return view('posts.new', compact('communities', 'user'));
     }
 
     public function createPost(Request $request)
     {
         $rules = [
-            'image'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:6000'
+            'image'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:6000',
+            'body'    => 'required'
         ];
         $this->validate($request, $rules);
 
@@ -57,15 +68,29 @@ class PostController extends Controller
 
     // Post save by axios
     public function getAllPosts(){
-        $posts = Post::with('postdetails', 'user', 'likes')->orderBy('created_at', 'desc')->get();
+        $posts = Post::with('postdetails', 'user', 'community')->orderBy('created_at', 'desc')->get();
         return response()->json($posts);
     }
     public function imageUpload(Request $request){
 
+        $rules = [
+            'filename'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:6000',
+            'body'    => 'required'
+        ];
+        $this->validate($request, $rules);
+
         $post = Post::create([
             'user_id' => Auth::user()->id,
-            'body' => $request->body
+            'body' => $request->body,
+            'community_id' => $request->community,
         ]);
+        if($request->hasFile('audio')){
+            $filename = $request->file('audio')->getClientOriginalName();
+            $fileNameToStore = $filename;
+            $path = $request->file('audio')->storeAs('', $fileNameToStore, ['disk' => 'audio']);
+            $post->audio = $fileNameToStore;
+            $post->save();
+        }
 
         if (count($request->photos)){
             foreach($request->photos as $photo) {
@@ -79,41 +104,32 @@ class PostController extends Controller
 
         return redirect()->back();
     }
-
-
-    // Likes system
-    public function isLikedByMe($id)
-    {
-        $post = Post::findOrFail($id)->first();
-        if (Like::whereUserId(Auth::id())->wherePostId($post->id)->exists()){
-            return 'true';
-        }
-        return 'false';
+    public function single($slug)
+    {   
+        $user = Auth::user();
+        $post = Post::where('slug', '=', $slug)->first();
+        $images = PostDetail::where('post_id', '=' , $post->id)->get();
+        return view('posts.single', compact('post', 'images', 'user'));
     }
 
-    public function like(Request $request)
-    {
-        $existing_like = Like::where(['user_id' => Auth::id(), 'post_id' => $request->id])->first();
-
-        if ($existing_like) {
-            Like::where(['user_id' => Auth::id(), 'post_id' => $request->id])->delete();
-        } else {
-            Like::create([
-                'post_id' => $request->id,
-                'user_id' => Auth::id()
-            ]);
-        }
-            
-        return redirect()->back();
+    public function ApiPodcast(){
+        $posts = Post::where('audio', '!=', '')->get();
+        return response()->json($posts);
+    }
+    public function getPodcast(){
+        $user = Auth::user();
+        return view('posts.podcast', compact('user'));
     }
 
-    public function likePost(Post $post)
-    {
+
+    // Likes system / Favourite Post
+    public function favoritePost(Post $post)
+    {   
         Auth::user()->likes()->attach($post->id);
-            return back();
-    }
-
-    public function unlikePost(Post $post){
+        return back();
+    }    
+    public function unFavoritePost(Post $post)
+    {
         Auth::user()->likes()->detach($post->id);
         return back();
     }

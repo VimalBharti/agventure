@@ -1,43 +1,49 @@
 <template>
   <span>
-    <a href="#" v-if="isLiked" @click.prevent="unLike(post)">
-      <v-icon color="pink">mdi-heart</v-icon>
-    </a>
-    <a href="#" v-else @click.prevent="like(post)">
-      <v-icon>mdi-heart</v-icon>
-    </a>
+    <v-btn
+      small
+      depressed
+      class="white text-capitalize"
+      v-if="isFavorited"
+      @click.prevent="unFavorite(post)"
+    >
+      <v-icon color="pink">mdi-bookmark-check</v-icon>Saved
+    </v-btn>
+    <v-btn small depressed class="white text-capitalize" v-else @click.prevent="favorite(post)">
+      <v-icon color="grey">mdi-bookmark-check</v-icon>Save
+    </v-btn>
   </span>
 </template>
 
 <script>
 export default {
-  props: ["post", "liked"],
+  props: ["post", "favorited"],
   data() {
     return {
-      isLiked: ""
+      isFavorited: ""
     };
   },
 
   mounted() {
-    this.isLiked = this.isLike ? true : false;
+    this.isFavorited = this.isFavorite ? true : false;
   },
 
   computed: {
-    isLike() {
-      return this.isLiked;
+    isFavorite() {
+      return this.favorited;
     }
   },
   methods: {
-    like(post) {
+    favorite(post) {
       axios
-        .post("/like/" + post)
-        .then(response => (this.isLiked = true))
+        .post("/favorite/" + post)
+        .then(response => (this.isFavorited = true))
         .catch(response => console.log(reponse.data));
     },
-    unLike(post) {
+    unFavorite(post) {
       axios
-        .post("/unlike/" + post)
-        .then(response => (this.isLiked = false))
+        .post("/unfavorite/" + post)
+        .then(response => (this.isFavorited = false))
         .catch(response => console.log(response.data));
     }
   }

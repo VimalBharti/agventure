@@ -1,7 +1,8 @@
 @import "./vuetify.min.css";
 @import "~@mdi/font/css/materialdesignicons.min.css";
+@import "./mobile.scss";
 #app {
-    background: #fafafa;
+    background: #e8edf1;
 }
 .box-shadow {
     -webkit-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
@@ -11,17 +12,67 @@
 a {
     text-decoration: none;
 }
+::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+}
+* {
+    scrollbar-width: none;
+}
 .relative {
     position: relative;
 }
 .border-bottom {
     border-bottom: 1px solid #efefef !important;
 }
+.pagination-links {
+    text-align: center;
+    ul {
+        padding: 0px;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    li {
+        display: inline;
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        padding: 6px 14px;
+        background: #fff;
+        transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
+        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+            0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+            0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        a {
+            color: #333;
+        }
+        &.active {
+            background: #2b7fd5;
+            border: 1px solid #2b7fd5;
+            color: #fff;
+        }
+    }
+}
 // Navbar
 .main-navbar {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
     -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
     background: #fff !important;
+}
+h6.divider {
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+    color: #aaa;
+    &::before {
+        border-top: 1px solid #efefef;
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        bottom: 0;
+        width: 85%;
+        z-index: -1;
+    }
 }
 .auth-dropdown-menu {
     margin-top: 12px;
@@ -59,7 +110,7 @@ p.background-line {
     min-height: 86vh;
     .sidebar-links {
         .sidebar-link-box {
-            background: #fafafa;
+            background: #fff;
         }
         h6 {
             margin-top: 1rem;
@@ -92,13 +143,9 @@ p.background-line {
 }
 // Right Sidebar
 .right-sidebar {
-    background: #fafafa;
-    max-height: 86vh;
+    background: #e8edf1;
+    min-height: 95vh;
     overflow-y: scroll;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 // Add New Post Links
@@ -130,16 +177,26 @@ p.background-line {
     text-align: center;
 }
 .main-container {
-    max-height: 86vh;
-    overflow: hidden;
+    // width: 70%;
+    min-height: 95vh;
+    // max-height: 95vh;
+    // overflow: scroll;
+
     .center-post-container {
-        max-height: 86vh;
-        overflow-y: scroll;
+        // max-height: 95vh;
+        // overflow-y: scroll;
         -ms-overflow-style: none;
         &::-webkit-scrollbar {
             display: none;
         }
     }
+}
+#select-community {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    padding: 12px;
+    margin-bottom: 1em;
 }
 
 // Home Page All Post
@@ -147,17 +204,37 @@ video {
     width: 100%;
 }
 .center-post-area {
-    .post-auth-details {
-        .auth-name {
-            color: #222;
-        }
+    .gallery {
+        display: grid;
+        max-height: 16vw;
+        max-width: 100rem;
+        overflow: hidden;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 6px;
+        transition: grid-gap 1s ease-in-out;
     }
-    .img-box {
-        padding: 0px;
-        margin-top: 12px;
+    .gallery-panel {
+        width: 100%;
+        height: 16vw;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 0 0 6px 6px;
+    }
+    .auth-name {
+        color: #333;
+    }
+    .community-name {
+        color: #333;
+    }
+    .posted-text {
+        color: #838181;
+        font-weight: 200;
     }
     .post-body {
-        margin-bottom: 0px;
+        font-size: 15px;
+        line-height: 21px;
+        color: #444;
+        padding: 0 12px 12px 15px;
     }
 }
 .public-user-hover-detail {
@@ -170,6 +247,53 @@ video {
         a {
             color: #333;
         }
+    }
+}
+
+// Post in Single Community Page
+.single-community-post {
+    border: 1px solid #efefef;
+    margin-bottom: 1rem;
+    a {
+        p {
+            color: #555;
+        }
+    }
+    .gallery {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 4px;
+        max-width: 100rem;
+        padding: 5px;
+        max-height: 13vw;
+        overflow: hidden;
+    }
+    .gallery-panel {
+        padding: 0.2rem;
+        img {
+            width: 100%;
+            height: 12vw;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 0.2rem;
+        }
+    }
+}
+// single-post
+.single-post {
+    .gallery {
+        display: grid;
+        max-width: 100rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 6px;
+        transition: grid-gap 1s ease-in-out;
+    }
+    .gallery-panel {
+        width: 100%;
+        height: 16vw;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 0 0 6px 6px;
     }
 }
 
@@ -231,4 +355,37 @@ video {
 }
 .public-profile-main-container {
     margin-top: -100px;
+}
+// Edit User Profile
+.user-profile-detail {
+    label.save-btn {
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        cursor: pointer;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 6px 0;
+    }
+}
+
+// Community
+.single-community {
+    padding: 0px;
+}
+
+// podcast-main-page
+.podcast-main-page {
+    min-height: 86vh;
+}
+
+// Single Event Page
+.single-event-page {
+    min-height: 95vh;
+
+    .single-event {
+        padding: 0px;
+    }
 }

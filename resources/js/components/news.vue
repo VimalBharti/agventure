@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3 class="mb-3">News & Updates</h3>
     <v-card color="#385F73" dark>
       <v-card-title class="headline">Unlimited music now</v-card-title>
 

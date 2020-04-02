@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Inbox;
+use App\Post;
+use App\PostDetail;
 use Auth;
 use App\Events\NewMessage;
 use Session;
-
+use Storage;
 
 class HomeController extends Controller
 {
@@ -73,11 +75,41 @@ class HomeController extends Controller
         $user = Auth::user();
         return view('auth.mypost', compact('user'));
     }
+    public function postDelete($id)
+    {
+        $post = Post::findOrFail($id);
+        $images = $post->postdetails();
+
+        foreach ($images as $image){
+            Storage::delete(storage_path('uploads/' . $image->filename));
+        }
+        PostDetail::where('post_id', $post->id)->delete();
+
+        $post->delete();
+        return redirect()->back();
+    }
+    // Events
+    public function myEvents()
+    {
+        $user = Auth::user();
+        return view('auth.myevents', compact('user'));
+    }
+    public function singleEvent()
+    {
+        $user = Auth::user();
+        return view('auth.singleEvent', compact('user'));
+    }
+
+
+
+    //** */
+    // Messages Functions
+    //** */
     public function inbox()
     {
         $user = Auth::user();
         $inbox = Inbox::where('receiver_id', $user->id)->orderBy('created_at', 'desc')->get();
-        return view('auth.inbox', compact('inbox'));
+        return view('auth.inbox', compact('inbox', 'user'));
     }
     public function sendMessage(Request $request){
         $user = Auth::user();
@@ -92,9 +124,7 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-
     // Message App Start
-    
     public function get(){
         // get all user except the Auth user
         $contacts = User::where('id', '!=', auth()->id())->get();

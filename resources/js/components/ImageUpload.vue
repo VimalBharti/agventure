@@ -1,56 +1,119 @@
 <template>
-  <div class="imagePost">
-    <h4>
-      <v-icon small>mdi-pencil</v-icon>
-      <span>Share an update!</span>
-    </h4>
-    <v-divider></v-divider>
+  <v-row class="main-container mx-auto">
+    <v-col cols="7">
+      <div class="imagePost">
+        <v-card class="mb-2" flat>
+          <select id="community-select" @change="onChange($event)">
+            <option disabled selected>--- Select Commmunity ---</option>
+            <option
+              v-for="(community, index) in communities"
+              :value="community.id"
+              :key="index"
+            >{{community.title}}</option>
+          </select>
+          <input v-model="community" hidden />
+        </v-card>
+        <v-card flat>
+          <v-card-text>
+            <h4>
+              <v-icon small>mdi-pencil</v-icon>
+              <span>Share an update!</span>
+            </h4>
+            <v-divider></v-divider>
 
-    <v-row>
-      <v-col cols="1">
-        <v-list-item-avatar color="grey">
-          <v-img
-            :src="`/storage/profile/${user.image}`"
-            lazy-src="https://picsum.photos/10/6"
-            aspect-ratio="1"
-            class="grey lighten-2"
-          ></v-img>
-        </v-list-item-avatar>
-      </v-col>
-      <v-col cols="11">
-        <v-textarea v-model="body" label="Whats on your mind?" solo flat rows="1" auto-grow></v-textarea>
-      </v-col>
-    </v-row>
+            <v-row>
+              <v-col cols="1">
+                <v-list-item-avatar color="grey">
+                  <v-img
+                    :src="`/storage/profile/${user.image}`"
+                    lazy-src="https://picsum.photos/10/6"
+                    aspect-ratio="1"
+                    class="grey lighten-2"
+                  ></v-img>
+                </v-list-item-avatar>
+              </v-col>
+              <v-col cols="11">
+                <v-textarea
+                  required
+                  v-model="body"
+                  label="Whats on your mind?"
+                  solo
+                  flat
+                  rows="1"
+                  auto-grow
+                ></v-textarea>
+              </v-col>
+            </v-row>
+            <p v-if="error" class="red--text">{{error}}</p>
 
-    <div
-      class="uploader"
-      @dragenter="onDragEnter"
-      @dragleave="onDragLeave"
-      @dragover.prevent
-      @drop="onDrop"
-      :class="{ dragging: isDragging }"
-      v-show="photos.length"
-    >
-      <div class="images-preview">
-        <div class="img-wrapper" v-for="(image, index) in photos" :key="index">
-          <img :src="image" :alt="`Agventure ${index}`" />
-          <div class="details">
-            <!-- <span class="name" v-text="files[index].name"></span> -->
-            <span class="size" v-text="getFileSize(files[index].size)"></span>
-          </div>
-        </div>
+            <div
+              class="uploader"
+              @dragenter="onDragEnter"
+              @dragleave="onDragLeave"
+              @dragover.prevent
+              @drop="onDrop"
+              :class="{ dragging: isDragging }"
+              v-show="photos.length"
+            >
+              <div class="images-preview">
+                <div class="img-wrapper" v-for="(image, index) in photos" :key="index">
+                  <img :src="image" :alt="`Agventure ${index}`" />
+                  <div class="details">
+                    <!-- <span class="name" v-text="files[index].name"></span> -->
+                    <span class="size" v-text="getFileSize(files[index].size)"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <v-divider></v-divider>
+            <v-row class="upload-control">
+              <label for="file">
+                <v-icon>mdi-camera</v-icon>
+              </label>
+              <input type="file" id="file" @change="onInputChange" multiple />
+
+              <!-- Share Button -->
+              <v-spacer></v-spacer>
+              <v-btn outlined @click="upload" small>Share</v-btn>
+            </v-row>
+          </v-card-text>
+        </v-card>
       </div>
-    </div>
-    <v-divider></v-divider>
-    <v-row class="upload-control">
-      <label for="file">
-        <v-icon>mdi-camera</v-icon>
-      </label>
-      <input type="file" id="file" @change="onInputChange" multiple />
-      <v-spacer></v-spacer>
-      <v-btn outlined @click="upload" small>Share</v-btn>
-    </v-row>
-  </div>
+    </v-col>
+    <v-col cols="5">
+      <v-card>
+        <v-card-text>
+          <p class="title text--primary">Add Audio Podcast</p>
+          <p>Upload audio podcast about this post, So people can listen the process or techniques in audio format.</p>
+          <!-- Audio -->
+          <div class="text--primary audio-file-input">
+            <v-file-input
+              v-model="audio"
+              color="deep-purple accent-4"
+              counter
+              label="Upload Audio Podcast"
+              dense
+              placeholder="Select your files"
+              prepend-icon="mdi-music"
+              outlined
+              name="audio"
+              :show-size="1000"
+              accept="audio/mp3"
+            >
+              <template v-slot:selection="{ index, text }">
+                <v-chip v-if="index < 2" color="deep-purple accent-4" dark label small>{{ text }}</v-chip>
+
+                <span
+                  v-else-if="index === 2"
+                  class="overline grey--text text--darken-3 mx-2"
+                >+{{ files.length - 2 }} File(s)</span>
+              </template>
+            </v-file-input>
+          </div>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -58,12 +121,28 @@ export default {
   props: ["user"],
   data: () => ({
     isDragging: false,
+    error: "",
     dragCount: 0,
     files: [],
     photos: [],
-    body: ""
+    body: "",
+    audio: null,
+    communities: [],
+    community: ""
   }),
+  created() {
+    this.fetchCommunity();
+  },
   methods: {
+    onChange(event) {
+      console.log(event.target.value);
+      this.community = event.target.value;
+    },
+    fetchCommunity() {
+      axios.get("/get_community").then(response => {
+        this.communities = response.data;
+      });
+    },
     onDragEnter(e) {
       e.preventDefault();
 
@@ -120,6 +199,8 @@ export default {
       const formData = new FormData();
 
       formData.append("body", this.body);
+      formData.append("community", this.community);
+      formData.append("audio", this.audio);
 
       this.files.forEach(file => {
         formData.append("photos[]", file, file.name);
@@ -132,9 +213,12 @@ export default {
           this.photos = [];
           this.files = [];
           this.body = [];
+          this.audio = null;
+          this.community = [];
         })
         .catch(error => {
           console.log(error);
+          this.error = error.response.data.errors.body[0];
         });
     }
   }
@@ -144,6 +228,12 @@ export default {
 <style lang="scss" scoped>
 @import "~vue-toastr/src/vue-toastr.scss";
 
+#community-select {
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  padding: 12px;
+  font-size: 14px;
+}
 h4 {
   padding-bottom: 12px;
   font-weight: normal;
@@ -213,5 +303,8 @@ h4 {
     visibility: hidden;
     z-index: -2;
   }
+}
+.audio-file-input {
+  margin-top: 2em;
 }
 </style>

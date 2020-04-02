@@ -15,4 +15,12 @@ class UserController extends Controller
         $posts = Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(4);
         return view('profile', compact('user', 'posts'));
     }
+
+    public function myFavorites()
+    {
+        $user = Auth::user();
+        $counts = Auth::user()->likes;
+        $myFavorites = Auth::user()->likes()->orderBy('created_at', 'desc')->paginate(15);
+        return view('auth.saved', compact('myFavorites', 'user', 'counts'));
+    }
 }

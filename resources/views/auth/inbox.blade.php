@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <v-container>
-        <v-row class="main-container">
+        <v-row class="main-container mx-auto">
             <!-- sidebar -->
             @include('_partials.sidebar')
 
-            <v-col cols="10" class="grey lighten-5 center-post-container">
+            <v-col cols="9" class="center-post-container">
                 <v-row>
                     <v-col>                        
                         <!-- <v-list three-line>
@@ -73,5 +72,4 @@
                 </v-row>
             </v-col>
         </v-row>
-    </v-container>
 @endsection

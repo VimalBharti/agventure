@@ -25,12 +25,6 @@
             <main class="router-view">
                 @yield('content')
             </main>
-
-            <!-- Footer -->
-            <v-footer>
-                <v-spacer></v-spacer>
-                <div>&copy; 2020</div>
-            </v-footer>
         </v-app>
     </div>
 

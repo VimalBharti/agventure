@@ -1,100 +1,98 @@
-<v-col cols="2" class="left-sidebar d-none d-md-block d-lg-block">
-    @guest
-      <div class="sidebar-links mt-6">
-        <podcast></podcast>
-      </div>
-    @else
-      <div class="user-profile-detail pl-4 mt-4">
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <img src="/storage/profile/{{Auth::user()->image}}" />
-          </v-list-item-avatar>
+<v-col cols="3" class="left-sidebar d-none d-md-block d-lg-block">
+  <div class="user-profile-detail mt-3">
+    <v-card>
+      <v-img
+          src="/storage/profile/{{Auth::user()->image}}"
+          aspect-ratio="1"
+          position="top"
+          dark
+          class="align-end"
+      >
+        <form enctype="multipart/form-data" action="{{ route('avatar.update') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="avatar" id="files" style="display:none;" onchange='this.form.submit();'>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-          <v-list-item-content>
-            <v-list-item-title>{{Auth::user()->name}}</v-list-item-title>
-            <v-list-item-subtitle class="caption">
-              {{Auth::user()->city}}, {{Auth::user()->country}}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </div>
-      <div class="sidebar-links">
-        <h6>Main</h6>
-        <v-list dense nav class="sidebar-link-box">
-          <v-list-item href="/">
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-buffer</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>Timeline</v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-          <v-list-item href="{{route('myaccount')}}">
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>My Account</v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-          <v-list-item href="{{route('mypost')}}">
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-video</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>My Post</v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-          <v-list-item href="{{route('inbox')}}">
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-message-text-outline</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>
-                Message
-                <span class="notification">6</span>
-              </v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-bookmark-check</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>
-                Saved Post
-              </v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-        </v-list>
-      </div>
-      <div class="sidebar-links">
-        <h6>Other</h6>
-        <v-list dense nav class="sidebar-link-box">
-          <v-list-item link>
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-account-multiple-plus</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>Followers</v-list-item-title>
-            </v-list-content>
-          </v-list-item>
+            <label for="files" class="save-btn">
+                <v-icon color="white">mdi-image-filter</v-icon>  Change Photo
+            </label>
+        </form>
+      </v-img>
+    </v-card>
+  </div>
+  <div class="sidebar-links">
+    <v-list dense nav class="sidebar-link-box">
+      <v-list-item href="/">
+        <v-list-item-icon>
+          <v-icon color="grey darken-3">mdi-buffer</v-icon>
+        </v-list-item-icon>
+        <v-list-content>
+          <v-list-item-title>Timeline</v-list-item-title>
+        </v-list-content>
+      </v-list-item>
+      <v-list-item href="{{route('myaccount', $user->username)}}">
+        <v-list-item-icon>
+          <v-icon color="grey darken-3">mdi-account</v-icon>
+        </v-list-item-icon>
+        <v-list-content>
+          <v-list-item-title>My Account</v-list-item-title>
+        </v-list-content>
+      </v-list-item>
+      <v-list-item href="{{route('mypost')}}">
+        <v-list-item-icon>
+          <v-icon color="grey darken-3">mdi-video</v-icon>
+        </v-list-item-icon>
+        <v-list-content>
+          <v-list-item-title>My Post</v-list-item-title>
+        </v-list-content>
+      </v-list-item>
+      <v-list-item href="{{route('inbox')}}">
+        <v-list-item-icon>
+          <v-icon color="grey darken-3">mdi-message-text-outline</v-icon>
+        </v-list-item-icon>
+        <v-list-content>
+          <v-list-item-title>
+            Message
+          </v-list-item-title>
+        </v-list-content>
+      </v-list-item>
+      <v-list-item href="{{route('savedpost')}}">
+        <v-list-item-icon>
+          <v-icon color="grey darken-3">mdi-bookmark-check</v-icon>
+        </v-list-item-icon>
+        <v-list-content>
+          <v-list-item-title>
+            Saved Post
+          </v-list-item-title>
+        </v-list-content>
+      </v-list-item>
+    </v-list>
+  </div>
+  <v-divider></v-divider>
+  <div class="sidebar-links">
+    <v-list dense nav class="sidebar-link-box">
+      <v-list-item href="{{route('myEvents')}}">
+        <v-list-item-icon>
+          <v-icon color="grey darken-3">mdi-ticket</v-icon>
+        </v-list-item-icon>
+        <v-list-content>
+          <v-list-item-title>My Event</v-list-item-title>
+        </v-list-content>
+      </v-list-item>
 
-          <v-list-item href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-            <v-list-item-icon>
-              <v-icon class="grey--text">mdi-logout-variant</v-icon>
-            </v-list-item-icon>
-            <v-list-content>
-              <v-list-item-title>
-                Logout
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-                </form>
-              </v-list-item-title>
-            </v-list-content>
-          </v-list-item>
-        </v-list>
-      </div>
-    @endguest
-  </v-col>
+      <v-list-item href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+        <v-list-item-icon>
+          <v-icon color="grey darken-3">mdi-logout-variant</v-icon>
+        </v-list-item-icon>
+        <v-list-content>
+          <v-list-item-title>
+            Logout
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
+          </v-list-item-title>
+        </v-list-content>
+      </v-list-item>
+    </v-list>
+  </div>
+</v-col>
