@@ -10,8 +10,10 @@ use App\Like;
 use App\Community;
 use Auth;
 
+
 class Post extends Model
 {
+    
     protected $table = 'posts';
     protected $primaryKey = 'id';
     

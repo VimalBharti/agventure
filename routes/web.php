@@ -14,10 +14,16 @@ Route::get('/', 'PostController@home');
 
 Auth::routes();
 
+Route::get('/search', 'PostController@search')->name('search');
+
 // Admin Login
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
-Route::post('/login/admin', 'Auth\LoginController@adminLogin')->name('admin');
-Route::view('/admin', 'admin.index');
+Route::prefix('admin')->group(function() {
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/dashboard', 'AdminController@index')->name('admin.home');
+    Route::post('/updates/new','AdminController@newUpdate')->name('newUpdate');
+});
 
 // Social Login
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.redirect');
@@ -56,6 +62,7 @@ Route::get('/c/{slug}', 'CommunityController@single')->name('community');
 
 // Post Routes API-axios
 Route::get('new/post', 'PostController@newPost')->middleware('auth');
+Route::get('new/post/mobile', 'PostController@newMobilePost')->middleware('auth');
 Route::get('get_all', 'PostController@getAllPosts');
 Route::post('/images-upload', 'PostController@imageUpload');
 Route::get('/p/{slug}', 'PostController@single')->name('singlePost');
@@ -69,4 +76,7 @@ Route::get('my_favorites', 'UserController@myFavorites')->middleware('auth')->na
 
 // Public Profile
 Route::get('/{username}', 'UserController@profile')->name('public-profile');
+
+
+
 

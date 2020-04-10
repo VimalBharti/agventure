@@ -33,15 +33,7 @@
               <v-list-item-subtitle>{{ post.created_at | formatDate }}</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
-              <!-- <v-btn
-                                small
-                                depressed
-                                class="white text-capitalize"
-                                @click="addtofav()"
-                            >
-                                <v-icon>mdi-bookmark-check</v-icon>save
-              </v-btn>-->
-              <like :post="`${post.id}`" :favorited="`${post.favorited}`"></like>
+              <like :post="post.id" :favorited="post.favorited ? true : false "></like>
             </v-list-item-action>
             <v-list-item-action>
               <v-menu offset-y>

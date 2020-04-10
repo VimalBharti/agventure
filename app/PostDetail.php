@@ -7,7 +7,7 @@ use App\Post;
 
 class PostDetail extends Model
 {
-    protected $fillable = ['post_id', 'filename'];
+    protected $fillable = ['post_id', 'filename', 'thumb'];
     protected $table = 'post_details';
     protected $primaryKey = 'id';
 

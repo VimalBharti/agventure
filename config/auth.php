@@ -18,6 +18,11 @@ return [
         'passwords' => 'users',
     ],
 
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Admin::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -48,6 +53,10 @@ return [
         ],
         'admin' => [
             'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'admin-api' => [
+            'driver' => 'token',
             'provider' => 'admins',
         ],
     ],
@@ -105,6 +114,11 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
         ],
     ],
 

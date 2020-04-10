@@ -1,5 +1,5 @@
 <template>
-  <v-row class="main-container mx-auto">
+  <v-row>
     <v-col cols="7">
       <div class="imagePost">
         <v-card class="mb-2" flat>

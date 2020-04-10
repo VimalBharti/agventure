@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <v-row class="main-container mx-auto">
+    <v-row class="main-container boxed-layout">
         <!-- sidebar -->
         @include('_partials.sidebar')
 
@@ -129,4 +129,136 @@
             </form>
         </v-col>
     </v-row>
+
+<!--
+===================================== 
+            Mobile Screen 
+=====================================
+-->
+
+    <div class="mobile-container pb-6 pt-3 edit-account">
+        <v-card class="text-center user-image" flat>
+            <v-avatar size="200">
+                <v-img src="/storage/profile/{{Auth::user()->image}}" class="align-end" aspect-ratio="1">
+                    <form enctype="multipart/form-data" action="{{ route('avatar.update') }}" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="avatar" id="files" style="display:none;" onchange='this.form.submit();'>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                        <label for="files" class="image-upload-btn">
+                            <v-icon color="white">mdi-image-filter</v-icon>  Change Photo
+                        </label>
+                    </form>
+                </v-img>
+            </v-avatar>
+        </v-card>
+
+        <div class="mobile-account-center pa-4 mb-8">
+            <form action="{{ route('profile.update', $user->id) }}" method="POST">
+            {{ csrf_field() }}
+
+                <v-text-field
+                    label="Name"
+                    name="name"
+                    outlined
+                    dense
+                    value="{{$user->name}}"
+                    color="primary"
+                    class="body-2"
+                ></v-text-field>
+                <v-text-field
+                    label="Email address"
+                    name="email"
+                    outlined
+                    dense
+                    color="primary"
+                    value="{{$user->email}}"
+                    class="body-2"
+                ></v-text-field>
+                <v-text-field
+                    label="Contact no."
+                    outlined
+                    dense
+                    name="mobile"
+                    value="{{$user->mobile}}"
+                    color="primary"
+                    class="body-2"
+                ></v-text-field>
+                <v-text-field
+                    label="City"
+                    name="city"
+                    outlined
+                    dense
+                    color="primary"
+                    value="{{$user->city}}"
+                    class="body-2"
+                ></v-text-field>
+                <v-text-field
+                    label="State"
+                    outlined
+                    dense
+                    name="state"
+                    color="primary"
+                    class="body-2"
+                    value="{{$user->state}}"
+                    background-color="white"
+                ></v-text-field>
+                <v-text-field
+                    label="Country"
+                    name="country"
+                    outlined
+                    dense
+                    color="primary"
+                    class="body-2"
+                    value="{{$user->country}}"
+                    background-color="white"
+                ></v-text-field>
+                <v-textarea
+                    label="About me"
+                    name="about"
+                    dense
+                    class="body-2"
+                    background-color="white"
+                    outlined
+                    value="{{$user->about}}"
+                ></v-textarea>
+                <h5 class="mb-3">Social Links</h5>
+                <v-text-field
+                    label="Facebook"
+                    name="country"
+                    outlined
+                    dense
+                    color="primary"
+                    class="body-2"
+                    value=""
+                    background-color="white"
+                ></v-text-field>
+                <v-text-field
+                    label="Twitter"
+                    name="country"
+                    outlined
+                    dense
+                    color="primary"
+                    class="body-2"
+                    value=""
+                    background-color="white"
+                ></v-text-field>
+                <v-text-field
+                    label="Youtube"
+                    name="country"
+                    outlined
+                    dense
+                    color="primary"
+                    class="body-2"
+                    value=""
+                ></v-text-field>
+                <v-btn block depressed type="submit" outlined color="grey darken-3"> 
+                    <v-icon left dark>mdi-content-save</v-icon>Save Changes
+                </v-btn>
+            </form>
+        </div>
+
+        <div class="footer">@include('mobile.footer')</div>
+    </div>
+
+
 @endsection

@@ -4,35 +4,45 @@
     
 <div class="main-container boxed-layout">
     <div class="event-list-home-page">
-        <div color="grey darken-3" class="mt-2">Trending Events</div>
+        <div color="grey darken-3" class="mt-2">Latest Updates</div>
         <v-row>
-            <v-col cols="3" v-for="n in 4">
+            @foreach($updates as $update)
+            <v-col cols="3">
                 <v-card>
                     <v-img
-                        src="https://cdn.vuetifyjs.com/images/cards/plane.jpg"
+                        src="{{asset('uploads/updates/' . $update->image)}}"
                         height="180"
                         class="align-end white--text pl-3 pb-3"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                        gradient="to bottom, rgba(0,0,0,.2), rgba(0,0,0,.6)"
                     >
                         <div class="event-details-home-page">
-                            <h4>Ellie Goulding</h4>
-                            <div class="caption"><v-icon size="14" color="white">mdi-calendar-clock</v-icon> 25 - 25 Aug 2020</div>
-                            <div class="caption"><v-icon size="14" color="white">mdi-map-marker-radius</v-icon> New Delhi, India</div>
+                            <h4>{{str_limit($update->title, 24, '..')}}</h4>
+                            <div class="caption">{{str_limit($update->about, 50, '...')}}</div>
                         </div>
                     </v-img>
                 </v-card>
             </v-col>
+            @endforeach
         </v-row>
     </div>
 
-    <v-row> 
-        <v-col md="8" sm="12" xs="12" class="center-post-container">
+    <v-row class="app-post-home-page">  
+        <v-col cols="8">
             @include('posts.all')
         </v-col>
         
         <!-- right Sidebar -->
         @include('_partials.rightSidebar')
     </v-row>
+</div>
+
+<div class="mobile-container">
+    <!-- App post Mobile screen -->
+    <div class="app-post-mobile-page">
+        @include('posts.allMobile')
+    </div>
+    <!-- footer link bar -->
+    @include('mobile.footer')
 </div>
 
 @endsection

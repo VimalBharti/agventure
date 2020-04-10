@@ -53,6 +53,11 @@ return [
             'root' => storage_path('app/public/uploads'),
             'visibility' => 'public',
         ],
+        'thumbnail' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/thumbnails'),
+            'visibility' => 'public',
+        ],
         'audio' => [
             'driver' => 'local',
             'root' => storage_path('app/public/audio'),

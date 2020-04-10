@@ -3,25 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Response;
 use App\Post;
 use App\PostDetail;
 use App\Video;
 use App\Like;
 use App\Community;
+use App\Update;
 use Auth;
 use Storage;
 use DB;
+use Image;
 
 class PostController extends Controller
 {
 
     // Main Home Page
     public function home(){
-        // $posts = Post::orderBy('created_at', 'desc')->get();
         $user = Auth::user();
         $communities = Community::with('posts')->paginate(4);
-        $posts = Post::with('postdetails', 'community')->orderBy('created_at', 'desc')->paginate(25);
-        return view('welcome', compact('posts', 'details', 'communities', 'user'));
+        $posts = Post::with('postdetails', 'community')->orderBy('created_at', 'desc')->paginate(20);
+        $updates = Update::orderBy('created_at', 'desc')->paginate(4);
+        return view('welcome', compact('posts', 'details', 'communities', 'user', 'updates'));
     }
 
     public function newPost()
@@ -29,6 +32,12 @@ class PostController extends Controller
         $user = Auth::user();
         $communities = Community::all();
         return view('posts.new', compact('communities', 'user'));
+    }
+    public function newMobilePost()
+    {
+        $user = Auth::user();
+        $communities = Community::all();
+        return view('posts.newMobile', compact('communities', 'user'));
     }
 
     public function createPost(Request $request)
@@ -94,10 +103,22 @@ class PostController extends Controller
 
         if (count($request->photos)){
             foreach($request->photos as $photo) {
+                
+                // Create thumbnail
+                $image_name = $photo->getClientOriginalName();
+                $destinationPath = storage_path('app/public/thumbnails');
+                $resize_image = Image::make($photo->getRealPath());
+                $resize_image->fit(600, 360, function($constraint){
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $image_name);
+
+                
                 $filename = $photo->store('', ['disk' => 'uploads']);
+                
                 PostDetail::create([
                     'post_id' => $post->id,
-                    'filename' => $filename
+                    'filename' => $filename,
+                    'thumb' => $image_name,
                 ]);
             }
         }
@@ -132,6 +153,14 @@ class PostController extends Controller
     {
         Auth::user()->likes()->detach($post->id);
         return back();
+    }
+
+
+    // Search Filter
+    public function search(Request $request)
+    {
+        $search = $request->get('q');
+        return Post::where('body', 'like', '%'.$search.'%')->with('user')->get();
     }
 
 }

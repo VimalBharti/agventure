@@ -1,13 +1,18 @@
 @import "./vuetify.min.css";
 @import "~@mdi/font/css/materialdesignicons.min.css";
 @import "./mobile.scss";
-#app {
-    background: #e8edf1;
-}
+
 .box-shadow {
     -webkit-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
     -moz-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
     box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+}
+.boxed-layout {
+    width: 70%;
+    margin: 0 auto;
+}
+.green-color {
+    color: #00bfa6;
 }
 a {
     text-decoration: none;
@@ -143,7 +148,7 @@ p.background-line {
 }
 // Right Sidebar
 .right-sidebar {
-    background: #e8edf1;
+    // background: #e8edf1;
     min-height: 95vh;
     overflow-y: scroll;
 }
@@ -218,7 +223,6 @@ video {
         height: 16vw;
         object-fit: cover;
         object-position: center top;
-        border-radius: 0 0 6px 6px;
     }
     .auth-name {
         color: #333;
@@ -235,6 +239,9 @@ video {
         line-height: 21px;
         color: #444;
         padding: 0 12px 12px 15px;
+        a {
+            color: #444;
+        }
     }
 }
 .public-user-hover-detail {
@@ -275,7 +282,6 @@ video {
             height: 12vw;
             object-fit: cover;
             object-position: center top;
-            border-radius: 0.2rem;
         }
     }
 }
@@ -293,30 +299,53 @@ video {
         height: 16vw;
         object-fit: cover;
         object-position: center top;
-        border-radius: 0 0 6px 6px;
     }
 }
 
 // Register Page
 .register {
-    min-height: 86vh;
+    max-height: 100vh;
+    overflow: hidden;
+    .left-logo-box {
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    .right-form-box {
+        max-height: 100vh;
+        overflow-y: scroll;
+    }
     .register-input-form {
+        background-color: rgba(255, 255, 255, 0.99);
+        border-radius: 50px;
         padding: 2.5em;
-        margin-top: 5%;
-        h3 {
-            text-align: center;
+        form {
+            margin-top: 3em;
         }
-        h1 {
-            text-align: center;
+        ul {
+            padding-top: 0px;
+            li {
+                font-size: 13px;
+                color: #777;
+            }
         }
         p {
-            text-align: center;
-            margin-bottom: 2em;
+            font-size: 13px;
+            color: #777;
         }
         .tag-text {
             font-size: 14px;
             color: #777;
             line-height: 20px;
+        }
+        .field {
+            margin-bottom: 2em;
+        }
+        select {
+            width: 100%;
+            &:after {
+                content: "&#9662;";
+                color: #333;
+            }
         }
     }
     .forgot-password {
@@ -329,6 +358,27 @@ video {
                 color: #555;
                 text-decoration: underline;
             }
+        }
+    }
+}
+// Login Page
+.login {
+    min-height: 95vh;
+    p {
+        font-size: 15px;
+        color: #777;
+    }
+    .field {
+        margin-bottom: 2em;
+    }
+    form {
+        margin-top: 3em;
+    }
+    .forgot-password {
+        text-align: center;
+        margin-top: 2em;
+        p {
+            margin-bottom: 10px;
         }
     }
 }
@@ -387,5 +437,15 @@ video {
 
     .single-event {
         padding: 0px;
+    }
+}
+
+// 404 Not Found
+.not-found-page {
+    min-height: 95vh;
+
+    .top-column {
+        padding-top: 3em;
+        padding-bottom: 2em;
     }
 }

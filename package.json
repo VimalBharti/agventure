@@ -22,17 +22,19 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "@moefe/vue-aplayer": "^2.0.0-beta.5",
         "dropzone": "^5.5.1",
         "laravel-echo": "^1.6.1",
+        "laravel-vue-pagination": "^2.3.1",
         "lightbox2": "^2.11.1",
         "moment": "^2.24.0",
         "pusher-js": "^5.1.1",
         "vue-clipboard2": "^0.3.1",
         "vue-cool-lightbox": "^1.1.0",
+        "vue-infinite-loading": "^2.4.5",
         "vue-router": "^3.1.5",
         "vue-toastr": "^2.1.2",
         "vuetify": "^2.2.8",
+        "vuetify-audio": "^0.3.2",
         "vuex": "^3.1.2"
     }
 }

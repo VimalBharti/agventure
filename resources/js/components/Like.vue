@@ -1,16 +1,10 @@
 <template>
   <span>
-    <v-btn
-      small
-      depressed
-      class="white text-capitalize"
-      v-if="isFavorited"
-      @click.prevent="unFavorite(post)"
-    >
-      <v-icon color="pink">mdi-bookmark-check</v-icon>Saved
+    <v-btn icon v-if="isFavorited" @click.prevent="unFavorite(post)">
+      <v-icon size="28" color="pink">mdi-heart</v-icon>
     </v-btn>
-    <v-btn small depressed class="white text-capitalize" v-else @click.prevent="favorite(post)">
-      <v-icon color="grey">mdi-bookmark-check</v-icon>Save
+    <v-btn icon v-else @click.prevent="favorite(post)">
+      <v-icon size="28" color="grey">mdi-heart-outline</v-icon>
     </v-btn>
   </span>
 </template>
@@ -50,5 +44,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

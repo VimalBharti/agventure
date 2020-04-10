@@ -9,6 +9,16 @@ Vue.filter("formatDate", function(value) {
     }
 });
 
+import InfiniteLoading from "vue-infinite-loading";
+Vue.use(InfiniteLoading, {
+    props: {
+        spinner: "default"
+    },
+    system: {
+        throttleLimit: 50
+    }
+});
+
 import CoolLightBox from "vue-cool-lightbox";
 Vue.use(CoolLightBox);
 
@@ -38,6 +48,11 @@ Vue.component("single-post", require("./components/Single.vue").default);
 Vue.component("blog", require("./components/Blog.vue").default);
 Vue.component("all-podcast", require("./components/Podcast.vue").default);
 Vue.component("like", require("./components/Like.vue").default);
+Vue.component("search", require("./components/Search.vue").default);
+Vue.component(
+    "new-post-mobile",
+    require("./components/NewPostMobile.vue").default
+);
 
 const app = new Vue({
     el: "#app",

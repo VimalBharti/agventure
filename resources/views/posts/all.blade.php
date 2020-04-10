@@ -1,7 +1,28 @@
+ 
 @foreach($posts as $post)
 <v-row class="center-post-area">
     <v-col class="pt-0 mb-2">
-        <v-card flat>
+        <v-card elevation="1">
+            <a href="{{route('singlePost', $post->slug)}}">
+                <div class="gallery">
+                @isset($post->postdetails)
+                    @foreach($post->postdetails as $image)
+                        <v-img
+                            src="/storage/thumbnails/{{$image->thumb}}"
+                            lazy-src="{{asset('images/lazy.jpg')}}"
+                            class="grey lighten-2 gallery-panel"
+                        >
+                            <template v-slot:placeholder>
+                                <v-row class="fill-height ma-0" align="center" justify="center">
+                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                </v-row>
+                            </template>
+                        </v-img>
+                    @endforeach
+                @endisset
+                </div>
+            </a>
+
             <v-list-item>
                 <v-list-item-avatar color="grey">
                     <v-img
@@ -40,36 +61,21 @@
                             :favorited={{ $post->favorited() ? 'true' : 'false' }}
                         ></like>
                     @else
-                        <v-btn small depressed class="white text-capitalize" href="login">
-                            <v-icon>mdi-bookmark-check</v-icon> save
+                        <v-btn small depressed icon href="login">
+                            <v-icon color="grey">mdi-heart-outline</v-icon>
                         </v-btn>
                     @endif
                 </v-card-actions>
             </v-list-item>
-
-            <a href="{{route('singlePost', $post->slug)}}">
-                @isset($post->body)
-                    <div class="post-body">{{$post->body}}</div>
-                @endisset
-
-                <div class="gallery">
-                @isset($post->postdetails)
-                    @foreach($post->postdetails as $image)
-                        <v-img
-                            src="/storage/uploads/{{$image->filename}}"
-                            lazy-src="{{asset('images/lazy.jpg')}}"
-                            class="grey lighten-2 gallery-panel"
-                        >
-                            <template v-slot:placeholder>
-                                <v-row class="fill-height ma-0" align="center" justify="center">
-                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                                </v-row>
-                            </template>
-                        </v-img>
-                    @endforeach
-                @endisset
+            
+            @isset($post->body)
+                <div class="post-body">
+                    <a href="{{route('singlePost', $post->slug)}}">
+                        {{str_limit($post->body, 250, '...')}}
+                    </a>
                 </div>
-            </a>
+            @endisset
+
         </v-card>
     </v-col>
 </v-row>

@@ -1,7 +1,9 @@
-@media (min-width: 1025px) and (max-width: 1280px) {
-    .boxed-layout {
-        width: 70%;
-        margin: 0 auto;
+@media (min-width: 1025px) {
+    .mobile-nav {
+        display: none;
+    }
+    .mobile-container {
+        display: none;
     }
 }
 
@@ -11,7 +13,6 @@
   */
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    //CSS
 }
 
 /* 
@@ -43,10 +44,84 @@
   */
 
 @media (min-width: 320px) and (max-width: 480px) {
-    .event-list-home-page {
+    .main-container {
         display: none;
     }
-    .boxed-layout {
-        width: 100%;
+    .mobile-container {
+        min-height: 95vh;
+    }
+    // Navbar
+    .main-navbar {
+        display: none;
+    }
+    .mobile-nav {
+        -webkit-box-shadow: 0 6px 6px -6px #ececec;
+        -moz-box-shadow: 0 6px 6px -6px #ececec;
+        box-shadow: 0 6px 6px -6px #ececec;
+    }
+
+    // Home Post
+    .app-post-mobile-page {
+        padding: 1em 0.5em 4em 0.5em;
+        .single-mobile-post {
+            -webkit-box-shadow: 0px 0px 7px -5px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 0px 7px -5px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 0px 7px -5px rgba(0, 0, 0, 0.75);
+            margin-bottom: 1em;
+            .image-box-mobile {
+                max-height: 200px;
+                overflow: hidden;
+                // border-radius: 0.5em;
+            }
+        }
+    }
+    // Single Post Page Mobile
+    .single-post-mobile-page {
+        padding-bottom: 5rem;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-gap: 3px;
+            transition: grid-gap 1s ease-in-out;
+            padding: 0.5em;
+        }
+        .gallery-panel {
+            width: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+        .save-button-mobile-single {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+
+    .app-bar-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        -webkit-box-shadow: 0 -6px 6px -6px #ececec;
+        -moz-box-shadow: 0 -6px 6px -6px #ececec;
+        box-shadow: 0 -6px 6px -6px #ececec;
+    }
+
+    // User Account
+    // Edit Account
+    .edit-account {
+        .user-image {
+            .image-upload-btn {
+                text-align: center;
+                background: rgba(0, 0, 0, 0.5);
+                color: #fff;
+                cursor: pointer;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 6px 0;
+            }
+        }
     }
 }
