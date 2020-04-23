@@ -95,10 +95,11 @@
 <!-- For mobile -->
 <v-app-bar color="white" dense flat class="mobile-nav">
     <v-toolbar-title>
-        <v-avatar tile size="30">
-            <img src="{{asset('images/logo.png')}}">
-        </v-avatar>
-        <span class="grey--text text--darken-4">Agrishi</span>
+        <a href="/"><v-img 
+            src="{{asset('images/logo.png')}}"
+            max-height="46"
+            contain
+        ></v-img></a>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
