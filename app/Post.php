@@ -2,8 +2,6 @@
 
 namespace App;
 
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
-
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
