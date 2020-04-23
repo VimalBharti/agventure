@@ -19,6 +19,7 @@ class CreateUpdatesTable extends Migration
             $table->string('slug');
             $table->text('about');
             $table->string('image');
+            $table->string('link');
             $table->timestamps();
         });
     }

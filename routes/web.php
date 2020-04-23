@@ -10,11 +10,17 @@
 |
 */
 
-Route::get('/', 'PostController@home');
+Route::get('/', 'PostController@home')->name('main');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/search', 'PostController@search')->name('search');
+Route::get('/search', 'PostController@DesktopSearch')->name('search-desktop');
+
+// Pages
+Route::get('/privacy', 'PageController@privacy');
+Route::get('/about', 'PageController@about');
+Route::get('/contact', 'PageController@contact');
+Route::post('/sendMessage', 'PageController@SendMessage')->name('sendMessage');
 
 // Admin Login
 Route::prefix('admin')->group(function() {
@@ -24,6 +30,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/dashboard', 'AdminController@index')->name('admin.home');
     Route::post('/updates/new','AdminController@newUpdate')->name('newUpdate');
 });
+
+// All Updates for Guest+Auth
+Route::get('/all/updates', 'UserController@allUpdates')->name('allUpdates');
+Route::get('/updates/{slug}', 'UserController@singleUpdate')->name('singleUpdate');
 
 // Social Login
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.redirect');
@@ -51,6 +61,9 @@ Route::post('/conversation/send', 'HomeController@send');
 // Blog
 Route::get('articles', 'BlogController@index')->name('blog');
 
+// Comments
+Route::post('comment', 'CommentController@store')->name('comments.store');
+
 // Post
 Route::group(['middleware' => 'auth', 'prefix' => 'post'], function(){
     Route::post('create_post', 'PostController@createPost');
@@ -66,7 +79,9 @@ Route::get('new/post/mobile', 'PostController@newMobilePost')->middleware('auth'
 Route::get('get_all', 'PostController@getAllPosts');
 Route::post('/images-upload', 'PostController@imageUpload');
 Route::get('/p/{slug}', 'PostController@single')->name('singlePost');
+Route::get('/m/{slug}', 'PostController@singleMobile')->name('singleMobile');
 Route::get('api-podcasts', 'PostController@ApiPodcast');
+Route::get('podcast/{slug}', 'PostController@SinglePodcast');
 Route::get('all/podcasts', 'PostController@getPodcast')->name('podcast');
 
 // Likes Routes
@@ -78,5 +93,8 @@ Route::get('my_favorites', 'UserController@myFavorites')->middleware('auth')->na
 Route::get('/{username}', 'UserController@profile')->name('public-profile');
 
 
-
+View::composer(['*'], function($view){
+    $user = Auth::user();
+    $view->with('user', $user);
+});
 

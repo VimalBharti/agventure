@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/lightbox.min.css')}}">
+@endsection
+
 @section('content')
     <v-row class="main-container boxed-layout single-post"> 
         <v-col md="8" sm="12" class="center-post-container">
@@ -15,7 +19,7 @@
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>
-                            <a class="auth-name">{{ $post->user->name }}</a>
+                            {{ $post->user->name }}
                         </v-list-item-title>
                         <v-list-item-subtitle>{{ $post->created_at }}</v-list-item-subtitle>
                     </v-list-item-content>
@@ -48,20 +52,21 @@
 
                 <div class="gallery">
                     @foreach($images as $image)
-                        <v-img
-                            src="/storage/thumbnails/{{$image->thumb}}"
-                            lazy-src="{{asset('images/lazy.jpg')}}"
-                            class="grey lighten-2 gallery-panel"
-                        >
-                            <template v-slot:placeholder>
-                                <v-row class="fill-height ma-0" align="center" justify="center">
-                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                                </v-row>
-                            </template>
-                        </v-img>
+                        <a href="/storage/uploads/{{$image->filename}}" data-lightbox="mygallery">
+                            <v-img
+                                src="/storage/thumbnails/{{$image->thumb}}"
+                                lazy-src="{{asset('images/lazy.jpg')}}"
+                                class="grey lighten-2 gallery-panel"
+                            >
+                                <template v-slot:placeholder>
+                                    <v-row class="fill-height ma-0" align="center" justify="center">
+                                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                    </v-row>
+                                </template>
+                            </v-img>
+                        </a>
                     @endforeach
                 </div>
-
             </v-card>
         </v-col>
         
@@ -85,7 +90,7 @@
             </v-card>
             @endif
             <v-card>
-                <v-list two-line>
+                <v-list two-line class="pb-0">
                     <v-list-item>
                         <v-list-item-avatar>
                             <v-img
@@ -99,102 +104,28 @@
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
-                <v-card-text>
+                <v-card-text class="pt-0">
                     <div>{{$post->user->about}}</div>
                 </v-card-text>
                 <v-card-actions>
                     <v-btn
-                        color="deep-purple accent-4"
+                        color="teal"
                         dark
                         block
                         class="text-capitalize"
                     >
-                        Follow
+                        View Profile
                     </v-btn>
                 </v-card-actions>
             </v-card>
+
+            <div class="comment-view mt-5">
+                @include('Comments.commentDesktop')
+            </div>
         </v-col>
     </v-row>
-
-<!-- 
-=======================================
-            Mobile Screen
-=======================================
- -->
-
-    <div class="mobile-container">
-        <!-- App post Mobile screen -->
-        <div class="single-post-mobile-page">
-            <v-img
-                class="white--text align-end"
-                src="{{asset('images/post-bg.png')}}"
-                lazy-src="{{asset('images/lazy.jpg')}}"
-                gradient="to bottom, rgba(0,0,0,.4), rgba(0,0,0,.8)"
-                height="90"
-            >
-                <v-list two-line color="transparent" dark>
-                    <v-list-item>
-                        <v-list-item-avatar size="45">
-                            <v-img
-                                src="/storage/profile/{{$post->user->image}}"
-                                lazy-src="{{asset('images/lazy.jpg')}}"
-                                aspect-ratio="1"
-                            ></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-content>
-                            <v-list-item-title>{{$post->user->name}}</v-list-item-title>
-                            <v-list-item-subtitle>{{$post->created_at->format('d M, Y')}}</v-list-item-subtitle>
-                        </v-list-item-content>
-                        <div class="like-btn-box">
-                            @if (Auth::check())
-                            <like
-                                :post={{ $post->id }}
-                                :favorited={{ $post->favorited() ? 'true' : 'false' }}
-                            ></like>
-                            @else
-                            @endif
-                        </div>
-                    </v-list-item>
-                </v-list>
-            </v-img>
-
-            <div class="mobile-single-post-details">
-                <div class="audio-player-if">
-                    @if(isset($post->audio))
-                        <audio controls>
-                            <source src="../storage/audio/{{$post->audio}}" type="audio/ogg">
-                            <source src="../storage/audio/{{$post->audio}}" type="audio/mpeg">
-                            Your browser does not support the audio tag.
-                        </audio>
-                    @endif
-                </div>
-                <div class="community-tag">
-                    @if(isset($post->community))
-                        <v-btn outlined x-small dark class="text-capitalize">{{$post->community->title}}</v-btn>
-                    @endif
-                </div>
-                <div class="about-post pa-2">{{$post->body}}</div>
-            </div>
-
-            <div class="gallery">
-                @foreach($images as $image)
-                    <v-img
-                        src="/storage/uploads/{{$image->filename}}"
-                        lazy-src="{{asset('images/lazy.jpg')}}"
-                        class="grey lighten-2 gallery-panel"
-                    >
-                        <template v-slot:placeholder>
-                            <v-row class="fill-height ma-0" align="center" justify="center">
-                                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                            </v-row>
-                        </template>
-                    </v-img>
-                @endforeach
-            </div>
-        </div>
-        <!-- footer link bar -->
-        @include('mobile.footer')
-    </div>
-
 @endsection
 
+@section('script')
+    <script src="{{asset('js/lightbox.js')}}"></script>
+@endsection

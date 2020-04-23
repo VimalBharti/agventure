@@ -15,9 +15,11 @@
                         class="align-end white--text pl-3 pb-3"
                         gradient="to bottom, rgba(0,0,0,.2), rgba(0,0,0,.6)"
                     >
-                        <div class="event-details-home-page">
-                            <h4>{{str_limit($update->title, 24, '..')}}</h4>
-                            <div class="caption">{{str_limit($update->about, 50, '...')}}</div>
+                        <div class="updates-details-home-page">
+                            <a href="{{route('singleUpdate', $update->slug)}}">
+                                <h4>{{str_limit($update->title, 24, '..')}}</h4>
+                                <div class="caption">{{str_limit($update->about, 50, '...')}}</div>
+                            </a>
                         </div>
                     </v-img>
                 </v-card>
@@ -46,4 +48,3 @@
 </div>
 
 @endsection
-

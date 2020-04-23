@@ -85,6 +85,7 @@
         <v-card-text>
           <p class="title text--primary">Add Audio Podcast</p>
           <p>Upload audio podcast about this post, So people can listen the process or techniques in audio format.</p>
+
           <!-- Audio -->
           <div class="text--primary audio-file-input">
             <v-file-input
@@ -93,7 +94,7 @@
               counter
               label="Upload Audio Podcast"
               dense
-              placeholder="Select your files"
+              placeholder="select mp3 file"
               prepend-icon="mdi-music"
               outlined
               name="audio"
@@ -109,6 +110,15 @@
                 >+{{ files.length - 2 }} File(s)</span>
               </template>
             </v-file-input>
+
+            <!-- Featured Image -->
+            <v-file-input
+              accept="image/png, image/jpeg, image/bmp"
+              placeholder="upload jpg, png file"
+              prepend-icon="mdi-camera"
+              label="Select featured Image"
+              v-model="featured"
+            ></v-file-input>
           </div>
         </v-card-text>
       </v-card>
@@ -128,7 +138,8 @@ export default {
     body: "",
     audio: null,
     communities: [],
-    community: ""
+    community: "",
+    featured: null
   }),
   created() {
     this.fetchCommunity();
@@ -201,6 +212,7 @@ export default {
       formData.append("body", this.body);
       formData.append("community", this.community);
       formData.append("audio", this.audio);
+      formData.append("featured", this.featured);
 
       this.files.forEach(file => {
         formData.append("photos[]", file, file.name);
@@ -214,6 +226,7 @@ export default {
           this.files = [];
           this.body = [];
           this.audio = null;
+          this.featured = null;
           this.community = [];
         })
         .catch(error => {

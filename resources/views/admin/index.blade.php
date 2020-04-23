@@ -41,7 +41,7 @@
                             <v-img
                                 class="white--text align-end"
                                 height="100px"
-                                src="{{asset('images/post-bg.png')}}"
+                                src="{{asset('images/post-bg.jpg')}}"
                             >
                                 <v-card-title class="font-weight-bold">Total Posts</v-card-title>
                             </v-img>

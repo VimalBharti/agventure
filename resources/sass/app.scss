@@ -3,9 +3,9 @@
 @import "./mobile.scss";
 
 .box-shadow {
-    -webkit-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
-    -moz-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
-    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+    -webkit-box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
+    -moz-box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
+    box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
 }
 .boxed-layout {
     width: 70%;
@@ -13,6 +13,13 @@
 }
 .green-color {
     color: #00bfa6;
+}
+.empty-space {
+    height: 100px;
+}
+.sticky {
+    position: fixed;
+    top: 0;
 }
 a {
     text-decoration: none;
@@ -62,6 +69,15 @@ a {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
     -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
     background: #fff !important;
+}
+.search-input-desktop {
+    border: 1px solid #acacac;
+    border-radius: 4px;
+    padding: 5px 12px;
+    &:focus {
+        outline: none;
+        border: 1px solid #777;
+    }
 }
 h6.divider {
     margin-top: 1rem;
@@ -256,6 +272,13 @@ video {
         }
     }
 }
+.event-list-home-page {
+    .updates-details-home-page {
+        a {
+            color: #fff;
+        }
+    }
+}
 
 // Post in Single Community Page
 .single-community-post {
@@ -299,7 +322,19 @@ video {
         height: 16vw;
         object-fit: cover;
         object-position: center top;
+        border-radius: 10px;
+        transition: 1s;
+        &:hover {
+            transform: scale(1.02);
+        }
     }
+}
+
+// Commenting System
+.comment-nav {
+    -webkit-box-shadow: 0 6px 6px -6px #ececec;
+    -moz-box-shadow: 0 6px 6px -6px #ececec;
+    box-shadow: 0 6px 6px -6px #ececec;
 }
 
 // Register Page
@@ -363,22 +398,53 @@ video {
 }
 // Login Page
 .login {
-    min-height: 95vh;
+    min-height: 100vh;
+
     p {
         font-size: 15px;
         color: #777;
-    }
-    .field {
-        margin-bottom: 2em;
     }
     form {
         margin-top: 3em;
     }
     .forgot-password {
         text-align: center;
-        margin-top: 2em;
+        margin-top: 1em;
         p {
-            margin-bottom: 10px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            a {
+                color: #666;
+                font-weight: bold;
+            }
+        }
+    }
+    // .login-input-form {
+    //     -webkit-box-shadow: rgba(195, 195, 195, 0.55) 0px -5px 10px -5px;
+    //     -moz-box-shadow: rgba(195, 195, 195, 0.55) 0px -5px 10px -5px;
+    //     box-shadow: rgba(195, 195, 195, 0.55) 0px -5px 10px -5px;
+    // }
+    .social-login-btn {
+        margin-top: 2em;
+    }
+}
+.login-dialog {
+    background: #fff;
+    .social-logins {
+        -webkit-box-shadow: rgba(195, 195, 195, 0.55) 0px 5px 10px -5px;
+        -moz-box-shadow: rgba(195, 195, 195, 0.55) 0px 5px 10px -5px;
+        box-shadow: rgba(195, 195, 195, 0.55) 0px 5px 10px -5px;
+        a {
+            color: #3f3e3e;
+        }
+        .social-link-btn {
+            border: 1px solid #adabab;
+            margin-bottom: 1.5em;
+            border-radius: 7px;
+            padding: 5px 12px;
+            &:hover {
+                border: 1px solid #424242;
+            }
         }
     }
 }
@@ -421,14 +487,94 @@ video {
     }
 }
 
+// User My Post Page
+.my-saved-post-container {
+    max-height: 95vh;
+    overflow-y: scroll;
+}
+
 // Community
 .single-community {
     padding: 0px;
 }
 
 // podcast-main-page
-.podcast-main-page {
-    min-height: 86vh;
+
+/*
+    ====================
+      All Pages Styling
+    ====================
+*/
+// privacy-policy
+.privacy-policy {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    p {
+        font-size: 15px;
+        line-height: 25px;
+        color: #444;
+    }
+}
+.contact-us {
+    padding-top: 2em;
+    .input-control {
+        width: 100%;
+        margin-bottom: 2.2em;
+        input {
+            height: 48px;
+            border: 1px solid #9a9a9a;
+            padding: 15px 8px;
+            width: 100%;
+            border-radius: 4px;
+            &:focus {
+                border-color: teal;
+                outline: teal;
+            }
+        }
+        textarea {
+            padding: 15px 8px;
+            border: 1px solid #9a9a9a;
+            width: 100%;
+            border-radius: 4px;
+            &:focus {
+                border-color: teal;
+                outline: teal;
+            }
+        }
+    }
+    .success-msg {
+        position: absolute;
+        top: 50px;
+        right: 0;
+    }
+}
+// verify-email
+.verify-email {
+    min-height: 94vh;
+    position: relative;
+
+    .bg-color-teal {
+        background-color: teal;
+        height: 50vh;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .verify-card {
+        padding: 3% 6%;
+        z-index: 1;
+        h2 {
+            color: #fff;
+            margin-top: 2.5em;
+        }
+        p {
+            color: #dcdcdc;
+        }
+        .resend {
+            margin-top: 2em;
+        }
+    }
 }
 
 // Single Event Page
@@ -437,6 +583,17 @@ video {
 
     .single-event {
         padding: 0px;
+    }
+}
+
+// Updates and Policy
+.all-updates-page {
+    min-height: 95vh;
+}
+.single-update-page {
+    min-height: 95vh;
+    .update-image {
+        border-radius: 1em;
     }
 }
 

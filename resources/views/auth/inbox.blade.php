@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <v-row class="main-container mx-auto">
+        <v-row class="main-container boxed-layout">
             <!-- sidebar -->
             @include('_partials.sidebar')
 

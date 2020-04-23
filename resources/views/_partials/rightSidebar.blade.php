@@ -1,4 +1,4 @@
-<v-col class="right-sidebar d-none d-md-block d-lg-block">
+<v-col class="right-sidebar d-none d-md-block d-lg-block" id="myRightSidebar">
 
     <v-card class="mb-3" flat>
         <v-img
@@ -19,6 +19,35 @@
         </v-img>
     </v-card>
 
+    <!-- Policy and Updates -->
+    <v-card class="mb-3" flat>
+        <v-img
+            class="white--text align-end"
+            height="80px"
+            src="images/post-bg.jpg"
+            gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+        >
+            <v-card-title>Updates & Policies</v-card-title>
+        </v-img>
+
+        @foreach($updates as $update)
+        <v-list-item two-line href="/">
+            <v-list-item-avatar tile>
+                <v-img src="{{asset('uploads/updates/' . $update->image)}}"></v-img>
+            </v-list-item-avatar>
+            <v-list-item-content>
+                <v-list-item-title>{{$update->title}}</v-list-item-title>
+                <v-list-item-subtitle>{{$update->about}}</v-list-item-subtitle>
+            </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        @endforeach
+        <v-card-actions>
+            <v-btn block href="{{url('/all/updates')}}">All Updates</v-btn>
+        </v-card-actions>
+    </v-card>
+
+    <!-- Top Communities -->
     <v-card class="mb-3" flat>
         <v-img
             class="white--text align-end"
@@ -46,30 +75,6 @@
         </v-card-actions>
     </v-card>
 
-    <v-card class="mb-3" flat>
-        <v-img
-            class="white--text align-end"
-            height="80px"
-            src="images/post-bg.png"
-            gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-        >
-            <v-card-title>Updates & Policies</v-card-title>
-        </v-img>
-
-        @foreach($updates as $update)
-        <v-list-item two-line href="/">
-            <v-list-item-avatar tile>
-                <v-img src="{{asset('uploads/updates/' . $update->image)}}"></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-                <v-list-item-title>{{$update->title}}</v-list-item-title>
-                <v-list-item-subtitle>{{$update->about}}</v-list-item-subtitle>
-            </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
-        @endforeach
-        <v-card-actions>
-            <v-btn block href="{{url('/all_community')}}">View All</v-btn>
-        </v-card-actions>
-    </v-card>
+    
 </v-col>
+

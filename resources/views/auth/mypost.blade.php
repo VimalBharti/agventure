@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <v-row class="main-container mx-auto">
+    <v-row class="main-container boxed-layout">
         <!-- sidebar -->
         @include('_partials.sidebar')
 
-        <v-col cols="9" class="center-post-container">
-                @forelse($user->posts as $post)
-                    <v-card class="mb-6 pa-2" flat>
-                        <v-card-text>
-                            <div class="post-auth-details border-bottom pb-3 mb-2">
-                            <h3 class="indigo--text text--darken-3">Posted on:</h3>
-                            <div>{{$post->created_at->format('d M, Y')}}</div>
-                            </div>
-                            <div class="text--primary">{{$post->body}}</div>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn text small>
-                                <v-icon class="mr-1">mdi-delete</v-icon>
-                                {!! Form::open(['route' => ['deletemypost', $post->id], 'method' => 'DELETE']) !!}
-                                    {!! Form::submit('Delete', ['class' => 'delete-button']) !!}
-                                {!! Form::close() !!}
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
+        <v-col cols="9" class="my-saved-post-container">
+                @forelse($user->posts->reverse() as $post)
+                    <v-list>
+                        <v-list-item two-line>
+                            <v-list-item-content>
+                                <v-list-item-subtitle>
+                                    Posted on: {{$post->created_at->format('d M, Y')}}
+                                </v-list-item-subtitle>
+                                <v-list-item-title>{{$post->body}}</v-list-item-title>
+                            </v-list-item-content>
+                            <v-list-actions>
+                                <v-btn outlined small>
+                                    {!! Form::open(['route' => ['deletemypost', $post->id], 'method' => 'DELETE']) !!}
+                                        {!! Form::submit('Delete', ['class' => 'delete-button']) !!}
+                                    {!! Form::close() !!}
+                                </v-btn>
+                            </v-list-actions>
+                        </v-list-item>
+                    </v-list>
+                    <v-divider></v-divider>
                 @empty
                     <v-card class="pa-10" height="580" flat>
                         <p>No post!</p>

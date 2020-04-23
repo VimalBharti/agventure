@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('audio');
             $table->longText('body');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

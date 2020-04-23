@@ -1,19 +1,21 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="register" style="background-image: url('https://source.unsplash.com/1600x900/?agriculture');">
+<div class="register">
     <v-container>  
         <v-row justify="center" align="center">
             <v-col md="7" class="left-logo-box d-none d-md-flex" align-end>
+                <a href="/">
                 <v-img
-                    src="{{asset('images/logo.jpg')}}"
-                    max-width="200"
-                ></v-img>
+                    src="{{asset('images/logoFull.png')}}"
+                    max-height="62" 
+                    max-width="228"
+                ></v-img></a>
             </v-col>
             <v-col md="5" sm="12" xs="12" class="right-form-box">
-                <v-card class="register-input-form">
+                <v-card class="register-input-form" flat>
                     <h2>Create an account</h2>
-                    <p>Already have an account? <a href="/login">Sign in</a></p>
+                    <p>Already have an account? <a href="login">Sign in</a></p>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="field">
@@ -80,9 +82,9 @@
                         <p>By clicking Create account, I agree that:</p>
                         <ul>
                             <li>I have read and accepted the Terms of Use.</li>
-                            <li>The Adobe family of companies may keep me informed with personalized emails about products and services.</li>
+                            <li>The Agrishi family of companies may keep me informed with personalized emails about products and services.</li>
                         </ul>
-                        <p class="mt-6">See our <a href="/">Privacy Policy</a> for more details or to opt-out at any time.</p>
+                        <p class="mt-6">See our <a href="/privacy">Privacy Policy</a> for more details or to opt-out at any time.</p>
                         <!-- submit -->
                         <v-btn block large outlined color="primary" type="submit">Sign Up</v-btn>
                     </form>

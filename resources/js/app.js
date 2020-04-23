@@ -46,7 +46,14 @@ Vue.component("image-upload", require("./components/ImageUpload.vue").default);
 Vue.component("all-post", require("./components/AllPost.vue").default);
 Vue.component("single-post", require("./components/Single.vue").default);
 Vue.component("blog", require("./components/Blog.vue").default);
-Vue.component("all-podcast", require("./components/Podcast.vue").default);
+Vue.component(
+    "all-podcast",
+    require("./components/Podcast/Podcast.vue").default
+);
+Vue.component(
+    "mobile-podcast",
+    require("./components/Podcast/MobilePodcast.vue").default
+);
 Vue.component("like", require("./components/Like.vue").default);
 Vue.component("search", require("./components/Search.vue").default);
 Vue.component(
@@ -57,5 +64,10 @@ Vue.component(
 const app = new Vue({
     el: "#app",
     vuetify: new Vuetify(),
-    router
+    router,
+    data() {
+        return {
+            comment: false
+        };
+    }
 });

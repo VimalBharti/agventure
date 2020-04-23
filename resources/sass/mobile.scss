@@ -2,8 +2,29 @@
     .mobile-nav {
         display: none;
     }
+    .updates-page-footer {
+        display: none;
+    }
     .mobile-container {
         display: none;
+    }
+    .login {
+        background-image: linear-gradient(
+                to bottom,
+                rgba(245, 246, 252, 0.3),
+                rgba(0, 0, 0, 0.8)
+            ),
+            url("images/login-bg.jpg");
+        background-size: cover;
+    }
+    .register {
+        background-image: linear-gradient(
+                to bottom,
+                rgba(245, 246, 252, 0.3),
+                rgba(0, 0, 0, 0.5)
+            ),
+            url("https://source.unsplash.com/1600x900/?agriculture");
+        background-size: cover;
     }
 }
 
@@ -60,21 +81,48 @@
         box-shadow: 0 6px 6px -6px #ececec;
     }
 
+    // update page
+    .updates-page-footer {
+        padding-bottom: 2.5em;
+        display: block;
+    }
+
     // Home Post
     .app-post-mobile-page {
-        padding: 1em 0.5em 4em 0.5em;
+        padding: 1em 0.5em 3em 0.5em;
         .single-mobile-post {
-            -webkit-box-shadow: 0px 0px 7px -5px rgba(0, 0, 0, 0.75);
-            -moz-box-shadow: 0px 0px 7px -5px rgba(0, 0, 0, 0.75);
-            box-shadow: 0px 0px 7px -5px rgba(0, 0, 0, 0.75);
             margin-bottom: 1em;
+            border-radius: 1.5em;
             .image-box-mobile {
                 max-height: 200px;
                 overflow: hidden;
                 // border-radius: 0.5em;
             }
+            .post-body {
+                a {
+                    color: #444;
+                    font-size: 14px;
+                }
+            }
         }
     }
+
+    // Single Podcast
+    .single-podcast-mobile-page {
+        .circle-avatar {
+            border: 4px solid #fff;
+        }
+        .audio-player-single {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+    #audio-player-mobile {
+        width: 100%;
+    }
+
     // Single Post Page Mobile
     .single-post-mobile-page {
         padding-bottom: 5rem;
@@ -89,6 +137,7 @@
             width: 100%;
             object-fit: cover;
             object-position: center top;
+            border-radius: 8px;
         }
         .save-button-mobile-single {
             position: absolute;
@@ -107,7 +156,12 @@
         box-shadow: 0 -6px 6px -6px #ececec;
     }
 
-    // User Account
+    // Login
+    .login {
+        background-image: none;
+        background: none;
+    }
+
     // Edit Account
     .edit-account {
         .user-image {
@@ -124,4 +178,53 @@
             }
         }
     }
+
+    // pagination
+    ul.pagination {
+        margin-top: 0px;
+        li.page-item {
+            display: none;
+
+            &:first-child,
+            &:last-child {
+                display: inline-flex;
+                width: 49%;
+                padding-left: 25%;
+                box-shadow: none;
+            }
+            &.disabled {
+                border: 1px solid #efefef;
+                background: #efefef;
+                cursor: not-allowed;
+                color: #cdcdcd;
+            }
+        }
+    }
+}
+
+// Comment System
+.add-new-comment {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #efefef;
+    textarea {
+        margin-top: 10px;
+        &:focus {
+            outline: none !important;
+            border: none;
+        }
+    }
+}
+.comment-date {
+    margin-left: 6em;
+}
+.comment-body {
+    margin-bottom: 0px !important;
+    font-size: 0.9rem;
+    padding-right: 0.5rem;
+}
+.empty-space {
+    height: 100px;
 }

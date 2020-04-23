@@ -1,42 +1,47 @@
 <v-app-bar flat class="main-navbar" height="48">
-    <a href="/"><v-toolbar-title>
-        <v-avatar color="teal" size="36">
-            <v-icon dark>mdi-leaf</v-icon>
-        </v-avatar>
-        <span class="ml-2 grey--text text--darken-4">Agventure</span>
-    </v-toolbar-title></a>
+    <v-toolbar-title>
+        <a href="/"><v-img 
+            src="{{asset('images/logo.png')}}"
+            max-height="46"
+            contain
+        ></v-img></a>
+    </v-toolbar-title>
 
     <v-spacer></v-spacer>
 
-    <v-text-field
-        hide-details
-        placeholder="Search farming, vermicompost, hyrophonic..."
-        outlined
-        dense
-    ></v-text-field>
-    <v-btn icon><v-icon>mdi-magnify</v-icon></v-btn>
+    <form action="{{route('search-desktop')}}" method="get">
+        <input
+            hide-details
+            placeholder="Search post..."
+            class="search-input-desktop"
+            name="search"
+        />
+        <v-btn icon type="submit"><v-icon>mdi-magnify</v-icon></v-btn>
+    </form>
 
     <v-spacer></v-spacer>
 
     <!-- if logout -->
     @guest
-        <v-btn outlined small color="teal" href="{{route('login')}}">Log in</v-btn>
-        <v-btn depressed small color="teal" dark href="{{route('register')}}" class="ml-3 mr-5">Sign up</v-btn>
+        <v-btn outlined small color="teal" href="login">Log in</v-btn>
+        <v-btn depressed small color="teal" dark href="{{route('register')}}" class="ml-3 mr-3">Sign up</v-btn>
         <v-menu offset-y>
             <template v-slot:activator="{ on }">
-                <v-icon v-on="on">mdi-menu-down</v-icon>
-                <v-icon>mdi-account</v-icon>
+                <v-btn  v-on="on" text>
+                    <v-icon>mdi-account</v-icon>
+                    <v-icon>mdi-menu-down</v-icon>
+                </v-btn>
             </template>
             <v-list class="py-0" dense>
-                <v-list-item href="/">
+                <v-list-item href="/about">
                     <v-list-item-title>About Us</v-list-item-title>
                 </v-list-item>
-                <v-list-item href="/">
+                <v-list-item href="/contact">
                     <v-list-item-title>Contact Us</v-list-item-title>
                 </v-list-item>
                 <v-divider></v-divider>
-                <v-list-item href="/login">
-                    <v-list-item-title>FAQ</v-list-item-title>
+                <v-list-item href="/privacy">
+                    <v-list-item-title>Privacy Policy</v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-menu>
@@ -90,12 +95,10 @@
 <!-- For mobile -->
 <v-app-bar color="white" dense flat class="mobile-nav">
     <v-toolbar-title>
-        <a href="/">
-        <v-avatar color="cyan" size="32">
-            <v-icon dark>mdi-leaf</v-icon>
+        <v-avatar tile size="30">
+            <img src="{{asset('images/logo.png')}}">
         </v-avatar>
-        <span class="ml-1 grey--text text--darken-4">Agventure</span>
-        </a>
+        <span class="grey--text text--darken-4">Agrishi</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
@@ -103,6 +106,6 @@
     <search></search>
     @guest
     @else
-        <v-btn icon href="{{url('new/post/mobile')}}"><v-icon>mdi-plus-circle-outline</v-icon></v-btn>
+        <v-btn icon href="{{url('new/post/mobile')}}"><v-icon>mdi-plus</v-icon></v-btn>
     @endguest
 </v-app-bar>

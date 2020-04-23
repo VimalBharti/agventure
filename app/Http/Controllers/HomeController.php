@@ -11,6 +11,7 @@ use Auth;
 use App\Events\NewMessage;
 use Session;
 use Storage;
+use File;
 
 class HomeController extends Controller
 {
@@ -21,7 +22,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -35,12 +36,10 @@ class HomeController extends Controller
     }
     public function myAccount()
     {
-        $user = Auth::user();
         return view('auth.account', compact('user'));
     }
     public function editAccount()
     {
-        $user = Auth::user();
         return view('auth.edit', compact('user'));
     }
     public function updateAccount(Request $request, $id)
@@ -58,8 +57,6 @@ class HomeController extends Controller
         return redirect()->back();
     }
     public function avatar_update(Request $request){
-
-        $user = Auth::user();
         
         $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
 
@@ -72,31 +69,25 @@ class HomeController extends Controller
     }
     public function myPost()
     {
-        $user = Auth::user();
         return view('auth.mypost', compact('user'));
     }
     public function postDelete($id)
     {
         $post = Post::findOrFail($id);
-        $images = $post->postdetails();
 
-        foreach ($images as $image){
-            Storage::delete(storage_path('uploads/' . $image->filename));
-        }
-        PostDetail::where('post_id', $post->id)->delete();
+        $images = PostDetail::where('post_id', $post->id);
 
         $post->delete();
+        $images->delete();
         return redirect()->back();
     }
     // Events
     public function myEvents()
     {
-        $user = Auth::user();
         return view('auth.myevents', compact('user'));
     }
     public function singleEvent()
     {
-        $user = Auth::user();
         return view('auth.singleEvent', compact('user'));
     }
 

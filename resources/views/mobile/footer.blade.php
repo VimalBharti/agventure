@@ -8,7 +8,7 @@
     </v-btn>
     <v-spacer></v-spacer>
     @guest
-        <v-btn icon href="login"> 
+        <v-btn icon href="login">
             <v-icon>mdi-account</v-icon>
         </v-btn>
     @else
@@ -28,7 +28,7 @@
         <v-icon size="29">mdi-heart-outline</v-icon>
     </v-btn>
     <v-spacer></v-spacer>
-    <v-btn icon href="{{route('podcast')}}">
+    <v-btn icon href="{{route('allUpdates')}}">
         <v-icon size="29">mdi-newspaper</v-icon>
     </v-btn>
 </v-app-bar>

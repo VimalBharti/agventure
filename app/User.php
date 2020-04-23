@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,10 +12,9 @@ use App\Post;
 use App\Like;
 use App\Inbox;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
-    use Sluggable;
+    use Sluggable, Notifiable, HasApiTokens;
 
     public function sluggable()
     {

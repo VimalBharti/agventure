@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Response;
 use App\Post;
@@ -20,22 +21,20 @@ class PostController extends Controller
 
     // Main Home Page
     public function home(){
-        $user = Auth::user();
         $communities = Community::with('posts')->paginate(4);
-        $posts = Post::with('postdetails', 'community')->orderBy('created_at', 'desc')->paginate(20);
         $updates = Update::orderBy('created_at', 'desc')->paginate(4);
+        $posts = Post::with('postdetails', 'community')->orderBy('created_at', 'desc')->paginate(20);
+
         return view('welcome', compact('posts', 'details', 'communities', 'user', 'updates'));
     }
 
     public function newPost()
     {
-        $user = Auth::user();
         $communities = Community::all();
         return view('posts.new', compact('communities', 'user'));
     }
     public function newMobilePost()
     {
-        $user = Auth::user();
         $communities = Community::all();
         return view('posts.newMobile', compact('communities', 'user'));
     }
@@ -83,7 +82,7 @@ class PostController extends Controller
     public function imageUpload(Request $request){
 
         $rules = [
-            'filename'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:6000',
+            'filename'   => 'image|mimes:jpeg,png,jpg|max:6000',
             'body'    => 'required'
         ];
         $this->validate($request, $rules);
@@ -100,6 +99,14 @@ class PostController extends Controller
             $post->audio = $fileNameToStore;
             $post->save();
         }
+        if($request->hasFile('featured')){
+            $filename = $request->file('featured')->getClientOriginalName();
+            $fileNameToStore = $filename;
+            $path = $request->file('featured')->storeAs('', $fileNameToStore, ['disk' => 'audio']);
+            $post->featured = $fileNameToStore;
+            $post->save();
+        }
+        
 
         if (count($request->photos)){
             foreach($request->photos as $photo) {
@@ -125,21 +132,32 @@ class PostController extends Controller
 
         return redirect()->back();
     }
+    // Single Post Desktop
     public function single($slug)
     {   
-        $user = Auth::user();
         $post = Post::where('slug', '=', $slug)->first();
         $images = PostDetail::where('post_id', '=' , $post->id)->get();
         return view('posts.single', compact('post', 'images', 'user'));
     }
 
+    // Single Post Mobile
+    public function singleMobile($slug)
+    {   
+        $post = Post::where('slug', '=', $slug)->first();
+        $images = PostDetail::where('post_id', '=' , $post->id)->get();
+        return view('posts.singleMobile', compact('post', 'images', 'user'));
+    }
+
     public function ApiPodcast(){
-        $posts = Post::where('audio', '!=', '')->get();
+        $posts = Post::where('audio', '!=', '')->with('user')->orderBy('created_at', 'desc')->get();
         return response()->json($posts);
     }
+    public function SinglePodcast($slug){
+        $post = Post::where('slug', '=', $slug)->with('user')->firstOrFail();
+        return view('posts.singlePodcast', compact('post'));
+    }
     public function getPodcast(){
-        $user = Auth::user();
-        return view('posts.podcast', compact('user'));
+        return view('posts.podcast');
     }
 
 
@@ -161,6 +179,18 @@ class PostController extends Controller
     {
         $search = $request->get('q');
         return Post::where('body', 'like', '%'.$search.'%')->with('user')->get();
+    }
+    public function DesktopSearch(Request $request)
+    {
+        $search = $request->search;
+
+        $posts = Post::where('body', 'like', '%' .$search. '%')->with('postdetails', 'user')->paginate(20);
+        
+        if(count($posts) > 0)
+            return view('result', ['posts' => $posts]);
+        else
+            $request->session()->flash('error', 'We did not find results for this search.');
+            return redirect()->back();
     }
 
 }

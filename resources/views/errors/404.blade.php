@@ -14,7 +14,7 @@
                 ></v-img>
             </v-col>
             <v-col class="pa-6">
-                <h2 class="mt-10">Not Found!</h2>
+                <h1 class="mt-10">Not Found!</h1>
                 <p>Sorry, the page you were looking for doesn't exist. Please try another way or come back to the home</p>
                 <v-btn outlined color="teal" href="/">Go To Home</v-btn>
             </v-col>

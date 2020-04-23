@@ -48,12 +48,23 @@ class LoginController extends Controller
     }
     public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver($provider)->user();
-        $existingUser = User::whereEmail($user->getEmail())->first();
+        $userSocial = Socialite::driver($provider)->stateless()->user();
+        $existingUser = User::whereEmail($userSocial->getEmail())->first();
 
         if($existingUser) {
             auth()->login($existingUser);
-            return redirect($this->redirectPath());
+            return redirect()->route('main');
+        } else {
+
+            $user = User::create([
+                'name' => $userSocial->getName(),
+                'email' => $userSocial->getEmail(),
+                'image' => $userSocial->getAvatar(),
+                'provider_id' => $userSocial->getId(),
+                'provider' => $provider,
+            ]);
+
+            return redirect()->route('main');
         }
     }
 

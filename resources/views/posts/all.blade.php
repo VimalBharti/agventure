@@ -2,7 +2,7 @@
 @foreach($posts as $post)
 <v-row class="center-post-area">
     <v-col class="pt-0 mb-2">
-        <v-card elevation="1">
+        <v-card class="box-shadow" flat>
             <a href="{{route('singlePost', $post->slug)}}">
                 <div class="gallery">
                 @isset($post->postdetails)
@@ -55,6 +55,13 @@
                     <v-list-item-subtitle>{{$post->created_at->format('d M, Y')}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-card-actions>
+                    <div class="mr-2">
+                        <a href="{{route('singlePost', $post->slug)}}">
+                            <v-icon size="22" color="grey">mdi-comment-outline</v-icon>
+                        </a>
+                        <span class="grey--text ml-1">{{$post->comments->count()}}</span>
+                    </div>
+                    <!-- Save post Icon -->
                     @if (Auth::check())
                         <like
                             :post={{ $post->id }}

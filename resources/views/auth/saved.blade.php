@@ -20,13 +20,17 @@
         <v-row>
             @forelse ($myFavorites as $myFavorite)
             <v-col cols="4">
-                <v-card class="pa-1" flat height="320">
+                <v-card class="pa-1" height="320">
                     <v-card-text>
                         <div class="post-auth-details border-bottom pb-3 mb-2">
                         <h3 class="indigo--text text--darken-3">Posted on:</h3>
                         <div>{{$myFavorite->created_at->format('M, Y')}}</div>
                         </div>
-                        <div class="text--primary">{{str_limit($myFavorite->body, 180, '...')}}</div>
+                        <div>
+                            <a class="text--primary" href="{{route('singlePost', $myFavorite->slug)}}">
+                                {{str_limit($myFavorite->body, 180, '...')}}
+                            </a>
+                        </div>
                     </v-card-text>
                     <v-card-actions>
                         <like
@@ -54,7 +58,7 @@
 <div class="mobile-container pb-6">
     <div class="saved-post-mobile pa-3">
         @forelse ($myFavorites as $myFavorite)
-            <v-card class="pa-1">
+            <v-card class="pa-1 mb-3">
                 <v-card-actions>
                     <div class="body-2">{{$myFavorite->user->name}}, </div>
                     <h5>{{$myFavorite->created_at->format('M, Y')}}</h5>

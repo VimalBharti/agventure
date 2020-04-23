@@ -1,10 +1,10 @@
 <template>
   <span>
     <v-btn icon v-if="isFavorited" @click.prevent="unFavorite(post)">
-      <v-icon size="28" color="pink">mdi-heart</v-icon>
+      <v-icon size="22" color="pink">mdi-heart</v-icon>
     </v-btn>
     <v-btn icon v-else @click.prevent="favorite(post)">
-      <v-icon size="28" color="grey">mdi-heart-outline</v-icon>
+      <v-icon size="22" color="grey">mdi-heart-outline</v-icon>
     </v-btn>
   </span>
 </template>
