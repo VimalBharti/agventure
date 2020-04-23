@@ -8,7 +8,7 @@
     </v-btn>
     <v-spacer></v-spacer>
     @guest
-        <v-btn icon href="login">
+        <v-btn icon href="../login">
             <v-icon>mdi-account</v-icon>
         </v-btn>
     @else
