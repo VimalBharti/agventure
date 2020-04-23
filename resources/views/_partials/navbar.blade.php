@@ -95,11 +95,7 @@
 <!-- For mobile -->
 <v-app-bar color="white" dense flat class="mobile-nav">
     <v-toolbar-title>
-        <a href="/"><v-img 
-            src="{{asset('images/logo.png')}}"
-            max-height="46"
-            contain
-        ></v-img></a>
+        <a href="/"><img src="{{asset('images/logo.png')}}" alt="agrishi"></a>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
