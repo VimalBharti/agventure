@@ -88,13 +88,12 @@ class PostController extends Controller
 
         $rules = [
             'filename'   => 'image|mimes:jpeg,png,jpg|max:6000',
-            'body'    => 'required'
         ];
         $this->validate($request, $rules);
 
         $post = Post::create([
             'user_id' => Auth::user()->id,
-            'body' => $request->body,
+            'about' => $request->about,
             'community_id' => $request->community,
         ]);
         if($request->hasFile('audio')){

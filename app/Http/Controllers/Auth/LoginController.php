@@ -65,7 +65,9 @@ class LoginController extends Controller
                 'email_verified_at' => now(),
             ]);
 
-            return redirect()->to('/');
+            Auth::login($user);
+
+            return redirect()->to('/home');
         }
     }
 

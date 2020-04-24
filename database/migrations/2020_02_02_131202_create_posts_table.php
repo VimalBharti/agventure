@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->integer('community_id')->unsigned()->nullable();
             $table->string('slug');
             $table->string('audio');
-            $table->longText('body');
+            $table->longText('about');
             $table->timestamps();
             $table->softDeletes();
         });

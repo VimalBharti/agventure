@@ -35,7 +35,7 @@
               <v-col cols="11">
                 <v-textarea
                   required
-                  v-model="body"
+                  v-model="about"
                   label="Whats on your mind?"
                   solo
                   flat
@@ -135,7 +135,7 @@ export default {
     dragCount: 0,
     files: [],
     photos: [],
-    body: "",
+    about: "",
     audio: null,
     communities: [],
     community: "",
@@ -224,7 +224,7 @@ export default {
           this.$toastr.s("Post shared successfully");
           this.photos = [];
           this.files = [];
-          this.body = [];
+          this.about = "";
           this.audio = null;
           this.featured = null;
           this.community = [];
