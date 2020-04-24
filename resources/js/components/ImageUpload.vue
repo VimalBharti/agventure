@@ -231,7 +231,6 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          this.error = error.response.data.errors.body[0];
         });
     }
   }
