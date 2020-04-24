@@ -51,9 +51,15 @@
             <template v-slot:activator="{ on }">
                 <v-toolbar-title>
                     <v-btn icon>
+                        @if(Auth::user()->image)
                         <v-avatar size="36" v-on="on">
                             <img src="/storage/profile/{{Auth::user()->image}}" />
                         </v-avatar>
+                        @else
+                            <v-avatar color="teal" size="40" v-on="on">
+                                <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
+                            </v-avatar>
+                        @endif
                     </v-btn>
                     <!-- <span class="caption">{{Auth::user()->username}}</span> -->
                 </v-toolbar-title>
@@ -95,7 +101,13 @@
 <!-- For mobile -->
 <v-app-bar color="white" dense flat class="mobile-nav">
     <v-toolbar-title>
-        <a href="/"><img src="{{asset('images/logo.png')}}" alt="agrishi"></a>
+        <v-avatar tile size="32">
+            <img
+                src="{{asset('images/logo2.png')}}"
+                alt="agrishi"
+            >
+        </v-avatar>
+        <span>agrishi</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>

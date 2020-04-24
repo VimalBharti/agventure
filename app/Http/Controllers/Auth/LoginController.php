@@ -62,6 +62,7 @@ class LoginController extends Controller
                 'image' => $userSocial->getAvatar(),
                 'provider_id' => $userSocial->getId(),
                 'provider' => $provider,
+                'email_verified_at' => now(),
             ]);
 
             return redirect()->route('main');

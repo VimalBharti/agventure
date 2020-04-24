@@ -75,6 +75,7 @@ Route::get('/c/{slug}', 'CommunityController@single')->name('community');
 
 // Post Routes API-axios
 Route::get('new/post', 'PostController@newPost')->middleware('auth');
+Route::get('new/podcast', 'PostController@newPodcast')->middleware('auth');
 Route::get('new/post/mobile', 'PostController@newMobilePost')->middleware('auth');
 Route::get('get_all', 'PostController@getAllPosts');
 Route::post('/images-upload', 'PostController@imageUpload');

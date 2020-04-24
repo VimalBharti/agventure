@@ -31,7 +31,12 @@ class PostController extends Controller
     public function newPost()
     {
         $communities = Community::all();
-        return view('posts.new', compact('communities', 'user'));
+        return view('posts.new', compact('communities'));
+    }
+    public function newPodcast()
+    {
+        $communities = Community::all();
+        return view('posts.newPodcast', compact('communities'));
     }
     public function newMobilePost()
     {
@@ -95,14 +100,14 @@ class PostController extends Controller
         if($request->hasFile('audio')){
             $filename = $request->file('audio')->getClientOriginalName();
             $fileNameToStore = $filename;
-            $path = $request->file('audio')->storeAs('', $fileNameToStore, ['disk' => 'audio']);
+            $path = $request->file('audio')->storeAs('audio', $fileNameToStore, ['disk' => 's3']);
             $post->audio = $fileNameToStore;
             $post->save();
         }
         if($request->hasFile('featured')){
             $filename = $request->file('featured')->getClientOriginalName();
             $fileNameToStore = $filename;
-            $path = $request->file('featured')->storeAs('', $fileNameToStore, ['disk' => 'audio']);
+            $path = $request->file('featured')->storeAs('audio', $fileNameToStore, ['disk' => 's3']);
             $post->featured = $fileNameToStore;
             $post->save();
         }
@@ -120,7 +125,7 @@ class PostController extends Controller
                 })->save($destinationPath . '/' . $image_name);
 
                 
-                $filename = $photo->store('', ['disk' => 'uploads']);
+                $filename = $photo->store('uploads', ['disk' => 's3']);
                 
                 PostDetail::create([
                     'post_id' => $post->id,

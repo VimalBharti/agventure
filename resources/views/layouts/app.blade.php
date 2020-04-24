@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Agrishi - A Social networks for Agriculture</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -17,7 +17,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body>
+<body style="opacity:0">
     <div id="app">
         <v-app>
             <!-- Navbar -->
@@ -31,6 +31,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        window.onload = function() {setTimeout(function(){document.body.style.opacity="100";},0);};
+    </script>
     @yield('script')
 </body>
 </html>

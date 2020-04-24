@@ -57,7 +57,9 @@ class HomeController extends Controller
         return redirect()->back();
     }
     public function avatar_update(Request $request){
-        
+
+        $user = Auth::user();
+
         $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
 
         $request->avatar->storeAs('', $avatarName, ['disk' => 'avatar']);

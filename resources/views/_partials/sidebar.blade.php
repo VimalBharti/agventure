@@ -1,6 +1,7 @@
 <v-col cols="3" class="left-sidebar d-none d-md-block d-lg-block">
   <div class="user-profile-detail mt-3">
     <v-card>
+      @if(Auth::user()->image)
       <v-img
           src="/storage/profile/{{Auth::user()->image}}"
           aspect-ratio="1"
@@ -8,6 +9,15 @@
           dark
           class="align-end"
       >
+      @else
+        <v-img
+            src="/storage/profile/default.jpg"
+            aspect-ratio="1"
+            position="top"
+            dark
+            class="align-end"
+        >
+      @endif
         <form enctype="multipart/form-data" action="{{ route('avatar.update') }}" method="POST" enctype="multipart/form-data">
             <input type="file" name="avatar" id="files" style="display:none;" onchange='this.form.submit();'>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -70,14 +80,14 @@
   <v-divider></v-divider>
   <div class="sidebar-links">
     <v-list dense nav class="sidebar-link-box">
-      <v-list-item href="{{route('myEvents')}}">
+      <!-- <v-list-item href="{{route('myEvents')}}">
         <v-list-item-icon>
           <v-icon color="grey darken-3">mdi-ticket</v-icon>
         </v-list-item-icon>
         <v-list-content>
           <v-list-item-title>My Event</v-list-item-title>
         </v-list-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <v-list-item href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">

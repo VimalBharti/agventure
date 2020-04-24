@@ -43,6 +43,7 @@ const router = new VueRouter({
 Vue.component("news", require("./components/news.vue").default);
 Vue.component("chat", require("./components/chat.vue").default);
 Vue.component("image-upload", require("./components/ImageUpload.vue").default);
+Vue.component("new-podcast", require("./components/NewPodcast.vue").default);
 Vue.component("all-post", require("./components/AllPost.vue").default);
 Vue.component("single-post", require("./components/Single.vue").default);
 Vue.component("blog", require("./components/Blog.vue").default);
