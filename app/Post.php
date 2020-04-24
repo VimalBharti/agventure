@@ -27,7 +27,7 @@ class Post extends Model
     {
         return [
             'slug' => [
-                'source' => 'body',
+                'source' => 'about',
                 'separator' => '_',
                 'maxLength' => 30,
                 'maxLengthKeepWords' => true,

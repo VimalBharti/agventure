@@ -59,7 +59,7 @@
                         </audio>
                     @endif
                 </div>
-                <div class="about-post px-3 py-3 body-2">{{$post->body}}</div>
+                <div class="about-post px-3 py-3 body-2">{{$post->about}}</div>
             </div>
 
             <div class="comments px-3">

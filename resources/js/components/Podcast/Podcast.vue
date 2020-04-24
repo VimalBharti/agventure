@@ -22,7 +22,7 @@
                 </v-btn>
               </div>
             </v-img>
-            <div class="postTitle pa-1">{{post.body.substring(0,100)+".."}}</div>
+            <div class="postTitle pa-1">{{post.about.substring(0,100)+".."}}</div>
           </v-card>
         </v-col>
       </v-row>

@@ -28,7 +28,7 @@
             </v-col>
             <v-col>
               <div class="caption podcast-body">
-                <a :href="`../podcast/${post.slug}`">{{post.body.substring(0,120)+"..."}}</a>
+                <a :href="`../podcast/${post.slug}`">{{post.about.substring(0,120)+"..."}}</a>
               </div>
             </v-col>
           </v-row>

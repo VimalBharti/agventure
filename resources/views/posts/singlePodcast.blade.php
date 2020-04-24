@@ -52,7 +52,7 @@
                             </v-list-item>
                         </v-list>
                     </div>
-                    <div>{{$post->body}}</div>
+                    <div>{{$post->about}}</div>
                 </v-card-text>
             </v-card>
             <div class="audio-player-single">

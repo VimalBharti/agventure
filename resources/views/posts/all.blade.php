@@ -75,10 +75,10 @@
                 </v-card-actions>
             </v-list-item>
             
-            @isset($post->body)
-                <div class="post-body">
+            @isset($post->about)
+                <div class="post-about">
                     <a href="{{route('singlePost', $post->slug)}}">
-                        {{str_limit($post->body, 250, '...')}}
+                        {{str_limit($post->about, 250, '...')}}
                     </a>
                 </div>
             @endisset

@@ -24,7 +24,7 @@
             </v-list-item>
         </v-list>
         <div class="px-3 mb-2 post-body">
-            <a href="{{route('singleMobile', $post->slug)}}">{{str_limit($post->body, 200, '...')}}</a>
+            <a href="{{route('singleMobile', $post->slug)}}">{{str_limit($post->about, 200, '...')}}</a>
         </div>
         <a href="{{route('singleMobile', $post->slug)}}">
             <div class="image-box-mobile">

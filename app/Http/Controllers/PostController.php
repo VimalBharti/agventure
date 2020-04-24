@@ -48,7 +48,7 @@ class PostController extends Controller
     {
         $rules = [
             'image'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:6000',
-            'body'    => 'required'
+            'about'    => 'required'
         ];
         $this->validate($request, $rules);
 
@@ -183,13 +183,13 @@ class PostController extends Controller
     public function search(Request $request)
     {
         $search = $request->get('q');
-        return Post::where('body', 'like', '%'.$search.'%')->with('user')->get();
+        return Post::where('about', 'like', '%'.$search.'%')->with('user')->get();
     }
     public function DesktopSearch(Request $request)
     {
         $search = $request->search;
 
-        $posts = Post::where('body', 'like', '%' .$search. '%')->with('postdetails', 'user')->paginate(20);
+        $posts = Post::where('about', 'like', '%' .$search. '%')->with('postdetails', 'user')->paginate(20);
         
         if(count($posts) > 0)
             return view('result', ['posts' => $posts]);

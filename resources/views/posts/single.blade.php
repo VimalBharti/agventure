@@ -46,7 +46,7 @@
 
                 <v-container>
                     <div class="post-body">
-                        {!! nl2br(e($post->body)) !!}
+                        {!! nl2br(e($post->about)) !!}
                     </div>
                 </v-container>
 
