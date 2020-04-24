@@ -127,6 +127,8 @@
 </template>
 
 <script>
+import Http from "../Http";
+
 export default {
   props: ["user"],
   data: () => ({

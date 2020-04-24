@@ -19,7 +19,7 @@ class Post extends Model
     protected $table = 'posts';
     protected $primaryKey = 'id';
     
-    protected $fillable = ['user_id', 'body', 'community_id'];
+    protected $fillable = ['user_id', 'about', 'community_id'];
     
     use Sluggable, SoftDeletes;
 

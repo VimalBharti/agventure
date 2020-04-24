@@ -88,6 +88,7 @@ class PostController extends Controller
 
         $rules = [
             'filename'   => 'image|mimes:jpeg,png,jpg|max:6000',
+            'about'    => 'required'
         ];
         $this->validate($request, $rules);
 
