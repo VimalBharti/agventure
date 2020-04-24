@@ -52,7 +52,7 @@
         <v-img
             class="white--text align-end"
             height="80px"
-            src="images/card-bg.png"
+            src="images/card-bg.jpg"
             gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         >
             <v-card-title>Top Growing Communities</v-card-title>
