@@ -209,7 +209,7 @@ export default {
     upload() {
       const formData = new FormData();
 
-      formData.append("body", this.body);
+      formData.append("about", this.about);
       formData.append("community", this.community);
       formData.append("audio", this.audio);
       formData.append("featured", this.featured);
