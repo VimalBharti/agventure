@@ -59,7 +59,7 @@
                         </v-btn>
                         <v-btn outlined block rounded large href="{{url('/login/google')}}" color="grey">
                             <v-icon color="#db4a39" size="32">mdi-google-plus-box</v-icon>
-                            <span class="text-capitalize ml-4">Login with facebook</span>
+                            <span class="text-capitalize ml-4">Login with google</span>
                         </v-btn>
                     </div>
                 </v-card>

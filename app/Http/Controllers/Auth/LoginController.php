@@ -53,7 +53,7 @@ class LoginController extends Controller
 
         if($existingUser) {
             auth()->login($existingUser);
-            return redirect()->route('main');
+            return redirect('/');
         } else {
 
             $user = User::create([
@@ -65,7 +65,7 @@ class LoginController extends Controller
                 'email_verified_at' => now(),
             ]);
 
-            return redirect()->route('main');
+            return redirect()->to('/');
         }
     }
 
