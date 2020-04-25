@@ -2,10 +2,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-    <div class="main-container boxed-layout">
-        <image-upload :user="{{ Auth::user() }}"></image-upload>
+
+<div class="main-container new-post-page">
+    <div class="bg-img">
+        <img src="{{asset('images/post.png')}}" />
     </div>
+
+    <image-upload :user="{{ Auth::user() }}"></image-upload>
 </div>
 
 @endsection

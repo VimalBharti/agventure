@@ -33,11 +33,7 @@ class PostController extends Controller
         $communities = Community::all();
         return view('posts.new', compact('communities'));
     }
-    public function newPodcast()
-    {
-        $communities = Community::all();
-        return view('posts.newPodcast', compact('communities'));
-    }
+    
     public function newMobilePost()
     {
         $communities = Community::all();
@@ -79,6 +75,8 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+    
+
     // Post save by axios
     public function getAllPosts(){
         $posts = Post::with('postdetails', 'user', 'community')->orderBy('created_at', 'desc')->get();
@@ -97,21 +95,6 @@ class PostController extends Controller
             'about' => $request->about,
             'community_id' => $request->community,
         ]);
-        if($request->hasFile('audio')){
-            $filename = $request->file('audio')->getClientOriginalName();
-            $fileNameToStore = $filename;
-            $path = $request->file('audio')->storeAs('audio', $fileNameToStore, ['disk' => 's3']);
-            $post->audio = $fileNameToStore;
-            $post->save();
-        }
-        if($request->hasFile('featured')){
-            $filename = $request->file('featured')->getClientOriginalName();
-            $fileNameToStore = $filename;
-            $path = $request->file('featured')->storeAs('audio', $fileNameToStore, ['disk' => 's3']);
-            $post->featured = $fileNameToStore;
-            $post->save();
-        }
-        
 
         if (count($request->photos)){
             foreach($request->photos as $photo) {
@@ -125,7 +108,7 @@ class PostController extends Controller
                 })->save($destinationPath . '/' . $image_name);
 
                 
-                $filename = $photo->store('uploads', ['disk' => 's3']);
+                $filename = $photo->store('articles', ['disk' => 's3']);
                 
                 PostDetail::create([
                     'post_id' => $post->id,
@@ -153,17 +136,6 @@ class PostController extends Controller
         return view('posts.singleMobile', compact('post', 'images', 'user'));
     }
 
-    public function ApiPodcast(){
-        $posts = Post::where('audio', '!=', '')->with('user')->orderBy('created_at', 'desc')->get();
-        return response()->json($posts);
-    }
-    public function SinglePodcast($slug){
-        $post = Post::where('slug', '=', $slug)->with('user')->firstOrFail();
-        return view('posts.singlePodcast', compact('post'));
-    }
-    public function getPodcast(){
-        return view('posts.podcast');
-    }
 
 
     // Likes system / Favourite Post

@@ -2,24 +2,28 @@
   <div class="podcast-page">
     <v-container>
       <v-row>
-        <v-col v-for="(post, index) in posts" :key="index" class="single-podcast-home">
+        <v-btn class="gradient-btn" dark small absolute bottom right fab>
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        <v-col v-for="podcast of podcasts" :key="podcast.id" class="single-podcast-home">
           <v-row>
             <v-col cols="3">
               <v-img
-                :src="`../storage/audio/${post.featured}`"
+                :src="`https://agrishi.s3.ap-south-1.amazonaws.com/${podcast.image}`"
                 class="align-center featured-image"
                 justify="center"
                 height="65"
               >
                 <div class="text-center">
                   <v-btn
-                    class="play-btn"
+                    dark
+                    class="play-btn gradient-btn"
                     elevation="1"
                     fab
                     small
                     @click="selected($event)"
-                    :id="`${post.audio}`"
-                    :name="`${post.slug}`"
+                    :id="`${podcast.audio}`"
+                    :name="`${podcast.slug}`"
                   >
                     <v-icon>mdi-play</v-icon>
                   </v-btn>
@@ -28,7 +32,7 @@
             </v-col>
             <v-col>
               <div class="caption podcast-body">
-                <a :href="`../podcast/${post.slug}`">{{post.about.substring(0,120)+"..."}}</a>
+                <a :href="`../podcast/${podcast.id}`">{{podcast.about.substring(0,120)+"..."}}</a>
               </div>
             </v-col>
           </v-row>
@@ -40,10 +44,7 @@
     <!-- Audio Player -->
     <div class="audio-player" v-if="audio">
       <!-- custom player -->
-      <div
-        class="custom-player"
-        style="background-image:url('../images/music.jpg'); background-size:cover;background-position:center"
-      >
+      <div class="custom-player">
         <v-btn @click="stop()" icon depressed>
           <v-icon size="42" color="white">{{icon}}</v-icon>
         </v-btn>
@@ -60,7 +61,7 @@
 <script>
 export default {
   data: () => ({
-    posts: null,
+    podcasts: null,
     audio: null,
     dialog: false,
     icon: "mdi-play-circle-outline",
@@ -74,7 +75,7 @@ export default {
       axios
         .get("/api-podcasts")
         .then(response => {
-          this.posts = response.data;
+          this.podcasts = response.data;
         })
         .catch(e => {
           this.error.push(e);
@@ -82,7 +83,8 @@ export default {
     },
     selected(event) {
       this.audio = "";
-      this.audio = "../storage/audio/" + event.currentTarget.id;
+      this.audio =
+        "https://agrishi.s3.ap-south-1.amazonaws.com/" + event.currentTarget.id;
       this.icon = "mdi-play-pause";
       this.name = event.currentTarget.name;
       console.log();
@@ -105,6 +107,12 @@ export default {
 .podcast-page {
   position: relative;
   padding-bottom: 3em;
+
+  .gradient-btn {
+    background: #348f50;
+    background: -webkit-linear-gradient(to right, #56b4d3, #348f50);
+    background: linear-gradient(to right, #56b4d3, #348f50);
+  }
 
   audio {
     position: fixed;

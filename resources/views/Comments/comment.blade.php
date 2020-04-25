@@ -23,13 +23,17 @@
                 @csrf
                 <v-list class="pa-0">
                     <v-list-item>
-                        <v-list-item-avatar size="32">
+                        <v-list-item-avatar size="32" color="teal">
+                            @if($post->user->image)
                             <v-img
                                 src="/storage/profile/{{$user->image}}"
                                 lazy-src="{{asset('images/lazy.jpg')}}"
                                 aspect-ratio="1"
                                 color="grey"
                             ></v-img>
+                            @else
+                            <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
+                            @endif
                         </v-list-item-avatar>
 
                         <v-list-item-content>

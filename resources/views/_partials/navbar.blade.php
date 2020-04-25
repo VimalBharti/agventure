@@ -46,7 +46,10 @@
             </v-list>
         </v-menu>
     @else
-        <v-btn outlined small color="teal" href="{{url('new/post')}}" class="mr-4">New Post</v-btn>
+        <v-btn text small color="teal" href="{{url('new/podcast')}}" class="mr-4">
+            <v-icon class="mr-2">mdi-radio-tower</v-icon> Add Podcast
+        </v-btn>
+        <v-btn outlined small color="teal" href="{{url('new/post')}}" class="mr-4">Add New Post</v-btn>
         <v-menu offset-y>
             <template v-slot:activator="{ on }">
                 <v-toolbar-title>

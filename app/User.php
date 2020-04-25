@@ -43,9 +43,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts()
-    {
+    public function posts(){
         return $this->hasMany('App\Post');
+    }
+    public function podcast(){
+        return $this->hasMany('App\Podcast');
     }
 
     // A User can send a message

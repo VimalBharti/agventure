@@ -2,10 +2,10 @@
   <div class="pl-2 pr-2 podcast-page">
     <v-container>
       <v-row>
-        <v-col md="3" cols="6" v-for="post of posts" :key="post.id" class="mb-2">
+        <v-col md="3" cols="6" v-for="podcast of podcasts" :key="podcast.id" class="mb-2">
           <v-card class="single-posdcast-home">
             <v-img
-              :src="`../storage/audio/${post.featured}`"
+              :src="`https://agrishi.s3.ap-south-1.amazonaws.com/${podcast.image}`"
               aspect-ratio="1.7"
               class="align-center"
               justify="center"
@@ -16,13 +16,13 @@
                   elevation="1"
                   fab
                   @click="selected($event)"
-                  :id="`${post.audio}`"
+                  :id="`${podcast.audio}`"
                 >
                   <v-icon>mdi-play</v-icon>
                 </v-btn>
               </div>
             </v-img>
-            <div class="postTitle pa-1">{{post.about.substring(0,100)+".."}}</div>
+            <div class="postTitle pa-1">{{podcast.about.substring(0,100)+".."}}</div>
           </v-card>
         </v-col>
       </v-row>
@@ -46,7 +46,7 @@
 <script>
 export default {
   data: () => ({
-    posts: null,
+    podcasts: null,
     audio: null,
     dialog: false
   }),
@@ -58,7 +58,7 @@ export default {
       axios
         .get("/api-podcasts")
         .then(response => {
-          this.posts = response.data;
+          this.podcasts = response.data;
         })
         .catch(e => {
           this.error.push(e);
@@ -66,7 +66,8 @@ export default {
     },
     selected(event) {
       this.audio = "";
-      this.audio = "../storage/audio/" + event.currentTarget.id;
+      this.audio =
+        "https://agrishi.s3.ap-south-1.amazonaws.com/" + event.currentTarget.id;
       console.log();
     },
     stop(event) {

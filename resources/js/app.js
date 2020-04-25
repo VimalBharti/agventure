@@ -55,6 +55,10 @@ Vue.component(
     "mobile-podcast",
     require("./components/Podcast/MobilePodcast.vue").default
 );
+Vue.component(
+    "single-podcast",
+    require("./components/Podcast/Single.vue").default
+);
 Vue.component("like", require("./components/Like.vue").default);
 Vue.component("search", require("./components/Search.vue").default);
 Vue.component(

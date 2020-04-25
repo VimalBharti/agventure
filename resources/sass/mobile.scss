@@ -9,21 +9,21 @@
         display: none;
     }
     .login {
-        background-image: linear-gradient(
-                to bottom,
-                rgba(245, 246, 252, 0.3),
-                rgba(0, 0, 0, 0.8)
-            ),
-            url("images/login-bg.jpg");
+        // background-image: linear-gradient(
+        //         to bottom,
+        //         rgba(245, 246, 252, 0.3),
+        //         rgba(0, 0, 0, 0.8)
+        //     ),
+        //     url("images/login-bg.jpg");
         background-size: cover;
     }
     .register {
-        background-image: linear-gradient(
-                to bottom,
-                rgba(245, 246, 252, 0.3),
-                rgba(0, 0, 0, 0.5)
-            ),
-            url("https://source.unsplash.com/1600x900/?agriculture");
+        // background-image: linear-gradient(
+        //         to bottom,
+        //         rgba(245, 246, 252, 0.3),
+        //         rgba(0, 0, 0, 0.5)
+        //     ),
+        //     url("https://source.unsplash.com/1600x900/?agriculture");
         background-size: cover;
     }
 }
@@ -123,12 +123,7 @@
         .audio-player-single {
             position: fixed;
             bottom: 0;
-            left: 0;
-            right: 0;
         }
-    }
-    #audio-player-mobile {
-        width: 100%;
     }
 
     // Single Post Page Mobile

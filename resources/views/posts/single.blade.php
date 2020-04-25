@@ -52,7 +52,7 @@
 
                 <div class="gallery">
                     @foreach($images as $image)
-                        <a href="/storage/uploads/{{$image->filename}}" data-lightbox="mygallery">
+                        <a href="https://agrishi.s3-ap-south-1.amazonaws.com/{{$image->filename}}" data-lightbox="mygallery">
                             <v-img
                                 src="/storage/thumbnails/{{$image->thumb}}"
                                 lazy-src="{{asset('images/lazy.jpg')}}"
@@ -72,23 +72,6 @@
         
         <!-- right Sidebar -->
         <v-col md="4">
-            @if(isset($post->audio))
-            <v-card
-                class="mb-4"
-            >   
-                <v-card-text>
-                    <h3>Listen podcast</h3>
-                    <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe perferendis numquam</div>
-                </v-card-text>
-                <v-card-actions>
-                    <audio controls preload="auto">
-                        <source src="../storage/audio/{{$post->audio}}" type="audio/ogg">
-                        <source src="../storage/audio/{{$post->audio}}" type="audio/mpeg">
-                        Your browser does not support the audio tag.
-                    </audio>
-                </v-card-actions>
-            </v-card>
-            @endif
             <v-card>
                 <v-list two-line class="pb-0">
                     <v-list-item>

@@ -220,6 +220,20 @@ p.background-line {
     margin-bottom: 1em;
 }
 
+// Add new Post Page
+.new-post-page {
+    position: relative;
+    .bg-img {
+        img {
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            left: 0;
+            max-width: 50vw;
+        }
+    }
+}
+
 // Home Page All Post
 video {
     width: 100%;
@@ -499,6 +513,18 @@ video {
 }
 
 // podcast-main-page
+.new-podcast-page {
+    position: relative;
+    .bg-img {
+        img {
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            left: 0;
+            max-width: 500px;
+        }
+    }
+}
 
 /*
     ====================

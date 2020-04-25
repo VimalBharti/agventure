@@ -18,12 +18,16 @@
             >
                 <v-list two-line color="transparent" dark>
                     <v-list-item>
-                        <v-list-item-avatar size="45">
+                        <v-list-item-avatar size="45" color="teal">
+                            @if($post->user->image)
                             <v-img
                                 src="/storage/profile/{{$post->user->image}}"
                                 lazy-src="{{asset('images/lazy.jpg')}}"
                                 aspect-ratio="1"
                             ></v-img>
+                            @else
+                            <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
+                            @endif
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title>{{$post->user->name}}</v-list-item-title>
@@ -49,15 +53,6 @@
                             {{ $post->community->slug }}
                         </v-btn>
                     @endisset
-                </div>
-                <div class="audio-player-if">
-                    @if(isset($post->audio))
-                        <audio controls id="audio-player-mobile">
-                            <source src="../storage/audio/{{$post->audio}}" type="audio/ogg">
-                            <source src="../storage/audio/{{$post->audio}}" type="audio/mpeg">
-                            Your browser does not support the audio tag.
-                        </audio>
-                    @endif
                 </div>
                 <div class="about-post px-3 py-3 body-2">{{$post->about}}</div>
             </div>

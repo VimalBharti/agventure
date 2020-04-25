@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="7">
+    <v-col cols="6" class="mx-auto">
       <div class="imagePost">
         <v-card class="mb-2" flat>
           <select id="community-select" @change="onChange($event)">
@@ -13,7 +13,7 @@
           </select>
           <input v-model="community" hidden />
         </v-card>
-        <v-card flat>
+        <v-card>
           <v-card-text>
             <h4>
               <v-icon small>mdi-pencil</v-icon>
@@ -22,24 +22,14 @@
             <v-divider></v-divider>
 
             <v-row>
-              <v-col cols="1">
-                <v-list-item-avatar color="grey">
-                  <v-img
-                    :src="`/storage/profile/${user.image}`"
-                    lazy-src="https://picsum.photos/10/6"
-                    aspect-ratio="1"
-                    class="grey lighten-2"
-                  ></v-img>
-                </v-list-item-avatar>
-              </v-col>
-              <v-col cols="11">
+              <v-col cols="12">
                 <v-textarea
                   required
                   v-model="about"
                   label="Whats on your mind?"
                   solo
                   flat
-                  rows="1"
+                  rows="2"
                   auto-grow
                 ></v-textarea>
               </v-col>
@@ -66,63 +56,25 @@
               </div>
             </div>
             <v-divider></v-divider>
+            <v-progress-linear color="teal" indeterminate rounded height="4" v-if="loading"></v-progress-linear>
             <v-row class="upload-control">
               <label for="file">
-                <v-icon>mdi-camera</v-icon>
+                <v-icon size="30">mdi-camera</v-icon>
               </label>
               <input type="file" id="file" @change="onInputChange" multiple />
 
               <!-- Share Button -->
               <v-spacer></v-spacer>
-              <v-btn outlined @click="upload" small>Share</v-btn>
+              <v-btn outlined @click="upload" color="teal" small>Share Post</v-btn>
             </v-row>
           </v-card-text>
         </v-card>
       </div>
     </v-col>
-    <v-col cols="5">
-      <v-card>
-        <v-card-text>
-          <p class="title text--primary">Add Audio Podcast</p>
-          <p>Upload audio podcast about this post, So people can listen the process or techniques in audio format.</p>
-
-          <!-- Audio -->
-          <div class="text--primary audio-file-input">
-            <v-file-input
-              v-model="audio"
-              color="deep-purple accent-4"
-              counter
-              label="Upload Audio Podcast"
-              dense
-              placeholder="select mp3 file"
-              prepend-icon="mdi-music"
-              outlined
-              name="audio"
-              :show-size="1000"
-              accept="audio/mp3"
-            >
-              <template v-slot:selection="{ index, text }">
-                <v-chip v-if="index < 2" color="deep-purple accent-4" dark label small>{{ text }}</v-chip>
-
-                <span
-                  v-else-if="index === 2"
-                  class="overline grey--text text--darken-3 mx-2"
-                >+{{ files.length - 2 }} File(s)</span>
-              </template>
-            </v-file-input>
-
-            <!-- Featured Image -->
-            <v-file-input
-              accept="image/png, image/jpeg, image/bmp"
-              placeholder="upload jpg, png file"
-              prepend-icon="mdi-camera"
-              label="Select featured Image"
-              v-model="featured"
-            ></v-file-input>
-          </div>
-        </v-card-text>
-      </v-card>
-    </v-col>
+    <v-snackbar v-model="toaster" :timeout="timeout" top>
+      {{ text }}
+      <v-btn color="teal" text @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-row>
 </template>
 
@@ -131,15 +83,17 @@ export default {
   props: ["user"],
   data: () => ({
     isDragging: false,
+    loading: false,
+    toaster: false,
+    text: "Post shared successfully!",
+    timeout: 3000,
     error: "",
     dragCount: 0,
     files: [],
     photos: [],
     about: "",
-    audio: null,
     communities: [],
-    community: "",
-    featured: null
+    community: ""
   }),
   created() {
     this.fetchCommunity();
@@ -207,26 +161,24 @@ export default {
       return `${Math.round(size * 100) / 100} ${fSExt[i]}`;
     },
     upload() {
+      this.loading = true;
       const formData = new FormData();
 
       formData.append("about", this.about);
       formData.append("community", this.community);
-      formData.append("audio", this.audio);
-      formData.append("featured", this.featured);
 
       this.files.forEach(file => {
         formData.append("photos[]", file, file.name);
       });
 
       axios
-        .post("/images-upload", formData)
+        .post(`/images-upload`, formData)
         .then(response => {
-          this.$toastr.s("Post shared successfully");
+          this.toaster = true;
+          this.loading = false;
           this.photos = [];
           this.files = [];
           this.about = "";
-          this.audio = null;
-          this.featured = null;
           this.community = [];
         })
         .catch(error => {
@@ -239,6 +191,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~vue-toastr/src/vue-toastr.scss";
+
+.imagePost {
+  margin-top: 10%;
+}
 
 #community-select {
   width: 100%;

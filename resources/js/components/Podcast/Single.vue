@@ -1,12 +1,7 @@
 <template>
   <div>
     <v-avatar size="20">
-      <v-img
-        :src="`/storage/profile/${post.user.image}`"
-        lazy-src="images/lazy.jpg"
-        aspect-ratio="1"
-        class="grey lighten-4"
-      >
+      <v-img lazy-src="images/lazy.jpg" aspect-ratio="1" class="grey lighten-4">
         <template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -14,28 +9,30 @@
         </template>
       </v-img>
     </v-avatar>
-    {{post.user.name}}
+    <h1>hhbh {{podcast}}</h1>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["id"],
   data: () => ({
-    posts: null,
+    podcast: null,
     audio: null,
     dialog: false,
     icon: "mdi-play-circle-outline",
     name: null
   }),
+
   created() {
     this.fetchData();
   },
   methods: {
     fetchData() {
       axios
-        .get("/podcast/{slug}")
+        .get("/podcast/" + this.id)
         .then(response => {
-          this.posts = response.data;
+          this.podcast = response.data;
         })
         .catch(e => {
           this.error.push(e);

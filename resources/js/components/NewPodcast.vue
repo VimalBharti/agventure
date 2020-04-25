@@ -1,86 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="7">
-      <div class="imagePost">
-        <v-card class="mb-2" flat>
-          <select id="community-select" @change="onChange($event)">
-            <option disabled selected>--- Select Commmunity ---</option>
-            <option
-              v-for="(community, index) in communities"
-              :value="community.id"
-              :key="index"
-            >{{community.title}}</option>
-          </select>
-          <input v-model="community" hidden />
-        </v-card>
-        <v-card flat>
-          <v-card-text>
-            <h4>
-              <v-icon small>mdi-pencil</v-icon>
-              <span>Share an update!</span>
-            </h4>
-            <v-divider></v-divider>
-
-            <v-row>
-              <v-col cols="1">
-                <v-list-item-avatar color="grey">
-                  <v-img
-                    :src="`/storage/profile/${user.image}`"
-                    lazy-src="https://picsum.photos/10/6"
-                    aspect-ratio="1"
-                    class="grey lighten-2"
-                  ></v-img>
-                </v-list-item-avatar>
-              </v-col>
-              <v-col cols="11">
-                <v-textarea
-                  required
-                  v-model="body"
-                  label="Whats on your mind?"
-                  solo
-                  flat
-                  rows="1"
-                  auto-grow
-                ></v-textarea>
-              </v-col>
-            </v-row>
-            <p v-if="error" class="red--text">{{error}}</p>
-
-            <div
-              class="uploader"
-              @dragenter="onDragEnter"
-              @dragleave="onDragLeave"
-              @dragover.prevent
-              @drop="onDrop"
-              :class="{ dragging: isDragging }"
-              v-show="photos.length"
-            >
-              <div class="images-preview">
-                <div class="img-wrapper" v-for="(image, index) in photos" :key="index">
-                  <img :src="image" :alt="`Agventure ${index}`" />
-                  <div class="details">
-                    <!-- <span class="name" v-text="files[index].name"></span> -->
-                    <span class="size" v-text="getFileSize(files[index].size)"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <v-row class="upload-control">
-              <label for="file">
-                <v-icon>mdi-camera</v-icon>
-              </label>
-              <input type="file" id="file" @change="onInputChange" multiple />
-
-              <!-- Share Button -->
-              <v-spacer></v-spacer>
-              <v-btn outlined @click="upload" small>Share</v-btn>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
-    </v-col>
-    <v-col cols="5">
+    <v-col cols="4" class="mx-auto mt-10">
       <v-card>
         <v-card-text>
           <p class="title text--primary">Add Audio Podcast</p>
@@ -121,6 +41,9 @@
             ></v-file-input>
           </div>
         </v-card-text>
+        <v-card-actions class="pa-5">
+          <v-btn outlined color="teal" block @click="upload">Submit Podcast</v-btn>
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
@@ -137,8 +60,6 @@ export default {
     photos: [],
     body: "",
     audio: null,
-    communities: [],
-    community: "",
     featured: null
   }),
   created() {

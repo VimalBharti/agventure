@@ -25,6 +25,7 @@
 
             <v-list-item>
                 <v-list-item-avatar color="grey">
+                    @if($post->user->image)
                     <v-img
                         src="/storage/profile/{{$post->user->image}}"
                         lazy-src="{{asset('images/lazy.jpg')}}"
@@ -37,6 +38,9 @@
                             </v-row>
                         </template>
                     </v-img>
+                    @else
+                    <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
+                    @endif
                 </v-list-item-avatar>
                 <v-list-item-content>
                     <v-list-item-title>
@@ -76,7 +80,7 @@
             </v-list-item>
             
             @isset($post->about)
-                <div class="post-about">
+                <div class="post-body">
                     <a href="{{route('singlePost', $post->slug)}}">
                         {{str_limit($post->about, 250, '...')}}
                     </a>

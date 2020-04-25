@@ -18,6 +18,7 @@ class CreatePostDetailsTable extends Migration
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
             $table->string('filename');
+            $table->string('thumb');
             $table->timestamps();
         });
     }

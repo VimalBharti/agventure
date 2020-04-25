@@ -19,8 +19,8 @@ return [
         'redirect' => 'https://agrishi.com/login/google/callback',
     ],
     'facebook' => [
-        'client_id' => '388130375236422',
-        'client_secret' => 'aa64dea5697d67cdba3800e2171b4137',
+        'client_id' => '578607166114980',
+        'client_secret' => '6e8bb9ceef1e6ea05aab9c4ce155a61b',
         'redirect' => 'https://agrishi.com/login/facebook/callback',
     ],
 

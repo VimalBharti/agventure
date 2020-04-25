@@ -13,13 +13,17 @@
         </v-btn>
     @else
         <v-btn icon href="{{route('myaccount', $user->username)}}">
-            <v-avatar size="42" outlined>
+            <v-avatar size="42" color="teal" outlined>
+                @if(Auth::user()->image)
                 <v-img 
                     src="/storage/profile/{{Auth::user()->image}}"
                     lazy-src="{{asset('images/lazy.jpg')}}"
                     aspect-ratio="1"
                     class="grey lighten-4"
                 ></v-img>
+                @else
+                <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
+                @endif
             </v-avatar>
         </v-btn>
     @endguest

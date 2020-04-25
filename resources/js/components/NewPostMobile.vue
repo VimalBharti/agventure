@@ -15,27 +15,12 @@
             <input v-model="community" hidden />
           </v-card>
           <v-card flat>
-            <v-card-actions class="pl-0">
-              <v-avatar size="32" color="grey ligten-2">
-                <v-img
-                  :src="`/storage/profile/${user.image}`"
-                  lazy-src="https://picsum.photos/10/6"
-                  aspect-ratio="1"
-                  class="grey lighten-2"
-                ></v-img>
-              </v-avatar>
-              <span class="body-2 grey--text text--darken-2 ml-2">Share an update!</span>
-            </v-card-actions>
-
-            <v-divider></v-divider>
-
             <v-textarea
               required
-              v-model="body"
+              v-model="about"
               label="Whats on your mind?"
-              solo
-              flat
-              rows="1"
+              outlined
+              rows="5"
               auto-grow
             ></v-textarea>
             <p v-if="error" class="red--text">{{error}}</p>
@@ -60,51 +45,25 @@
               </div>
             </div>
             <v-divider></v-divider>
+            <v-progress-linear color="teal" indeterminate rounded height="4" v-if="loading"></v-progress-linear>
             <v-row class="upload-control">
-              <label for="file">
-                <v-icon>mdi-camera</v-icon>
-              </label>
+              <v-btn text large block outlined>
+                <label for="file">
+                  Add Images
+                  <v-icon>mdi-camera</v-icon>
+                </label>
+              </v-btn>
               <input type="file" id="file" @change="onInputChange" multiple />
             </v-row>
           </v-card>
         </div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <v-card outlined>
-          <v-card-text>
-            <p>Upload audio podcast about this post, So people can listen the process or techniques in audio format.</p>
-            <!-- Audio -->
-            <div class="text--primary audio-file-input">
-              <v-file-input
-                v-model="audio"
-                color="deep-purple accent-4"
-                counter
-                label="Upload Audio Podcast"
-                dense
-                placeholder="Select your files"
-                prepend-icon="mdi-music"
-                outlined
-                name="audio"
-                :show-size="1000"
-                accept="audio/mp3"
-              >
-                <template v-slot:selection="{ index, text }">
-                  <v-chip v-if="index < 2" color="deep-purple accent-4" dark label small>{{ text }}</v-chip>
-
-                  <span
-                    v-else-if="index === 2"
-                    class="overline grey--text text--darken-3 mx-2"
-                  >+{{ files.length - 2 }} File(s)</span>
-                </template>
-              </v-file-input>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-btn block outlined @click="upload">Share Post</v-btn>
+    <v-btn block outlined large @click="upload">Share Post</v-btn>
+    <v-snackbar v-model="toaster" :timeout="timeout" top>
+      {{ text }}
+      <v-btn color="teal" text @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -113,12 +72,15 @@ export default {
   props: ["user"],
   data: () => ({
     isDragging: false,
+    loading: false,
+    toaster: false,
+    text: "Post shared successfully!",
+    timeout: 3000,
     error: "",
     dragCount: 0,
     files: [],
     photos: [],
-    body: "",
-    audio: null,
+    about: "",
     communities: [],
     community: ""
   }),
@@ -188,29 +150,28 @@ export default {
       return `${Math.round(size * 100) / 100} ${fSExt[i]}`;
     },
     upload() {
+      this.loading = true;
       const formData = new FormData();
 
-      formData.append("body", this.body);
+      formData.append("about", this.about);
       formData.append("community", this.community);
-      formData.append("audio", this.audio);
 
       this.files.forEach(file => {
         formData.append("photos[]", file, file.name);
       });
 
       axios
-        .post("/images-upload", formData)
+        .post(`/images-upload`, formData)
         .then(response => {
-          this.$toastr.s("Post shared successfully");
+          this.toaster = true;
+          this.loading = false;
           this.photos = [];
           this.files = [];
-          this.body = [];
-          this.audio = null;
+          this.about = "";
           this.community = [];
         })
         .catch(error => {
           console.log(error);
-          this.error = error.response.data.errors.body[0];
         });
     }
   }

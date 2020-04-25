@@ -3,7 +3,8 @@
     <div class="single-mobile-post box-shadow">
         <v-list two-line class="pa-0">
             <v-list-item class="px-3 py-0">
-                <v-list-item-avatar>
+                <v-list-item-avatar color="teal">
+                    @if($post->user->image)
                     <v-img
                         src="/storage/profile/{{$post->user->image}}"
                         lazy-src="{{asset('images/lazy.jpg')}}"
@@ -16,6 +17,9 @@
                             </v-row>
                         </template>
                     </v-img>
+                    @else
+                    <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
+                    @endif
                 </v-list-item-avatar>
                 <v-list-item-content>
                     <v-list-item-title>{{$post->user->name}}</v-list-item-title>

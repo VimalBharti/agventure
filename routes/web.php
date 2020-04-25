@@ -75,15 +75,17 @@ Route::get('/c/{slug}', 'CommunityController@single')->name('community');
 
 // Post Routes API-axios
 Route::get('new/post', 'PostController@newPost')->middleware('auth');
-Route::get('new/podcast', 'PostController@newPodcast')->middleware('auth');
 Route::get('new/post/mobile', 'PostController@newMobilePost')->middleware('auth');
 Route::get('get_all', 'PostController@getAllPosts');
 Route::post('/images-upload', 'PostController@imageUpload');
 Route::get('/p/{slug}', 'PostController@single')->name('singlePost');
 Route::get('/m/{slug}', 'PostController@singleMobile')->name('singleMobile');
-Route::get('api-podcasts', 'PostController@ApiPodcast');
-Route::get('podcast/{slug}', 'PostController@SinglePodcast');
-Route::get('all/podcasts', 'PostController@getPodcast')->name('podcast');
+// Podcast
+Route::get('new/podcast', 'PodcastController@newPodcast')->middleware('auth');
+Route::post('new/podcast', 'PodcastController@createPodcast')->middleware('auth');
+Route::get('api-podcasts', 'PodcastController@ApiPodcast');
+Route::get('podcast/{id}', 'PodcastController@SinglePodcast');
+Route::get('all/podcasts', 'PodcastController@getPodcast')->name('podcast');
 
 // Likes Routes
 Route::post('favorite/{post}', 'PostController@favoritePost');
