@@ -55,8 +55,14 @@ export default {
   },
   methods: {
     fetchData() {
+      let axiosConfig = {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+          "Access-Control-Allow-Origin": "*"
+        }
+      };
       axios
-        .get("/api-podcasts")
+        .get("/api-podcasts", axiosConfig)
         .then(response => {
           this.podcasts = response.data;
         })
