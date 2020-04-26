@@ -179,7 +179,7 @@ export default {
       };
 
       axios
-        .post(`/images-upload`, formData, axiosConfig)
+        .post("/images-upload", axiosConfig, formData)
         .then(response => {
           this.toaster = true;
           this.loading = false;
