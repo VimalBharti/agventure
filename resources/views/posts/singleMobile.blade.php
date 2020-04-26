@@ -26,7 +26,7 @@
                                 aspect-ratio="1"
                             ></v-img>
                             @else
-                            <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
+                            <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
                             @endif
                         </v-list-item-avatar>
                         <v-list-item-content>
