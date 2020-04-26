@@ -7,6 +7,7 @@ use Auth;
 use App\User;
 use App\Post;
 use App\Update;
+use App\Podcast;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminController extends Controller
     public function index(){
         $user = User::all();
         $post = Post::all();
-        $podcast = Post::where('audio', '!=', '')->get();
+        $podcast = Podcast::all();
         $updates = Update::orderBy('created_at', 'desc')->get();
         return view('admin.index', compact('user', 'post', 'podcast', 'updates'));
     }
