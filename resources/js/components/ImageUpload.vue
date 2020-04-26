@@ -171,8 +171,15 @@ export default {
         formData.append("photos[]", file, file.name);
       });
 
+      let axiosConfig = {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+          "Access-Control-Allow-Origin": "*"
+        }
+      };
+
       axios
-        .post(`/images-upload`, formData)
+        .post(`/images-upload`, formData, axiosConfig)
         .then(response => {
           this.toaster = true;
           this.loading = false;
