@@ -85,6 +85,7 @@ Route::get('new/podcast', 'PodcastController@newPodcast')->middleware('auth');
 Route::post('new/podcast', 'PodcastController@createPodcast')->middleware('auth');
 Route::get('api-podcasts', 'PodcastController@ApiPodcast');
 Route::get('podcast/{id}', 'PodcastController@SinglePodcast');
+Route::get('podcasts/{slug}', 'PodcastController@SinglePodcastDesktop');
 Route::get('all/podcasts', 'PodcastController@getPodcast')->name('podcast');
 
 // Likes Routes

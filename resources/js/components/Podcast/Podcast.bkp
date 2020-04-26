@@ -11,18 +11,37 @@
               justify="center"
             >
               <div class="text-center">
-                <v-btn class="play-btn" elevation="1" fab>
+                <v-btn
+                  class="play-btn"
+                  elevation="1"
+                  fab
+                  @click="selected($event)"
+                  :id="`${podcast.audio}`"
+                >
                   <v-icon>mdi-play</v-icon>
                 </v-btn>
               </div>
             </v-img>
             <div class="postTitle pa-1">
-              <a :href="`../podcasts/${podcast.slug}`">{{podcast.about.substring(0,100)+".."}}</a>
+              <a :href="`../podcast/${podcast.id}`">{{podcast.about.substring(0,100)+".."}}</a>
             </div>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
+    <!-- Audio Player -->
+    <div class="audio-player" v-if="audio">
+      <audio
+        crossorigin
+        controls
+        :src="audio"
+        ref="player"
+        id="audio-player"
+        preload="auto"
+        autoplay
+      ></audio>
+    </div>
+    <!-- Audio Player Ends -->
   </div>
 </template>
 
@@ -30,7 +49,9 @@
 <script>
 export default {
   data: () => ({
-    podcasts: null
+    podcasts: null,
+    audio: null,
+    dialog: false
   }),
   created() {
     this.fetchData();
@@ -51,6 +72,20 @@ export default {
         .catch(e => {
           this.error.push(e);
         });
+    },
+    selected(event) {
+      this.audio = "";
+      this.audio =
+        "https://agrishi.s3.ap-south-1.amazonaws.com/" + event.currentTarget.id;
+      console.log();
+    },
+    stop(event) {
+      var a = this.$refs.player;
+      if (a.paused) {
+        a.play();
+      } else {
+        a.pause();
+      }
     }
   }
 };
@@ -76,9 +111,7 @@ export default {
     .postTitle {
       font-size: 0.8em;
       margin-top: 6px;
-      a {
-        color: #444;
-      }
+      color: #444;
     }
   }
 }

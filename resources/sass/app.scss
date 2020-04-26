@@ -517,6 +517,12 @@ video {
     position: relative;
     min-height: 95vh;
 }
+// single Podcast desktop page
+.audio-player-single-desktop {
+    .audiojs {
+        width: 100%;
+    }
+}
 
 /*
     ====================

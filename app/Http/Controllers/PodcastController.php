@@ -18,6 +18,10 @@ class PodcastController extends Controller
         $podcast = Podcast::where('id', '=', $id)->with('user')->firstOrFail();
         return view('podcast.singlePodcast', compact('podcast'));
     }
+    public function SinglePodcastDesktop($slug){
+        $podcast = Podcast::where('slug', '=', $slug)->with('user')->firstOrFail();
+        return view('podcast.singleDesktop', compact('podcast'));
+    }
     public function getPodcast(){
         $podcasts = Podcast::with('user')->orderBy('created_at', 'desc')->get();
         return view('podcast.index', compact('podcasts'));
