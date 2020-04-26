@@ -2,7 +2,7 @@
   <div class="podcast-page">
     <v-container>
       <v-row>
-        <v-btn class="gradient-btn" dark small absolute bottom right fab to="new/podcast">
+        <v-btn class="gradient-btn" dark small absolute bottom right fab href="../new/podcast">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
         <v-col v-for="podcast of podcasts" :key="podcast.id" class="single-podcast-home">
