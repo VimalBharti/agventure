@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Agrishi - A Social networks for Agriculture</title>
+    <meta name="description" content="Agrishi is a free social network platform designed specifically for farmers and other agricultural professionals who can communicate with each other and exchange informations">
+    <meta name=”robots” content="index, follow">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
