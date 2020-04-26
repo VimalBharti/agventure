@@ -31,6 +31,7 @@
                   flat
                   rows="2"
                   auto-grow
+                  name="about"
                 ></v-textarea>
               </v-col>
             </v-row>

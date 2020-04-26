@@ -44,7 +44,7 @@
                                     <v-list-item-avatar color="teal">
                                         @if($podcast->user->image)
                                         <v-img
-                                            src="/storage/profile/{{$post->user->image}}"
+                                            src="/storage/profile/{{$podcast->user->image}}"
                                             lazy-src="{{asset('images/lazy.jpg')}}"
                                             aspect-ratio="1"
                                             class="grey lighten-2"
