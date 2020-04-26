@@ -1,5 +1,20 @@
 <v-col class="right-sidebar d-none d-md-block d-lg-block" id="myRightSidebar">
-
+    @guest
+    @else
+        @if(empty(Auth::user()->email_verified_at))
+        <v-card class="mb-3 pa-1" color="teal" dark>  
+            <v-card-text>
+                <div>Please click the button to confirm your email address and activate your account.</div>
+                @if (session('resent'))
+                    <p color="black">A fresh verification link has been sent to your email address.</p>
+                @endif  
+            </v-card-text>
+            <v-card-actions>
+                <v-btn rounded small     depressed href="{{ route('verification.resend') }}">Confirm Email</v-btn>
+            </v-card-actions>
+        </v-card>
+        @endif
+    @endguest
     <v-card class="mb-3" flat>
         <v-img
             class="white--text align-end"
