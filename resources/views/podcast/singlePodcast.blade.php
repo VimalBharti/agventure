@@ -11,7 +11,7 @@
     <div class="mobile-container">
         <v-app-bar color="white" dense flat>
             <v-toolbar-title>
-                <a href="/"><v-icon color="black">mdi-keyboard-backspace</v-icon></a>
+                <a href="/all/podcasts"><v-icon color="black">mdi-keyboard-backspace</v-icon></a>
                 <span class="ml-1 grey--text text--darken-4">Agrishi</span>
                 </a>
             </v-toolbar-title>
