@@ -2,10 +2,15 @@
 @import "~@mdi/font/css/materialdesignicons.min.css";
 @import "./mobile.scss";
 
-.box-shadow {
+.box-shadow-lg {
     -webkit-box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
     -moz-box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
     box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
+}
+.box-shadow {
+    box-shadow: rgba(195, 195, 195, 0.33) 0px 2px 10px 0px;
+    -moz-box-shadow: rgba(195, 195, 195, 0.33) 0px 2px 10px 0px;
+    -webkit-box-shadow: rgba(195, 195, 195, 0.33) 0px 2px 10px 0px;
 }
 .boxed-layout {
     width: 70%;

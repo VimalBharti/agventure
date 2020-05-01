@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('styles')
-    <link rel="stylesheet" href="{{asset('css/lightbox.min.css')}}">
-@endsection
-
 @section('content')
 
     <div class="mobile-container">
@@ -61,21 +57,19 @@
                 @include('Comments.comment')
             </div>
 
-            <div class="gallery px-3">
+            <div class="px-3 mt-4">
                 @foreach($images as $image)
-                    <a href="/storage/thumbnails/{{$image->thumb}}" data-lightbox="mygallery">
-                        <v-img
-                            src="/storage/thumbnails/{{$image->thumb}}"
-                            lazy-src="{{asset('images/lazy.jpg')}}"
-                            class="grey lighten-2 gallery-panel"
-                        >
-                            <template v-slot:placeholder>
-                                <v-row class="fill-height ma-0" align="center" justify="center">
-                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                                </v-row>
-                            </template>
-                        </v-img>
-                    </a>
+                    <v-img
+                        src="/storage/thumbnails/{{$image->thumb}}"
+                        lazy-src="{{asset('images/lazy.jpg')}}"
+                        class="grey lighten-2 gallery-panel mb-3"
+                    >
+                        <template v-slot:placeholder>
+                            <v-row class="fill-height ma-0" align="center" justify="center">
+                                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                            </v-row>
+                        </template>
+                    </v-img>
                 @endforeach
             </div>
         </div>
@@ -83,9 +77,5 @@
         @include('mobile.footer')
     </div>
 
-@endsection
-
-@section('script')
-    <script src="{{asset('js/lightbox.js')}}"></script>
 @endsection
 
