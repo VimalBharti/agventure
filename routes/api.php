@@ -30,3 +30,18 @@ Route::group([ 'prefix' => 'auth'], function (){
         Route::get('getuser', 'API\AuthController@getUser');
     });
 }); 
+
+// Post
+Route::post('posts/create', 'API\PostController@create')->middleware('auth:api');
+Route::post('posts/delete', 'API\PostController@delete')->middleware('auth:api');
+Route::post('posts/update', 'API\PostController@update')->middleware('auth:api');
+Route::get('posts', 'API\PostController@posts');
+
+// Comments
+Route::post('comments/create', 'API\CommentController@create')->middleware('auth:api');
+Route::post('comments/delete', 'API\CommentController@delete')->middleware('auth:api');
+Route::post('comments/update', 'API\CommentController@update')->middleware('auth:api');
+Route::post('posts/comments', 'API\CommentController@comments')->middleware('auth:api');
+
+// Like
+Route::post('posts/like', 'API\LikesController@like')->middleware('auth:api');

@@ -58,9 +58,6 @@ Route::get('/contacts', 'HomeController@get');
 Route::get('/conversation/{id}', 'HomeController@getMessageFor');
 Route::post('/conversation/send', 'HomeController@send');
 
-// Blog
-Route::get('articles', 'BlogController@index')->name('blog');
-
 // Comments
 Route::post('comment', 'CommentController@store')->name('comments.store');
 
