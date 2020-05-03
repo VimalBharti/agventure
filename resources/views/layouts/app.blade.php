@@ -9,11 +9,16 @@
 
     <title>Agrishi - A Social networks for Agriculture</title>
     <meta name="description" content="Agrishi is a free social network platform designed specifically for farmers and other agricultural professionals who can communicate with each other and exchange informations">
-    <meta name=”robots” content="index, follow">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="manifest" href="{{asset('manifest.json')}}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="theme-color" content="#479788">
+    <!-- Apple Meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Weather PWA">
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

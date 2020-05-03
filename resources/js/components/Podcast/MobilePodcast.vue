@@ -2,7 +2,7 @@
   <div class="podcast-page">
     <v-container>
       <v-row>
-        <v-btn class="gradient-btn" dark small absolute bottom right fab href="../new/podcast">
+        <v-btn class="gradient-btn add-new-post-icon" dark small fab href="../new/podcast">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
         <v-col v-for="podcast of podcasts" :key="podcast.id" class="single-podcast-home">
@@ -104,6 +104,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.add-new-post-icon {
+  position: fixed;
+  right: 10px;
+  bottom: 10vh;
+}
 .podcast-page {
   position: relative;
   padding-bottom: 3em;

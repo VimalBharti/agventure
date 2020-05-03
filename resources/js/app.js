@@ -1,4 +1,5 @@
 require("./bootstrap");
+require("./install");
 
 window.Vue = require("vue");
 import moment from "moment";
@@ -76,3 +77,12 @@ const app = new Vue({
         };
     }
 });
+
+// Service worker
+if ("serviceWorker" in navigator && "PushManager" in window) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js").then(reg => {
+            console.log("Service worker registered.", reg);
+        });
+    });
+}

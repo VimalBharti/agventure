@@ -1,28 +1,31 @@
-
 @foreach($posts as $post)
     <div class="single-mobile-post box-shadow">
         <v-list two-line class="pa-0">
             <v-list-item class="px-3 py-0">
-                <v-list-item-avatar color="teal">
+                <v-list-item-avatar color="teal" class="gradient-btn-green">
                     @if($post->user->image)
-                    <v-img
-                        src="/storage/profile/{{$post->user->image}}"
-                        lazy-src="{{asset('images/lazy.jpg')}}"
-                        aspect-ratio="1"
-                        class="grey lighten-4"
-                    >
-                        <template v-slot:placeholder>
-                            <v-row class="fill-height ma-0" align="center" justify="center">
-                                <v-img src="{{asset('images/logo2.png')}}"></v-img>
-                            </v-row>
-                        </template>
-                    </v-img>
+                        <v-img
+                            src="/storage/profile/{{$post->user->image}}"
+                            lazy-src="{{asset('images/lazy.jpg')}}"
+                            aspect-ratio="1"
+                            class="grey lighten-4"
+                        >
+                            <template v-slot:placeholder>
+                                <v-row class="fill-height ma-0" align="center" justify="center">
+                                    <v-img src="{{asset('images/logoBox.png')}}"></v-img>
+                                </v-row>
+                            </template>
+                        </v-img>
                     @else
-                    <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
+                        <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
                     @endif
                 </v-list-item-avatar>
                 <v-list-item-content>
-                    <v-list-item-title>{{$post->user->name}}</v-list-item-title>
+                    <v-list-item-title>
+                        <a class="grey--text text--darken-3" href="{{route('public-profile', $post->user->username)}}">
+                            {{$post->user->name}}
+                        </a>
+                    </v-list-item-title>
                     <div class="caption grey--text">{{$post->created_at->format('d M, Y')}}</div>
                 </v-list-item-content>
             </v-list-item>

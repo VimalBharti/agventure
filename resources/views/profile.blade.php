@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="cover-profile" style="background: url({{'images/cover-bg.jpg'}}) center center;background-size:cover;"></div>
-    <div class="public-profile-main-container">
+    <!-- <div class="cover-profile" style="background: url({{'images/cover-bg.jpg'}}) center center;background-size:cover;"></div> -->
+    <div class="public-profile-main-container main-container">
         <v-row>
             <v-col cols="12" class="grey lighten-5 center-post-container">
                 <v-container>
@@ -216,5 +216,25 @@
                 </v-container>
             </v-col>
         </v-row>
+    </div>
+
+    <!-- Mobile Screen -->
+    <div class="mobile-container">
+        <v-container>
+            <v-row>
+                <v-col class="text-center">
+                    <v-card flat>
+                        <v-avatar size="200">
+                            <img src="https://cdn.vuetifyjs.com/images/john.jpg">
+                        </v-avatar>
+                        <v-card-text class="text-center">
+                            <div class="title text--primary">{{$user->name}}</div>
+                            <p>@ {{$user->username}}</p>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+            @include('mobile.footer')
+        </v-container>
     </div>
 @endsection

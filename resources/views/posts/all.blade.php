@@ -44,7 +44,9 @@
                 </v-list-item-avatar>
                 <v-list-item-content>
                     <v-list-item-title>
-                        <a class="auth-name" href="{{route('public-profile', $post->user->username)}}">{{$post->user->name}}</a>
+                        <a class="auth-name" href="{{route('public-profile', $post->user->username)}}">
+                            {{$post->user->name}}
+                        </a>
                         @isset($post->community)
                         <span>
                             <v-icon color="grey darken-2">mdi-menu-right</v-icon>

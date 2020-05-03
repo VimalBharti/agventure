@@ -1,0 +1,17 @@
+{
+    "name": "Agrishi",
+    "short_name": "Agrishi",
+    "icons": [
+        {
+            "src": "/icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "orientation": "portrait",
+    "scope": "/",
+    "theme_color": "#479788"
+}

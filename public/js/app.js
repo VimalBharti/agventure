@@ -5745,7 +5745,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".podcast-page[data-v-0df82988] {\n  position: relative;\n  padding-bottom: 3em;\n}\n.podcast-page .gradient-btn[data-v-0df82988] {\n  background: #348f50;\n  background: -webkit-gradient(linear, left top, right top, from(#56b4d3), to(#348f50));\n  background: linear-gradient(to right, #56b4d3, #348f50);\n}\n.podcast-page audio[data-v-0df82988] {\n  position: fixed;\n  bottom: 46px;\n  width: 100%;\n  border-radius: 0px;\n}\n.podcast-page .custom-player[data-v-0df82988] {\n  position: fixed;\n  bottom: 46px;\n  left: 0;\n  right: 0;\n  background: #348f50;\n  background: -webkit-gradient(linear, left top, right top, from(#56b4d3), to(#348f50));\n  background: linear-gradient(to right, #56b4d3, #348f50);\n  padding: 0.7em;\n}\n.podcast-page .custom-player .slug[data-v-0df82988] {\n  color: #fff;\n  font-size: 1.1em;\n  margin-left: 10px;\n}\n.podcast-page .single-podcast-home[data-v-0df82988] {\n  padding-top: 0px;\n  padding-bottom: 0px;\n}\n.podcast-page .single-podcast-home .featured-image[data-v-0df82988] {\n  border-radius: 12px;\n}\n.podcast-page .single-podcast-home .play-btn[data-v-0df82988] {\n  opacity: 0.8;\n}\n.podcast-page .single-podcast-home .postTitle[data-v-0df82988] {\n  font-size: 0.9em;\n  margin-top: 6px;\n}\n.podcast-page .single-podcast-home .podcast-body a[data-v-0df82988] {\n  color: #444;\n}", ""]);
+exports.push([module.i, ".add-new-post-icon[data-v-0df82988] {\n  position: fixed;\n  right: 10px;\n  bottom: 10vh;\n}\n.podcast-page[data-v-0df82988] {\n  position: relative;\n  padding-bottom: 3em;\n}\n.podcast-page .gradient-btn[data-v-0df82988] {\n  background: #348f50;\n  background: -webkit-gradient(linear, left top, right top, from(#56b4d3), to(#348f50));\n  background: linear-gradient(to right, #56b4d3, #348f50);\n}\n.podcast-page audio[data-v-0df82988] {\n  position: fixed;\n  bottom: 46px;\n  width: 100%;\n  border-radius: 0px;\n}\n.podcast-page .custom-player[data-v-0df82988] {\n  position: fixed;\n  bottom: 46px;\n  left: 0;\n  right: 0;\n  background: #348f50;\n  background: -webkit-gradient(linear, left top, right top, from(#56b4d3), to(#348f50));\n  background: linear-gradient(to right, #56b4d3, #348f50);\n  padding: 0.7em;\n}\n.podcast-page .custom-player .slug[data-v-0df82988] {\n  color: #fff;\n  font-size: 1.1em;\n  margin-left: 10px;\n}\n.podcast-page .single-podcast-home[data-v-0df82988] {\n  padding-top: 0px;\n  padding-bottom: 0px;\n}\n.podcast-page .single-podcast-home .featured-image[data-v-0df82988] {\n  border-radius: 12px;\n}\n.podcast-page .single-podcast-home .play-btn[data-v-0df82988] {\n  opacity: 0.8;\n}\n.podcast-page .single-podcast-home .postTitle[data-v-0df82988] {\n  font-size: 0.9em;\n  margin-top: 6px;\n}\n.podcast-page .single-podcast-home .podcast-body a[data-v-0df82988] {\n  color: #444;\n}", ""]);
 
 // exports
 
@@ -52546,13 +52546,10 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  staticClass: "gradient-btn",
+                  staticClass: "gradient-btn add-new-post-icon",
                   attrs: {
                     dark: "",
                     small: "",
-                    absolute: "",
-                    bottom: "",
-                    right: "",
                     fab: "",
                     href: "../new/podcast"
                   }
@@ -110548,6 +110545,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./install */ "./resources/js/install.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 Vue.filter("formatDate", function (value) {
@@ -110602,7 +110601,15 @@ var app = new Vue({
       comment: false
     };
   }
-});
+}); // Service worker
+
+if ("serviceWorker" in navigator && "PushManager" in window) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("/service-worker.js").then(function (reg) {
+      console.log("Service worker registered.", reg);
+    });
+  });
+}
 
 /***/ }),
 
@@ -112022,6 +112029,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_news_vue_vue_type_template_id_1a2e07c4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_news_vue_vue_type_template_id_1a2e07c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/install.js":
+/*!*********************************!*\
+  !*** ./resources/js/install.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
 
 
