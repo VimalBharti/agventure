@@ -118,7 +118,7 @@
     <search></search>
 
     @guest
-        <v-btn icon><v-icon>mdi-account-outline</v-icon></v-btn>
+        <v-btn icon href="{{route('login')}}"><v-icon>mdi-account-outline</v-icon></v-btn>
     @else
         <v-btn icon href="{{url('new/post/mobile')}}"><v-icon>mdi-plus</v-icon></v-btn>
         <v-btn icon href="{{route('myaccount', $user->username)}}">

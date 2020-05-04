@@ -1,5 +1,4 @@
 require("./bootstrap");
-require("./install");
 
 window.Vue = require("vue");
 import moment from "moment";

@@ -16,15 +16,16 @@
     <meta name="theme-color" content="#479788">
     <!-- Apple Meta tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Weather PWA">
-    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#479788">
+    <meta name="apple-mobile-web-app-title" content="Agrishi">
+    <link rel="apple-touch-icon" href="{{asset('icons/icon-96x96.png')}}">
+    <link rel="apple-touch-startup-image" href="{{asset('icons/icon-96x96.png')}}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body style="opacity:0">
+<body>
     <div id="app">
         <v-app>
             <!-- Navbar -->
@@ -38,9 +39,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script>
-        window.onload = function() {setTimeout(function(){document.body.style.opacity="100";},0);};
-    </script>
     @yield('script')
 </body>
 </html>
