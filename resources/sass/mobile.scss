@@ -8,23 +8,26 @@
     .mobile-container {
         display: none;
     }
-    .login {
-        // background-image: linear-gradient(
-        //         to bottom,
-        //         rgba(245, 246, 252, 0.3),
-        //         rgba(0, 0, 0, 0.8)
-        //     ),
-        //     url("images/login-bg.jpg");
-        background-size: cover;
-    }
-    .register {
-        // background-image: linear-gradient(
-        //         to bottom,
-        //         rgba(245, 246, 252, 0.3),
-        //         rgba(0, 0, 0, 0.5)
-        //     ),
-        //     url("https://source.unsplash.com/1600x900/?agriculture");
-        background-size: cover;
+    // .login {
+    //     background-image: linear-gradient(
+    //             to bottom,
+    //             rgba(245, 246, 252, 0.3),
+    //             rgba(0, 0, 0, 0.8)
+    //         ),
+    //         url("images/login-bg.jpg");
+    //     background-size: cover;
+    // }
+    // .register {
+    //     background-image: linear-gradient(
+    //             to bottom,
+    //             rgba(245, 246, 252, 0.3),
+    //             rgba(0, 0, 0, 0.5)
+    //         ),
+    //         url("https://source.unsplash.com/1600x900/?agriculture");
+    //     background-size: cover;
+    // }
+    .only-mobile {
+        display: none;
     }
 }
 
@@ -37,6 +40,9 @@
     .mobile-nav {
         display: none;
     }
+    .only-mobile {
+        display: none;
+    }
 }
 
 /* 
@@ -46,6 +52,9 @@
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
     .mobile-nav {
+        display: none;
+    }
+    .only-mobile {
         display: none;
     }
 }
@@ -62,6 +71,9 @@
     .boxed-layout {
         width: 100%;
     }
+    .only-mobile {
+        display: block;
+    }
 }
 
 /* 
@@ -76,6 +88,9 @@
     .mobile-container {
         min-height: 95vh;
     }
+    .only-mobile {
+        display: block;
+    }
     // Navbar
     .main-navbar {
         display: none;
@@ -87,6 +102,16 @@
         img {
             max-height: 42px;
         }
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    // navigation-drawer
+    .navigation-drawer {
+        min-height: 100vh;
     }
 
     // update page
@@ -97,7 +122,7 @@
 
     // Home Post
     .app-post-mobile-page {
-        padding: 1em 0.5em 3em 0.5em;
+        padding: 3.5em 0.5em 3em 0.5em;
         .single-mobile-post {
             margin-bottom: 1em;
             border-radius: 1.5em;
@@ -208,6 +233,13 @@
                 color: #cdcdcd;
             }
         }
+    }
+}
+
+// Auth Login Register
+.register {
+    .right-form-box {
+        padding-bottom: 6em;
     }
 }
 

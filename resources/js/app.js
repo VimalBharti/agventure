@@ -72,7 +72,8 @@ const app = new Vue({
     router,
     data() {
         return {
-            comment: false
+            comment: false,
+            drawer: null
         };
     }
 });

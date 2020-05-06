@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-top-transition">
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" icon>
           <v-icon>mdi-magnify</v-icon>
@@ -13,7 +13,7 @@
           <v-btn icon @click="dialog = false">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          <span class="ml-1 grey--text text--darken-4">Agventure</span>
+          <span class="ml-1 grey--text text--darken-4">Agrishi</span>
         </v-app-bar>
 
         <div class="search-box pa-2 mt-2">
@@ -22,13 +22,10 @@
 
         <div v-if="showsearch==true && this.search.length">
           <v-list three-line class="pa-2">
-            <v-card class="mb-2" v-for="post in posts" :key="post.id" :href="`p/${post.slug}`">
+            <v-card class="mb-2" v-for="post in posts" :key="post.id" :href="`m/${post.slug}`">
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-img :src="`/storage/profile/${post.user.image}`" lazy-src="images/lazy.jpg"></v-img>
-                </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-list-item-subtitle v-html="post.body"></v-list-item-subtitle>
+                  <v-list-item-subtitle>{{post.about}}</v-list-item-subtitle>
                   <v-list-item-subtitle>{{post.created_at | formatDate}}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>

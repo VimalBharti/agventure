@@ -2,7 +2,7 @@
     <div class="single-mobile-post box-shadow">
         <v-list two-line class="pa-0">
             <v-list-item class="px-3 py-0">
-                <v-list-item-avatar color="teal" class="gradient-btn-green">
+                <v-list-item-avatar color="teal" class="gradient-btn-green" size="38">
                     @if($post->user->image)
                         <v-img
                             src="/storage/profile/{{$post->user->image}}"

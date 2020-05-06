@@ -30,4 +30,7 @@
         </div>
     </div>
 </div>
+<div class="mobile-container">
+    @include('mobile.footer')
+</div>
 @endsection

@@ -117,23 +117,78 @@
 
     <search></search>
 
-    @guest
-        <v-btn icon href="{{route('login')}}"><v-icon>mdi-account-outline</v-icon></v-btn>
-    @else
-        <v-btn icon href="{{url('new/post/mobile')}}"><v-icon>mdi-plus</v-icon></v-btn>
-        <v-btn icon href="{{route('myaccount', $user->username)}}">
-            <v-avatar size="36" class="gradient-btn-green" outlined>
+    <a @click.stop="drawer = !drawer" class="ml-3">
+        <v-icon>mdi-dots-vertical</v-icon>
+    </a>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+      class="navigation-drawer"
+    >
+        @guest
+            <v-list>
+                <v-list-item>
+                    <v-btn rounded outlined block color="teal" href="/login">Log in</v-btn>
+                </v-list-item>
+                <v-list-item>
+                    <v-btn rounded block color="teal" dark depressed href="/register">Sign Up</v-btn>
+                </v-list-item>
+            </v-list>
+        @else
+            <v-list-item>
                 @if(Auth::user()->image)
-                    <v-img 
-                        src="/storage/profile/{{Auth::user()->image}}"
-                        lazy-src="{{asset('images/lazy.jpg')}}"
-                        aspect-ratio="1"
-                        class="grey lighten-4"
-                    ></v-img>
+                    <v-list-item-avatar size="36" v-on="on">
+                        <img src="/storage/profile/{{Auth::user()->image}}" />
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title>{{Auth::user()->name}}</v-list-item-title>
+                    </v-list-item-content>
                 @else
-                    <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
+                    <v-list-item-avatar color="teal" size="40" v-on="on">
+                        <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title>{{Auth::user()->name}}</v-list-item-title>
+                    </v-list-item-content>
                 @endif
-            </v-avatar>
-        </v-btn>
-    @endguest
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list nav>
+                <v-list-item href="/">
+                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-buffer</v-icon> Timeline</v-list-item-title>
+                </v-list-item>
+                <v-list-item href="{{route('myaccount', $user->username)}}">
+                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-account</v-icon> My Account</v-list-item-title>
+                </v-list-item>
+                <v-list-item href="{{route('mypost')}}">
+                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-video</v-icon> My Post</v-list-item-title>
+                </v-list-item>
+                <v-list-item href="{{route('inbox')}}">
+                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-message-text-outline</v-icon> Message</v-list-item-title>
+                </v-list-item>
+                <v-list-item href="{{route('savedpost')}}">
+                    <v-list-item-title>
+                        <v-icon class="grey--text mr-1">mdi-bookmark-check</v-icon> Saved Post
+                    </v-list-item-title>
+                </v-list-item>
+                <v-divider></v-divider>
+                <v-list-item href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    <v-list-item-title>
+                        <v-icon class="grey--text mr-1">mdi-logout-variant</v-icon> Logout
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                        </form>
+                    </v-list-item-title>
+                </v-list-item>
+            </v-list>
+        @endguest
+
+    </v-navigation-drawer>
+
+    
 </v-app-bar>

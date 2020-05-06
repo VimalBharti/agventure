@@ -67,4 +67,7 @@
         </v-row>
     </v-container>
 </div>
+<div class="only-mobile">
+    @include('mobile.footer')
+</div>
 @endsection
