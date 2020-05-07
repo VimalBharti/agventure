@@ -16,12 +16,12 @@ return [
     'google' => [
         'client_id' => '430792567154-380eem39h1kf65t3en19bse8f5a749pv.apps.googleusercontent.com',
         'client_secret' => 'wHONsTA6jewGlYFT4cOcphA-',
-        'redirect' => 'https://agrishi.com/login/google/callback',
+        'redirect' => 'https://www.agrishi.com/login/google/callback',
     ],
     'facebook' => [
         'client_id' => '578607166114980',
         'client_secret' => '6e8bb9ceef1e6ea05aab9c4ce155a61b',
-        'redirect' => 'https://agrishi.com/login/facebook/callback',
+        'redirect' => 'https://www.agrishi.com/login/facebook/callback',
     ],
 
     'mailgun' => [
