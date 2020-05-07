@@ -101,7 +101,11 @@
 </v-app-bar>
 
 
-<!-- For mobile -->
+<!--======================================
+========================================== 
+                For mobile 
+==========================================
+=======================================-->
 <v-app-bar color="white" dense flat class="mobile-nav">
     <v-toolbar-title>
         <v-avatar tile size="32">
@@ -139,14 +143,14 @@
         @else
             <v-list-item>
                 @if(Auth::user()->image)
-                    <v-list-item-avatar size="36" v-on="on">
+                    <v-list-item-avatar size="36">
                         <img src="/storage/profile/{{Auth::user()->image}}" />
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>{{Auth::user()->name}}</v-list-item-title>
                     </v-list-item-content>
                 @else
-                    <v-list-item-avatar color="teal" size="40" v-on="on">
+                    <v-list-item-avatar color="teal" size="40">
                         <span class="white--text title">{{Str::limit(Auth::user()->name, 1, '')}}</span>
                     </v-list-item-avatar>
                     <v-list-item-content>
