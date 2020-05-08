@@ -146,8 +146,9 @@
             border: 4px solid #fff;
         }
         .audio-player-single {
-            position: fixed;
-            bottom: 0;
+            .listen {
+                width: 100%;
+            }
         }
     }
 

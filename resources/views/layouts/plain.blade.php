@@ -26,32 +26,16 @@
     @yield('styles')
 </head>
 <body>
-
     <div id="app">
         <v-app>
-            <!-- Navbar -->
-            @include('_partials.navbar')
-
             <main class="router-view">
                 @yield('content')
             </main>
         </v-app>
     </div>
 
-    <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
-    </div>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.js') }}"></script>
     @yield('script')
-
-    <script>
-        $(window).on("load",function(){
-          $(".loader-wrapper").fadeOut("slow");
-        });
-    </script>
-
 </body>
 </html>

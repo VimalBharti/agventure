@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.plain')
 
 @section('content')
 
@@ -67,20 +67,12 @@
                     <div>{{$podcast->about}}</div>
                 </v-card-text>
             </v-card>
-            <div class="audio-player-single">   
-                <audio class="audio-player" src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->audio}}" preload="auto" >
+            <div class="audio-player-single">
+                <audio class="listen" preload="none" controls>
+                    <source src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->audio}}">
+                </audio>
             </div>
         </div>
     </div>
 
 @endsection
-
-@section('script')
-<script src="{{asset('js/audio.min.js')}}"></script>
-<script>
-    audiojs.events.ready(function() {
-        var as = audiojs.createAll();
-    });
-</script>
-@endsection
-

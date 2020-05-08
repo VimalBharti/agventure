@@ -12,7 +12,7 @@
                 :src="`https://agrishi.s3.ap-south-1.amazonaws.com/${podcast.image}`"
                 class="align-center featured-image"
                 justify="center"
-                height="65"
+                height="55"
               >
                 <div class="text-center">
                   <v-btn
@@ -112,11 +112,12 @@ export default {
 .podcast-page {
   position: relative;
   padding-bottom: 3em;
+  padding-top: 3em;
 
   .gradient-btn {
-    background: #348f50;
-    background: -webkit-linear-gradient(to right, #56b4d3, #348f50);
-    background: linear-gradient(to right, #56b4d3, #348f50);
+    background: #646665;
+    background: -webkit-linear-gradient(to right, #222627, #646665);
+    background: linear-gradient(to right, #222627, #646665);
   }
 
   audio {
