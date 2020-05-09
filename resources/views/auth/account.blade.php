@@ -148,9 +148,21 @@
             </v-btn>
         </v-card-actions>
 
-        <v-avatar size="125">
-            <v-img src="/storage/profile/{{Auth::user()->image}}"></v-img>
-        </v-avatar>
+        <div class="user-image-avatar">
+            <v-avatar size="125">
+                @if($user->image)
+                    <v-img src="/storage/profile/{{$user->image}}">
+                        <template v-slot:placeholder>
+                            <v-row class="fill-height ma-0" align="center" justify="center">
+                                <v-img src="{{asset('images/logoBox.png')}}"></v-img>
+                            </v-row>
+                        </template>
+                    </v-img>
+                @else
+                    <span class="white--text display-3">{{Str::limit($user->name, 1, '')}}</span>
+                @endif
+            </v-avatar>
+        </div>
 
         <h2>{{$user->name}}</h2>
         <h5>{{$user->email}}</h5>
@@ -184,7 +196,7 @@
             @foreach($user->posts as $post)
                 <v-card class="mb-3" outlined>
                     <v-card-text>
-                        {{str_limit($post->body, 150, '...')}}
+                        {{str_limit($post->about, 120, '...')}}
                         <h5 x-small outlined>{{$post->created_at->format('d M, Y')}}</h5>
                     </v-card-text>
                 </v-card>

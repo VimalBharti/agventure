@@ -140,6 +140,11 @@
         <v-card class="text-center user-image" flat>
             <v-avatar size="200">
                 <v-img src="/storage/profile/{{Auth::user()->image}}" class="align-end" aspect-ratio="1">
+                    <template v-slot:placeholder>
+                        <v-row class="fill-height ma-0" align="center" justify="center">
+                            <v-icon size="80" color="grey">mdi-image-filter</v-icon>
+                        </v-row>
+                    </template>
                     <form enctype="multipart/form-data" action="{{ route('avatar.update') }}" method="POST" enctype="multipart/form-data">
                         <input type="file" name="avatar" id="files" style="display:none;" onchange='this.form.submit();'>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

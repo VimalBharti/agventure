@@ -44,7 +44,7 @@
                 </v-list-item-avatar>
                 <v-list-item-content>
                     <v-list-item-title>
-                        <a class="auth-name" href="{{route('public-profile', $post->user->username)}}">
+                        <a class="auth-name">
                             {{$post->user->name}}
                         </a>
                         @isset($post->community)
@@ -78,6 +78,7 @@
                             <v-icon color="grey">mdi-heart-outline</v-icon>
                         </v-btn>
                     @endif
+                    <span class="grey--text ml-1">{{$post->likes->count()}}</span>
                 </v-card-actions>
             </v-list-item>
             

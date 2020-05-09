@@ -547,22 +547,7 @@ video {
     position: relative;
     margin-bottom: 5em;
 }
-.user-avatar-box-public {
-    .link-button-public {
-        display: flex;
-        justify-content: space-evenly;
-    }
-    .auth-image-public {
-        border: 2px solid #fff;
-    }
-}
-.cover-profile {
-    height: 180px;
-    position: relative;
-}
-.public-profile-main-container {
-    margin-top: -100px;
-}
+
 // Edit User Profile
 .user-profile-detail {
     label.save-btn {

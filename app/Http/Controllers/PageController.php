@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use App\User;
+use App\Post;
+use App\Event;
 
 class PageController extends Controller
 {
@@ -37,5 +40,13 @@ class PageController extends Controller
         $contact->save();
 
         return redirect()->back()->with('success', 'Message sent successfully!');
+    }
+
+    public function profile($id){
+        $auth = User::findOrFail($id);
+        $posts = Post::where('user_id', $auth->id)->orderBy('created_at', 'desc')->get();
+        $events = Event::where('user_id', $auth->id)->orderBy('created_at', 'desc')->get();
+        // dd($auth);
+        return view('users.profile', compact('posts', 'events', 'auth'));
     }
 }

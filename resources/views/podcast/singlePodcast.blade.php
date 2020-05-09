@@ -8,7 +8,7 @@
 =======================================
  -->
 
-    <div class="mobile-container">
+    <div class="only-mobile">
         <v-app-bar color="white" dense flat>
             <v-toolbar-title>
                 <a href="/all/podcasts"><v-icon color="black">mdi-keyboard-backspace</v-icon></a>

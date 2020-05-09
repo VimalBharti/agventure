@@ -91,7 +91,7 @@ Route::post('unfavorite/{post}', 'PostController@unFavoritePost');
 Route::get('my_favorites', 'UserController@myFavorites')->middleware('auth')->name('savedpost');
 
 // Public Profile
-Route::get('/{username}', 'UserController@profile')->name('public-profile');
+Route::get('user/{id}', 'PageController@profile')->name('public-profile');
 
 
 View::composer(['*'], function($view){

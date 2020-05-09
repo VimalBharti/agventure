@@ -112,7 +112,6 @@ export default {
 .podcast-page {
   position: relative;
   padding-bottom: 3em;
-  padding-top: 3em;
 
   .gradient-btn {
     background: #646665;

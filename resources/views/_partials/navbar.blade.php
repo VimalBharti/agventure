@@ -162,32 +162,50 @@
             <v-divider></v-divider>
 
             <v-list nav>
+                <v-list-item href="{{url('new/post/mobile')}}">
+                    <v-list-item-subtitle>
+                        <v-icon class="grey--text mr-3" size="22">mdi-plus</v-icon>Add Post
+                    </v-list-item-subtitle>
+                </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <v-list nav>
+                <v-list-item href="{{url('new/podcast')}}">
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-music</v-icon>Add Podcast</v-list-item-subtitle>
+                </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <v-list nav>
                 <v-list-item href="/">
-                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-buffer</v-icon> Timeline</v-list-item-title>
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-buffer</v-icon> Timeline</v-list-item-subtitle>
                 </v-list-item>
                 <v-list-item href="{{route('myaccount', $user->username)}}">
-                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-account</v-icon> My Account</v-list-item-title>
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-account-outline</v-icon> My Account</v-list-item-subtitle>
                 </v-list-item>
                 <v-list-item href="{{route('mypost')}}">
-                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-video</v-icon> My Post</v-list-item-title>
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-database</v-icon> My Post</v-list-item-subtitle>
                 </v-list-item>
                 <v-list-item href="{{route('inbox')}}">
-                    <v-list-item-title><v-icon class="grey--text mr-1">mdi-message-text-outline</v-icon> Message</v-list-item-title>
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-message-text-outline</v-icon> Message</v-list-item-subtitle>
                 </v-list-item>
                 <v-list-item href="{{route('savedpost')}}">
-                    <v-list-item-title>
-                        <v-icon class="grey--text mr-1">mdi-bookmark-check</v-icon> Saved Post
-                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                        <v-icon class="grey--text mr-3" size="20">mdi-bookmark-plus-outline</v-icon> Saved Post
+                    </v-list-item-subtitle>
                 </v-list-item>
                 <v-divider></v-divider>
                 <v-list-item href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                    <v-list-item-title>
-                        <v-icon class="grey--text mr-1">mdi-logout-variant</v-icon> Logout
+                    <v-list-item-subtitle>
+                        <v-icon class="grey--text mr-3" size="20">mdi-logout-variant</v-icon> Logout
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                         </form>
-                    </v-list-item-title>
+                    </v-list-item-subtitle>
                 </v-list-item>
             </v-list>
         @endguest
