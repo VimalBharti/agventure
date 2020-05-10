@@ -2157,6 +2157,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     contacts: {
@@ -2166,6 +2179,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      placeholder: "/images/logoBox.png",
       selected: this.contacts.length ? this.contacts[0] : null
     };
   },
@@ -51603,14 +51617,48 @@ var render = function() {
                   }
                 },
                 [
-                  _c("v-list-item-avatar", [
-                    _c("img", {
-                      attrs: {
-                        src: "/storage/profile/" + contact.image,
-                        alt: contact.name
-                      }
-                    })
-                  ]),
+                  _c(
+                    "v-list-item-avatar",
+                    [
+                      _c("v-img", {
+                        attrs: {
+                          src: "/storage/profile/" + contact.image,
+                          alt: contact.name
+                        },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "placeholder",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "v-row",
+                                    {
+                                      staticClass: "fill-height ma-0",
+                                      attrs: {
+                                        align: "center",
+                                        justify: "center"
+                                      }
+                                    },
+                                    [
+                                      _c("v-img", {
+                                        attrs: { src: _vm.placeholder }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "v-list-item-content",
@@ -110637,7 +110685,8 @@ var app = new Vue({
   data: function data() {
     return {
       comment: false,
-      drawer: null
+      drawer: null,
+      enrollNow: false
     };
   }
 }); // Service worker

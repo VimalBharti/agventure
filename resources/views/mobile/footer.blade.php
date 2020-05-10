@@ -17,7 +17,7 @@
       <v-icon color="#454545">mdi-heart-outline</v-icon>
     </v-btn>
 
-    <v-btn href="{{route('allUpdates')}}">
+    <v-btn href="{{route('allUpdates.mobile')}}">
       <v-icon color="#454545">mdi-bell-outline</v-icon>
     </v-btn>
 

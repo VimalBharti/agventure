@@ -7,6 +7,8 @@ use App\User;
 use App\Inbox;
 use App\Post;
 use App\PostDetail;
+use App\Event;
+use App\EventResponse;
 use Auth;
 use App\Events\NewMessage;
 use Session;
@@ -83,14 +85,80 @@ class HomeController extends Controller
         $images->delete();
         return redirect()->back();
     }
-    // Events
+    // Events Page 
     public function myEvents()
     {
-        return view('auth.myevents', compact('user'));
+        $events = Event::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        return view('events.desktopEvent', compact('events'));
     }
-    public function singleEvent()
+    public function EventResponse()
+    {   
+        $responses = EventResponse::where('auth_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return view('events.response', compact('responses'));
+    }
+    public function destroyEvent($id)
     {
-        return view('auth.singleEvent', compact('user'));
+      $event = Event::find($id);
+
+      if(!empty($event->image)) {
+          if(file_exists(storage_path('app/public/events/'. $event->image))){
+              unlink(storage_path('app/public/events/'. $event->image));
+          }
+      }
+
+      $event->delete();
+      Session::flash('success', 'The project was successfully deleted.');
+      return redirect()->back();
+    }
+    // Mobile
+    public function mobileMyEvents()
+    {
+        $events = Event::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        $responses = EventResponse::where('auth_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return view('events.mobileEvent', compact('events', 'responses'));
+    }
+    public function getNewEvenPage()
+    {
+        return view('events.addNew');
+    }
+    public function newEvent(Request $request)
+    {
+        $rules = [
+            'image'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'title'    => 'required',
+            'about'    => 'required',
+            'date'    => 'required',
+            'location'    => 'required',
+            'fees'    => 'required',
+            'timming'    => 'required',
+            'highlightA'    => 'required',
+            'highlightB'    => 'required',
+            'highlightC'    => 'required',
+        ];
+        $this->validate($request, $rules);
+
+        $event = new Event;
+        $event->user_id = Auth::user()->id;
+        $event->title  =  $request->title;
+        $event->about  =  $request->about;
+        $event->date  =  $request->date;
+        $event->location  =  $request->location;
+        $event->fees  =  $request->fees;
+        $event->timming  =  $request->timming;
+        $event->highlightA  =  $request->highlightA;
+        $event->highlightB  =  $request->highlightB;
+        $event->highlightC  =  $request->highlightC;
+
+
+        $file = $request->file('image');
+        $filename = 'event-' . rand() . '.' . $file->getClientOriginalName();
+        $path = $file->storeAs('public/events', $filename);
+
+        $event->image = $filename;
+
+        $event->save();
+
+        return redirect()->back();
     }
 
 

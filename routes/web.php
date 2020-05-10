@@ -14,15 +14,25 @@ Route::get('/', 'PostController@home')->name('main');
 
 Auth::routes(['verify' => true]);
 
+/* 
+========================================
+---------     SEARCH PAGE    -----------
+*/
 Route::get('/search', 'PostController@DesktopSearch')->name('search-desktop');
 
-// Pages
+/* 
+========================================
+---------    OTHER PAGES    -----------
+*/
 Route::get('/privacy', 'PageController@privacy');
 Route::get('/about', 'PageController@about');
 Route::get('/contact', 'PageController@contact');
 Route::post('/sendMessage', 'PageController@SendMessage')->name('sendMessage');
 
-// Admin Login
+/* 
+========================================
+---------     ADMIN LOGIN    -----------
+*/
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -31,11 +41,18 @@ Route::prefix('admin')->group(function() {
     Route::post('/updates/new','AdminController@newUpdate')->name('newUpdate');
 });
 
-// All Updates for Guest+Auth
+/* 
+========================================
+----- ALL UPDATES FOR GUEST + AUTH  ----
+*/
 Route::get('/all/updates', 'UserController@allUpdates')->name('allUpdates');
+Route::get('/all/m/updates', 'UserController@allUpdatesMobile')->name('allUpdates.mobile');
 Route::get('/updates/{slug}', 'UserController@singleUpdate')->name('singleUpdate');
 
-// Social Login
+/* 
+========================================
+---------     SOCIAL LOGIN   -----------
+*/
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
@@ -44,40 +61,77 @@ Route::get('/account/edit', 'HomeController@editAccount')->name('editaccount');
 Route::get('/account/post', 'HomeController@myPost')->name('mypost');
 Route::delete('post/{id}', 'HomeController@postDelete')->name('deletemypost');
 Route::get('/account/inbox', 'HomeController@inbox')->name('inbox');
-// My Events / Add New Event
+/* 
+========================================
+---------     EVENTS PAGE    -----------
+*/
+// dektop
 Route::get('/account/events/', 'HomeController@myEvents')->name('myEvents');
-Route::get('single', 'HomeController@singleEvent')->name('singleEvent');
+Route::post('add/new-event', 'HomeController@newEvent')->name('new.event');
+Route::get('event/responses', 'HomeController@EventResponse')->name('event.response');
+Route::delete('event/{id}', 'HomeController@destroyEvent')->name('event.destroy');
+Route::get('events/{slug}', 'PageController@singleEvent')->name('singleEvent');
+// mobile
+Route::get('/m/add/event', 'HomeController@getNewEvenPage')->name('mobile-new-event-page');
+Route::get('/account/m/events/', 'HomeController@mobileMyEvents')->name('mobile.myEvents');
+Route::get('events/m/{slug}', 'PageController@mobileSingleEvent')->name('mobile.singleEvent');
+// response
+Route::post('/event/enrollNow', 'PageController@eventEnrollForm')->name('enrollNow');
 
+/* 
+=================================================
+---------   USER PROFILE EDIT/AVATAR  -----------
+*/
 Route::get('/account/{username}', 'HomeController@myAccount')->name('myaccount');
 Route::post('/avatar/edit', 'HomeController@avatar_update')->name('avatar.update');
 Route::post('/profile/edit/{id}', 'HomeController@updateAccount')->name('profile.update');
-// Inbox
+
+/* 
+========================================
+---------     INBOX PAGE    -----------
+*/
 Route::post('/message', 'HomeController@sendMessage')->name('send-message');
 
 Route::get('/contacts', 'HomeController@get');
 Route::get('/conversation/{id}', 'HomeController@getMessageFor');
 Route::post('/conversation/send', 'HomeController@send');
 
-// Comments
+/* 
+========================================
+---------     COMMENTS PAGE    -----------
+*/
 Route::post('comment', 'CommentController@store')->name('comments.store');
 
-// Post
+/* 
+========================================
+---------------  POST  -----------------
+*/
 Route::group(['middleware' => 'auth', 'prefix' => 'post'], function(){
     Route::post('create_post', 'PostController@createPost');
 });
-// Community
+
+/* 
+========================================
+---------     COMMUNITY PAGE    -----------
+*/
 Route::get('/get_community', 'CommunityController@get_community');
 Route::get('/all_community', 'CommunityController@all_community');
 Route::get('/c/{slug}', 'CommunityController@single')->name('community');
 
-// Post Routes API-axios
+/* 
+========================================
+------  POST ROUTE BY API - AXIOS ------
+*/
 Route::get('new/post', 'PostController@newPost')->middleware('auth');
 Route::get('new/post/mobile', 'PostController@newMobilePost')->middleware('auth');
 Route::get('get_all', 'PostController@getAllPosts');
 Route::post('/images-upload', 'PostController@imageUpload');
 Route::get('/p/{slug}', 'PostController@single')->name('singlePost');
 Route::get('/m/{slug}', 'PostController@singleMobile')->name('singleMobile');
-// Podcast
+/* 
+========================================
+---------     PODCAST PAGE    -----------
+*/
 Route::get('new/podcast', 'PodcastController@newPodcast')->middleware('auth');
 Route::post('new/podcast', 'PodcastController@createPodcast')->middleware('auth');
 Route::get('api-podcasts', 'PodcastController@ApiPodcast');
@@ -85,12 +139,18 @@ Route::get('podcast/{id}', 'PodcastController@SinglePodcast');
 Route::get('podcasts/{slug}', 'PodcastController@SinglePodcastDesktop');
 Route::get('all/podcasts', 'PodcastController@getPodcast')->name('podcast');
 
-// Likes Routes
+/* 
+========================================
+---------     LIKE ROUTES    -----------
+*/
 Route::post('favorite/{post}', 'PostController@favoritePost');
 Route::post('unfavorite/{post}', 'PostController@unFavoritePost');
 Route::get('my_favorites', 'UserController@myFavorites')->middleware('auth')->name('savedpost');
 
-// Public Profile
+/* 
+========================================
+---------   PUBLIC PROFILE   -----------
+*/
 Route::get('user/{id}', 'PageController@profile')->name('public-profile');
 
 

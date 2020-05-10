@@ -671,6 +671,14 @@ video {
         padding: 0px;
     }
 }
+// My Events Page
+.my-events-page {
+    min-height: 96vh;
+    .add-new-event {
+        max-height: 90vh;
+        overflow-y: scroll;
+    }
+}
 
 // Updates and Policy
 .all-updates-page {

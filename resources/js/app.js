@@ -73,7 +73,8 @@ const app = new Vue({
     data() {
         return {
             comment: false,
-            drawer: null
+            drawer: null,
+            enrollNow: false
         };
     }
 });

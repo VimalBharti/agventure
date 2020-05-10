@@ -26,6 +26,12 @@ class UserController extends Controller
         $updates = Update::orderBy('created_at', 'desc')->get();
         return view('updates.all', compact('updates'));
     }
+    public function allUpdatesMobile()
+    {
+        $updates = Update::orderBy('created_at', 'desc')->get();
+        $events = Event::orderBy('created_at', 'desc')->get();
+        return view('updates.allMobile', compact('updates', 'events'));
+    }
     public function singleUpdate($slug)
     {
         $update = Update::where('slug', '=', $slug)->firstOrFail();

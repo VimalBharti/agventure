@@ -6,6 +6,7 @@
     <div class="all-updates-page">
         <div color="grey darken-3" class="mt-2">Latest Updates</div>
         <v-row>
+            @if($updates->isNotEmpty())
             @foreach($updates as $update)
             <v-col md="3" sm="12" xs="12" class="d-flex flex-column">
                 <v-card class="flex d-flex flex-column">
@@ -29,14 +30,10 @@
                 </v-card>
             </v-col>
             @endforeach
+            @endif
         </v-row>
     </div>
 </v-container>
-
-<div class="updates-page-footer">
-    <!-- footer link bar -->
-    @include('mobile.footer')
-</div>
 
 @endsection
 

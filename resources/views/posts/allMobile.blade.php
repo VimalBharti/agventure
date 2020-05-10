@@ -72,11 +72,10 @@
                     :post={{ $post->id }}
                     :favorited={{ $post->favorited() ? 'true' : 'false' }}
                 ></like>
-                <span class="grey--text ml-1">{{$post->comments->count()}}</span>
             @else
                 <v-icon size="22" color="grey">mdi-heart-outline</v-icon>
             @endif
-            <span class="grey--text ml-1">{{$post->likes->count()}}</span>
+            <span class="grey--text">{{$post->likes->count()}}</span>
         </v-card-actions>
     </div>
 @endforeach

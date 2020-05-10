@@ -225,6 +225,20 @@
     cursor: not-allowed;
     color: #cdcdcd;
   }
+
+  .chat-app {
+    display: block !important;
+  }
+
+  .mobile-single-event-page {
+    padding-bottom: 4em;
+  }
+
+  .add-new-event-mobile-link {
+    position: fixed;
+    right: 6px;
+    bottom: 12%;
+  }
 }
 
 .register .right-form-box {
@@ -1049,6 +1063,15 @@ video {
 
 .single-event-page .single-event {
   padding: 0px;
+}
+
+.my-events-page {
+  min-height: 96vh;
+}
+
+.my-events-page .add-new-event {
+  max-height: 90vh;
+  overflow-y: scroll;
 }
 
 .all-updates-page {

@@ -77,6 +77,9 @@
                 <v-list-item href="{{route('mypost')}}">
                     <v-list-item-title><v-icon class="grey--text mr-1">mdi-video</v-icon> My Post</v-list-item-title>
                 </v-list-item>
+                <v-list-item href="{{route('myEvents')}}">
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-ticket</v-icon> My Events</v-list-item-subtitle>
+                </v-list-item>
                 <v-list-item href="{{route('inbox')}}">
                     <v-list-item-title><v-icon class="grey--text mr-1">mdi-message-text-outline</v-icon> Message</v-list-item-title>
                 </v-list-item>
@@ -188,6 +191,9 @@
                 </v-list-item>
                 <v-list-item href="{{route('mypost')}}">
                     <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-database</v-icon> My Post</v-list-item-subtitle>
+                </v-list-item>
+                <v-list-item href="{{route('mobile.myEvents')}}">
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-ticket</v-icon> My Events</v-list-item-subtitle>
                 </v-list-item>
                 <v-list-item href="{{route('inbox')}}">
                     <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-message-text-outline</v-icon> Message</v-list-item-subtitle>

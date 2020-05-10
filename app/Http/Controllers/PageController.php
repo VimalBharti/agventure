@@ -7,6 +7,7 @@ use App\Contact;
 use App\User;
 use App\Post;
 use App\Event;
+use App\EventResponse;
 
 class PageController extends Controller
 {
@@ -48,5 +49,32 @@ class PageController extends Controller
         $events = Event::where('user_id', $auth->id)->orderBy('created_at', 'desc')->get();
         // dd($auth);
         return view('users.profile', compact('posts', 'events', 'auth'));
+    }
+
+    // EVENTS
+
+    public function singleEvent($slug)
+    {
+        $event = Event::where('slug', $slug)->first();
+        return view('events.desktopSingle', compact('event'));
+    }
+    public function mobileSingleEvent($slug)
+    {
+        $event = Event::where('slug', $slug)->first();
+        return view('events.mobileSingle', compact('event'));
+    }
+
+    public function eventEnrollForm(Request $request)
+    {
+        $enroll = new EventResponse([
+            'auth_id' => $request->get('auth_id'),
+            'event_id' => $request->get('event_id'),
+            'title' => $request->get('title'),
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
+        ]);
+        $enroll->save();
+        return back()->with('success','Details sent successfully.');
     }
 }

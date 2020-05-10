@@ -8,26 +8,26 @@
             <v-img
                 class="white--text align-end"
                 max-height="255px"
-                src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                src="/storage/events/{{$event->image}}"
                 gradient="to top right, rgba(0,0,0,.33), rgba(0,0,0,.7)"
             >
                 <v-row class="boxed-layout">
                     <v-col cols="3">
                         <v-card shaped>
-                            <v-img src="https://cdn.vuetifyjs.com/images/cards/halcyon.png" aspect-ratio="1"></v-img>
+                            <v-img src="/storage/events/{{$event->image}}" aspect-ratio="1"></v-img>
                         </v-card>
                     </v-col>
                     <v-col cols="9">
                         <div>
-                            <v-chip color="pink" label text-color="white">
-                                <v-icon left>mdi-label</v-icon> Vermicomspost
+                            <v-chip color="pink" label small text-color="white">
+                                <v-icon left>mdi-label</v-icon> Event
                             </v-chip>
                         </div>
-                        <h1>Electric Power Tech Korea</h1>
-                        <h3><v-icon size="18" color="white">mdi-calendar-clock</v-icon> 25 - 25 Aug 2020 </h3>
-                        <h3><v-icon size="18" color="white">mdi-map-marker-radius</v-icon> New Delhi, India</h3>
-                        <v-chip color="grey" small outlined label text-color="white">
-                            Free Entry
+                        <h1>{{$event->title}}</h1>
+                        <h3><v-icon size="18" color="white">mdi-calendar-clock</v-icon> {{$event->date}} </h3>
+                        <h3><v-icon size="18" color="white">mdi-map-marker-radius</v-icon> {{$event->location}}</h3>
+                        <v-chip color="grey" outlined label text-color="white">
+                            {{$event->fees}}
                         </v-chip>
                     </v-col>
                 </v-row>
@@ -39,7 +39,7 @@
         <v-col>
             <div class="boxed-layout">
                 <v-app-bar flat dense color="white">
-                    <v-toolbar-title> Organized By: Vimal Bharti</v-toolbar-title>
+                    <v-toolbar-title> Organized By: {{$event->user->name}}</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-btn color="grey darken-3" dark>view profile</v-btn>
                 </v-app-bar>
@@ -51,16 +51,16 @@
         <v-col cols="8">
             <v-card>
                 <v-card-text>
-                    <h3>Electric Power Tech Korea</h3>
-                    <p>AgWeb is the farmer’s source for agriculture news online. Stay informed with daily content from across Farm Journal's properties. We'll supply the latest news on crop and livestock farming, live future trading information, weather forecasts, market analysis, ag policy and more.</p>
+                    <h3>{{$event->title}}</h3>
+                    <p>{{$event->about}}</p>
                     <h3>Highlights</h3>
                     <ul class="mt-3">
-                        <li>Driven by facing Industry 4.0, to figure out the demand for change for the future society</li>
-                        <li>The expo will present a paradigm for the renewable energy industry & prepare for climate change.</li>
-                        <li>Need to secure competitiveness in developing renewable energy industry technologies</li>
+                        <li>{{$event->highlightA}}</li>
+                        <li>{{$event->highlightB}}</li>
+                        <li>{{$event->highlightC}}</li>
                     </ul>
                     <v-chip class="ma-2" color="success" outlined small>
-                        Free Entry
+                        {{$event->fees}}
                     </v-chip>
                 </v-card-text>
             </v-card>
@@ -69,16 +69,16 @@
                     <v-row>
                         <v-col cols="4">
                             <h3>Venue</h3>
-                            <div>25 - 25 Aug 2020</div>
-                            <div>Pragti Maidan, Delhi</div>
+                            <div>{{$event->date}}</div>
+                            <div>{{$event->location}}</div>
                         </v-col>
                         <v-col cols="4">
                             <h3>Timings</h3>
-                            <div>10:00 AM - 5:00 PM</div>
+                            <div>{{$event->timming}}</div>
                         </v-col>
                         <v-col cols="4">
                             <h3>Entry Fees</h3>
-                            <div>Free Ticket</div>
+                            <div>{{$event->fees}}</div>
                         </v-col>
                     </v-row>
                 </v-card-text>
@@ -88,11 +88,20 @@
             <v-card class="pa-3">
                 <v-card-text>
                     <h2 class="text--primary">Fill Form if Interested</h2>
-                    <p>well meaning and kindly "a benevolent smile"</p>
-                    <v-form>
+                    <p class="caption">Kindly send your details, so we can contact you for enrollment.</p>
+                        @if ($message = Session::get('success'))
+                            <v-alert text dense color="teal" icon="mdi-check-all" border="left">
+                                {{ $message }}
+                            </v-alert>
+                        @endif
+                    <form action="/event/enrollNow" method="POST">
+                    @csrf
+                        <input value="{{$event->user->id}}" name="auth_id" type="hidden">
+                        <input value="{{$event->id}}" name="event_id" type="hidden">
                         <v-text-field
                             name="title"
-                            label="Electric Power Tech Korea"
+                            readonly
+                            value="{{$event->title}}"
                         ></v-text-field>
 
                         <v-text-field
@@ -104,26 +113,26 @@
                         <v-text-field
                             name="email"
                             label="E-mail"
-                            required
+                            type="email"
                         ></v-text-field>
 
                         <v-text-field
                             name="phone"
                             label="Phone Number"
+                            required
                             counter="10"
                         ></v-text-field>
 
-                    </v-form>
+                        <v-btn
+                            block
+                            color="secondary"
+                            class="mt-5"
+                            type="submit"
+                        >
+                            Send details
+                        </v-btn>
+                    </form>
                 </v-card-text>
-                <v-card-actions>
-                    <v-btn
-                        outlined
-                        block
-                        color="deep-purple accent-4"
-                    >
-                        Send details
-                    </v-btn>
-                </v-card-actions>
             </v-card>
         </v-col>
     </v-row>

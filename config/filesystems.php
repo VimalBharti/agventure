@@ -64,6 +64,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'events' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/events'),
+            'visibility' => 'public',
+        ],
+
         'vuploads' => [
             'driver' => 'local',
             'root' => storage_path('app/public/videos'),

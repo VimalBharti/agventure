@@ -10,11 +10,24 @@
                 @endif  
             </v-card-text>
             <v-card-actions>
-                <v-btn rounded small     depressed href="{{ route('verification.resend') }}">Confirm Email</v-btn>
+                <v-btn rounded small depressed href="{{ route('verification.resend') }}">Confirm Email</v-btn>
             </v-card-actions>
         </v-card>
         @endif
     @endguest
+
+    @if($events->isNotEmpty())
+    <v-card class="mb-3">
+        <v-carousel hide-delimiter-background :show-arrows="false" height="200">
+            @foreach($events as $event)
+                <v-carousel-item src="/storage/events/{{$event->image}}" href="{{route('singleEvent', $event->slug)}}"></v-carousel-item>
+            @endforeach
+        </v-carousel>
+    </v-card>
+    @else
+    @endif
+
+    <!-- PODCAST -->
     <v-card class="mb-3" flat>
         <v-img
             class="white--text align-end"

@@ -236,7 +236,23 @@
             }
         }
     }
+
+    .chat-app {
+        display: block !important;
+    }
+
+    // My Events Page
+    .mobile-single-event-page {
+        padding-bottom: 4em;
+    }
+    .add-new-event-mobile-link {
+        position: fixed;
+        right: 6px;
+        bottom: 12%;
+    }
 }
+
+// Media Screen Ends
 
 // Auth Login Register
 .register {
