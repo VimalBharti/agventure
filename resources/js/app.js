@@ -15,18 +15,27 @@ Vue.use(Toastr);
 import Vuetify from "vuetify";
 Vue.use(Vuetify);
 
-Vue.component("chat", require("./components/chat.vue"));
-Vue.component("image-upload", require("./components/ImageUpload.vue"));
-Vue.component("new-podcast", require("./components/NewPodcast.vue"));
-Vue.component("all-podcast", require("./components/Podcast/Podcast.vue"));
+Vue.component("chat", require("./components/chat.vue").default);
+Vue.component("image-upload", require("./components/ImageUpload.vue").default);
+Vue.component("new-podcast", require("./components/NewPodcast.vue").default);
+Vue.component(
+    "all-podcast",
+    require("./components/Podcast/Podcast.vue").default
+);
 Vue.component(
     "mobile-podcast",
-    require("./components/Podcast/MobilePodcast.vue")
+    require("./components/Podcast/MobilePodcast.vue").default
 );
-Vue.component("single-podcast", require("./components/Podcast/Single.vue"));
-Vue.component("like", require("./components/Like.vue"));
-Vue.component("search", require("./components/Search.vue"));
-Vue.component("new-post-mobile", require("./components/NewPostMobile.vue"));
+Vue.component(
+    "single-podcast",
+    require("./components/Podcast/Single.vue").default
+);
+Vue.component("like", require("./components/Like.vue").default);
+Vue.component("search", require("./components/Search.vue").default);
+Vue.component(
+    "new-post-mobile",
+    require("./components/NewPostMobile.vue").default
+);
 
 const app = new Vue({
     el: "#app",
