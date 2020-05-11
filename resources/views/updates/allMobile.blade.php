@@ -47,7 +47,7 @@
                     <v-divider></v-divider>
                 @endforeach
             @else 
-                <v-card-text>No Events!</v-card-text>
+                <v-card-text>No Updates!</v-card-text>
             @endif
         </v-tab-item>
 

@@ -18,8 +18,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#479788">
     <meta name="apple-mobile-web-app-title" content="Agrishi">
-    <link rel="apple-touch-icon" href="{{asset('icons/icon-96x96.png')}}">
-    <link rel="apple-touch-startup-image" href="{{asset('icons/icon-96x96.png')}}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-icon" href="{{asset('icons/icon-192x192.png')}}">
+    <link rel="apple-touch-startup-image" href="{{asset('icons/icon-192x192.png')}}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
