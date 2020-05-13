@@ -1,5 +1,6 @@
 @import "./vuetify.min.css";
 @import "~@mdi/font/css/materialdesignicons.min.css";
+@import "./mobile.scss";
 
 .box-shadow-lg {
     -webkit-box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
@@ -17,7 +18,7 @@
     background: linear-gradient(to right, #56b4d3, #348f50);
 }
 .boxed-layout {
-    width: 70%;
+    width: 75%;
     margin: 0 auto;
 }
 .green-color {
@@ -29,11 +30,6 @@
 .sticky {
     position: fixed;
     top: 0;
-}
-.mobile-container {
-    min-height: 95vh;
-    padding-top: 3em;
-    padding-bottom: 3em;
 }
 a {
     text-decoration: none;
@@ -214,22 +210,6 @@ p.background-line {
     }
 }
 
-.app-bar-bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    -webkit-box-shadow: 0 -6px 6px -6px #ececec;
-    -moz-box-shadow: 0 -6px 6px -6px #ececec;
-    box-shadow: 0 -6px 6px -6px #ececec;
-
-    .mobile-auth-bottom-text {
-        background: #348f50;
-        background: -webkit-linear-gradient(to right, #56b4d3, #348f50);
-        background: linear-gradient(to right, #56b4d3, #348f50);
-    }
-}
-
 // left-sidebar
 .left-sidebar {
     // background: #fff;
@@ -343,20 +323,6 @@ p.background-line {
 // Home Page All Post
 video {
     width: 100%;
-}
-.single-mobile-post {
-    margin-bottom: 1em;
-    border-radius: 1.5em;
-    .image-box-mobile {
-        max-height: 200px;
-        overflow: hidden;
-    }
-    .post-body {
-        a {
-            color: #444;
-            font-size: 14px;
-        }
-    }
 }
 .center-post-area {
     .gallery {
@@ -721,15 +687,6 @@ video {
         max-height: 90vh;
         overflow-y: scroll;
     }
-}
-// My Events Page
-.mobile-single-event-page {
-    padding-bottom: 4em;
-}
-.add-new-event-mobile-link {
-    position: fixed;
-    right: 6px;
-    bottom: 12%;
 }
 
 // Updates and Policy
