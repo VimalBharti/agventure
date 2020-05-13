@@ -30,6 +30,13 @@ class PostController extends Controller
         return view('welcome', compact('posts', 'details', 'communities', 'user', 'updates', 'events'));
     }
 
+    // Mobile home
+    public function mobileHome()
+    {
+        $posts = Post::with('postdetails', 'community')->orderBy('created_at', 'desc')->paginate(20);
+        return view('m-index', compact('posts'));
+    }
+
     public function newPost()
     {
         $communities = Community::all();

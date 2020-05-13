@@ -5,11 +5,11 @@
     color="teal"
     height="46"
   >
-    <v-btn href="/">
+    <v-btn href="/m">
       <v-icon color="#454545">mdi-buffer</v-icon>
     </v-btn>
 
-    <v-btn href="{{route('podcast')}}">
+    <v-btn href="{{route('podcast.mobile')}}">
       <v-icon color="#454545">mdi-headphones</v-icon>
     </v-btn>
 

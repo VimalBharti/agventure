@@ -1,6 +1,5 @@
 @import "./vuetify.min.css";
 @import "~@mdi/font/css/materialdesignicons.min.css";
-@import "./mobile.scss";
 
 .box-shadow-lg {
     -webkit-box-shadow: rgba(195, 195, 195, 0.55) 5px 5px 10px 0px;
@@ -31,6 +30,11 @@
     position: fixed;
     top: 0;
 }
+.mobile-container {
+    min-height: 95vh;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
 a {
     text-decoration: none;
 }
@@ -40,6 +44,7 @@ a {
 }
 * {
     scrollbar-width: none;
+    font-family: "Roboto", sans-serif;
 }
 .relative {
     position: relative;
@@ -146,6 +151,14 @@ a {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
     -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
     background: #fff !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.navigation-drawer {
+    min-height: 100vh;
 }
 .search-input-desktop {
     border: 1px solid #acacac;
@@ -198,6 +211,22 @@ p.background-line {
     span {
         background: #fff;
         padding: 0 15px;
+    }
+}
+
+.app-bar-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    -webkit-box-shadow: 0 -6px 6px -6px #ececec;
+    -moz-box-shadow: 0 -6px 6px -6px #ececec;
+    box-shadow: 0 -6px 6px -6px #ececec;
+
+    .mobile-auth-bottom-text {
+        background: #348f50;
+        background: -webkit-linear-gradient(to right, #56b4d3, #348f50);
+        background: linear-gradient(to right, #56b4d3, #348f50);
     }
 }
 
@@ -275,8 +304,8 @@ p.background-line {
     text-align: center;
 }
 .main-container {
-    // width: 70%;
     min-height: 95vh;
+    padding-top: 3em;
     // max-height: 95vh;
     // overflow: scroll;
 
@@ -314,6 +343,20 @@ p.background-line {
 // Home Page All Post
 video {
     width: 100%;
+}
+.single-mobile-post {
+    margin-bottom: 1em;
+    border-radius: 1.5em;
+    .image-box-mobile {
+        max-height: 200px;
+        overflow: hidden;
+    }
+    .post-body {
+        a {
+            color: #444;
+            font-size: 14px;
+        }
+    }
 }
 .center-post-area {
     .gallery {
@@ -678,6 +721,15 @@ video {
         max-height: 90vh;
         overflow-y: scroll;
     }
+}
+// My Events Page
+.mobile-single-event-page {
+    padding-bottom: 4em;
+}
+.add-new-event-mobile-link {
+    position: fixed;
+    right: 6px;
+    bottom: 12%;
 }
 
 // Updates and Policy

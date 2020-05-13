@@ -11,6 +11,7 @@
 */
 
 Route::get('/', 'PostController@home')->name('main');
+Route::get('/m', 'PostController@mobileHome')->name('mobile.home');
 
 Auth::routes(['verify' => true]);
 
@@ -138,6 +139,7 @@ Route::get('api-podcasts', 'PodcastController@ApiPodcast');
 Route::get('podcast/{id}', 'PodcastController@SinglePodcast');
 Route::get('podcasts/{slug}', 'PodcastController@SinglePodcastDesktop');
 Route::get('all/podcasts', 'PodcastController@getPodcast')->name('podcast');
+Route::get('m/all/podcasts', 'PodcastController@getPodcastMobile')->name('podcast.mobile');
 
 /* 
 ========================================

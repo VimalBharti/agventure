@@ -26,6 +26,10 @@ class PodcastController extends Controller
         $podcasts = Podcast::with('user')->orderBy('created_at', 'desc')->get();
         return view('podcast.index', compact('podcasts'));
     }
+    public function getPodcastMobile(){
+        $podcasts = Podcast::with('user')->orderBy('created_at', 'desc')->get();
+        return view('podcast.m-index', compact('podcasts'));
+    }
 
     public function newPodcast()
     {
