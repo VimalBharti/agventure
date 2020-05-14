@@ -167,6 +167,24 @@
             <v-divider></v-divider>
 
             <v-list nav>
+                <v-list-item href="{{url('new/post/mobile')}}">
+                    <v-list-item-subtitle>
+                        <v-icon class="grey--text mr-3" size="22">mdi-plus</v-icon>Add Post
+                    </v-list-item-subtitle>
+                </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <v-list nav>
+                <v-list-item href="{{url('new/podcast')}}">
+                    <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-music</v-icon>Add Podcast</v-list-item-subtitle>
+                </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <v-list nav>
                 <v-list-item href="/">
                     <v-list-item-subtitle><v-icon class="grey--text mr-3" size="20">mdi-buffer</v-icon> Timeline</v-list-item-subtitle>
                 </v-list-item>
