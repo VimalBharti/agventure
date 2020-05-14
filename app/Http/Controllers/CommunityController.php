@@ -29,4 +29,21 @@ class CommunityController extends Controller
         $posts = Post::where('community_id', '=', $community->id)->with('postdetails')->paginate(8);
         return view('community.single', compact('community', 'posts', 'user', 'counts'));
     }
+
+    public function add(Request $request)   
+    {
+        $community = new Community;
+        $community->title = $request->title;
+        $community->about  =  $request->about;
+
+        $file = $request->file('image');
+        $filename = 'community-' . rand() . '.' . $file->getClientOriginalName();
+        $path = $file->storeAs('public/community', $filename);
+
+        $community->image = $filename;
+
+        $community->save();
+
+        return redirect()->back();
+    }
 }

@@ -127,6 +127,40 @@
                         </v-card>
                     </v-col>
                 </v-row>
+
+                <!-- Add new Community -->
+                <v-row>
+                    <v-col cols="6">
+                        <form action="/add/community" method="POST" enctype="multipart/form-data">
+                        @csrf
+                            <div>
+                                <v-text-field
+                                    label="Outlined"
+                                    outlined
+                                    name="title"
+                                ></v-text-field>
+                                <v-file-input
+                                    accept="image/png, image/jpeg, image/bmp"
+                                    placeholder="Select featured Image"
+                                    prepend-icon="mdi-camera"
+                                    label="Upload jpg, png"
+                                    name="image"
+                                ></v-file-input>
+                                <v-textarea
+                                    required
+                                    name="about"
+                                    label="About Community..."
+                                    outlined
+                                    rows="4"
+                                    auto-grow
+                                ></v-textarea>
+                                <v-card-actions class="pa-5">
+                                    <v-btn outlined color="teal" block type="submit">Add Community</v-btn>
+                                </v-card-actions>
+                            </div>
+                        </form>
+                    </v-col>
+                </v-row>
             </v-container>
         </v-col>
     </v-row>

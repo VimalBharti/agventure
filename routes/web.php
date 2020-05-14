@@ -114,6 +114,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'post'], function(){
 ========================================
 ---------     COMMUNITY PAGE    -----------
 */
+Route::post('/add/community', 'CommunityController@add')->name('add-commmunity');
 Route::get('/get_community', 'CommunityController@get_community');
 Route::get('/all_community', 'CommunityController@all_community');
 Route::get('/c/{slug}', 'CommunityController@single')->name('community');
