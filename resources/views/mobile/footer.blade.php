@@ -5,7 +5,7 @@
     color="teal"
     height="46"
   >
-    <v-btn href="/m">
+    <v-btn href="/">
       <v-icon color="#454545">mdi-buffer</v-icon>
     </v-btn>
 

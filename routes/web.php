@@ -11,7 +11,6 @@
 */
 
 Route::get('/', 'PostController@home')->name('main');
-Route::get('/m', 'PostController@mobileHome')->name('mobile.home');
 
 Auth::routes(['verify' => true]);
 
