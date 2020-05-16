@@ -4,7 +4,7 @@
 <div class="main-navbar primary-navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-links">
         <a href="/" class="navbar-item">
-            <img src="{{asset('images/agrishi.png')}}" alt="Bulma: a modern CSS framework based on Flexbox" height="32">
+            <img src="{{asset('images/agrishi.png')}}" alt="Agrishi" height="32">
         </a>
         <div class="navbar-item">
             <div class="field">
@@ -82,7 +82,7 @@
 <div class="mobile-navbar primary-navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-links">
         <a href="/" class="navbar-item">
-            <img src="{{asset('images/logo.png')}}" alt="Bulma: a modern CSS framework based on Flexbox" height="32">
+            <img src="{{asset('images/logo.png')}}" alt="Agrishi - agricultural social network" height="32">
         </a>
 
         <span class="showMe"><search></search></span>
