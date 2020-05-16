@@ -2,9 +2,9 @@
   <div>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-top-transition">
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
+        <a v-on="on">
+          <input type="text" placeholder="Search...." class="search-input-box" />
+        </a>
       </template>
 
       <!-- Search Page -->
@@ -20,7 +20,8 @@
           <div class="search-box pa-2 mt-2">
             <v-text-field
               dense
-              placeholder="Search"
+              placeholder="Search..."
+              autofocus
               outlined
               v-model="search"
               @keyup="searchPost()"
@@ -74,5 +75,10 @@ export default {
 <style lang="scss" scoped>
 .wrapper-search {
   padding-top: 3em;
+}
+.search-input-box {
+  background-color: #efefef;
+  padding: 8px 12px;
+  border-radius: 10px;
 }
 </style>>

@@ -24,6 +24,7 @@
 .green-color {
     color: #00bfa6;
 }
+// .primary-color{color:#479788}
 .empty-space {
     height: 100px;
 }
@@ -142,17 +143,6 @@ a {
     }
 }
 
-// Navbar
-.main-navbar {
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-    background: #fff !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-}
 .navigation-drawer {
     min-height: 100vh;
 }
@@ -285,13 +275,9 @@ p.background-line {
 }
 .main-container {
     min-height: 95vh;
-    padding-top: 3em;
-    // max-height: 95vh;
-    // overflow: scroll;
+    padding-top: 5%;
 
     .center-post-container {
-        // max-height: 95vh;
-        // overflow-y: scroll;
         -ms-overflow-style: none;
         &::-webkit-scrollbar {
             display: none;

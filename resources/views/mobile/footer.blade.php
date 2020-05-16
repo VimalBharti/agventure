@@ -1,24 +1,21 @@
 
-<v-bottom-navigation
-    class="app-bar-bottom"
-    grow
-    color="teal"
-    height="46"
-  >
-    <v-btn href="/">
-      <v-icon color="#454545">mdi-buffer</v-icon>
-    </v-btn>
 
-    <v-btn href="{{route('podcast.mobile')}}">
-      <v-icon color="#454545">mdi-headphones</v-icon>
-    </v-btn>
+  <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+  
+  <div class="android-footer">
+    <a class="nav__link" text href="/">
+      <img src="{{asset('images/timeline.svg')}}">
+    </a>
 
-    <v-btn href="{{route('savedpost')}}">
-      <v-icon color="#454545">mdi-heart-outline</v-icon>
-    </v-btn>
+    <a class="nav__link" text href="{{route('podcast.mobile')}}">
+      <img src="{{asset('images/podcast.svg')}}">
+    </a>
 
-    <v-btn href="{{route('allUpdates.mobile')}}">
-      <v-icon color="#454545">mdi-bell-outline</v-icon>
-    </v-btn>
+    <a class="nav__link" text href="{{route('savedpost')}}">
+      <img src="{{asset('images/fav.svg')}}">
+    </a>
 
-  </v-bottom-navigation>
+    <a class="nav__link" text href="{{route('allUpdates.mobile')}}">
+      <img src="{{asset('images/update.svg')}}">
+    </a>
+  </div>

@@ -33,6 +33,7 @@
             class="white--text align-end"
             height="110px"
             src="images/podkast-bg.jpg"
+            lazy-src="{{asset('images/lazy.jpg')}}"
             gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         >
             <v-list-item three-line href="{{route('podcast')}}">
@@ -53,6 +54,7 @@
             class="white--text align-end"
             height="80px"
             src="images/post-bg.jpg"
+            lazy-src="{{asset('images/lazy.jpg')}}"
             gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         >
             <v-card-title>Updates & Policies</v-card-title>
@@ -81,6 +83,7 @@
             class="white--text align-end"
             height="80px"
             src="images/card-bg.jpg"
+            lazy-src="{{asset('images/lazy.jpg')}}"
             gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         >
             <v-card-title>Top Growing Communities</v-card-title>

@@ -1,27 +1,20 @@
- 
+<link rel="stylesheet" href="{{asset('css/image-grid.css')}}"> 
+
 @foreach($posts as $post)
 <v-row class="center-post-area">
     <v-col class="pt-0 mb-2">
         <v-card class="box-shadow" flat>
-            <a href="{{route('singlePost', $post->slug)}}">
-                <div class="gallery">
+
+            <div class="photoset square portrait">
                 @isset($post->postdetails)
                     @foreach($post->postdetails as $image)
-                        <v-img
-                            src="/storage/thumbnails/{{$image->thumb}}"
-                            lazy-src="{{asset('images/lazy.jpg')}}"
-                            class="grey lighten-2 gallery-panel"
-                        >
-                            <template v-slot:placeholder>
-                                <v-row class="fill-height ma-0" align="center" justify="center">
-                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                                </v-row>
-                            </template>
-                        </v-img>
+                        <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}')" href="{{route('singlePost', $post->slug)}}"></a>
                     @endforeach
                 @endisset
-                </div>
-            </a>
+                @if(count($post->postdetails) > 1)
+                    <span class="images-count">{{count($post->postdetails)}} more photos -></span>
+                @endif
+            </div>
 
             <v-list-item>
                 <v-list-item-avatar color="grey">

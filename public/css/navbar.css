@@ -1,0 +1,153 @@
+.primary-navbar {
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+    background: #fff !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    font-size: 15px;
+}
+.primary-navbar a {
+    color: #444;
+}
+
+@media (min-width: 768px) {
+    .mobile-navbar {
+        display: none;
+    }
+    .navbar-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 52px;
+        width: 75%;
+        margin: 0 auto;
+    }
+    .navbar-item {
+        display: flex;
+    }
+    .joinnow {
+        padding: 4px 16px;
+        margin-right: 1em;
+    }
+    .signin {
+        border: 1px solid #009688;
+        color: #009688 !important;
+        padding: 4px 16px;
+        border-radius: 3px;
+    }
+    .field {
+        display: flex;
+    }
+    .input {
+        line-height: 38px;
+        background: #efefef;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: 3px 0 0 3px;
+        outline-color: #009688;
+    }
+    .search-button {
+        border-left: 1px solid #ccc;
+        color: #555 !important;
+        line-height: 38px;
+        background: #eee;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: 0 3px 3px 0;
+    }
+    .navbar-item .button {
+        margin-left: 1.5em;
+    }
+    .auth-user {
+        margin-left: 1.5em;
+        cursor: pointer;
+    }
+    .auth-avatar {
+        display: flex;
+        align-items: center;
+    }
+    .auth-user .auth-avatar span.username {
+        background: #009688;
+        width: 22px;
+        height: 22px;
+        color: #fff;
+        border-radius: 100%;
+        margin-right: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .auth-user .auth-avatar img {
+        width: 22px;
+        height: 22px;
+        border-radius: 50px;
+        margin-right: 5px;
+    }
+}
+@media (max-width: 768px) {
+    .main-navbar {
+        display: none;
+    }
+    .mobile-navbar .navbar-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 52px;
+        width: 100%;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .mobile-navbar .navbar-item {
+        display: flex;
+    }
+    .mobile-navbar .navbar-links .showMe {
+        transition: 0.5s all;
+        animation: cssAnimation 0s 1s forwards;
+        opacity: 0;
+    }
+    @keyframes cssAnimation {
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+/* Footer Android */
+
+.android-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 52px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    display: flex;
+    overflow-x: auto;
+}
+.android-footer .nav__link {
+    display: flex;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.android-footer .nav__link::before {
+    content: "";
+    position: absolute;
+    background-color: #eee;
+    padding: 50%;
+    border-radius: 50%;
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+    z-index: -1;
+}
+.android-footer .nav__link:hover::before {
+    opacity: 1;
+    transition: 0.5s ease-in-out;
+}
