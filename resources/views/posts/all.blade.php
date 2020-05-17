@@ -6,13 +6,16 @@
         <v-card class="box-shadow" flat>
 
             <div class="photoset square portrait">
+                @isset($post->video)
+                    
+                @endisset
                 @isset($post->postdetails)
                     @foreach($post->postdetails as $image)
                         <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}')" href="{{route('singlePost', $post->slug)}}"></a>
                     @endforeach
                 @endisset
-                @if(count($post->postdetails) > 1)
-                    <span class="images-count">{{count($post->postdetails)}} more photos -></span>
+                @if(count($post->postdetails) > 3)
+                    <span class="images-count"> + {{count($post->postdetails)}}</span>
                 @endif
             </div>
 

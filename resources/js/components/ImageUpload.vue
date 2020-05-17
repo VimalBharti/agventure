@@ -66,7 +66,8 @@
 
               <!-- Share Button -->
               <v-spacer></v-spacer>
-              <v-btn outlined @click="upload" color="teal" small>Share Post</v-btn>
+
+              <v-btn dark @click="upload" :loading="loadingBtn" color="teal" small>Share Post</v-btn>
             </v-row>
           </v-card-text>
         </v-card>
@@ -85,6 +86,7 @@ export default {
   data: () => ({
     isDragging: false,
     loading: false,
+    loadingBtn: false,
     toaster: false,
     text: "Post shared successfully!",
     timeout: 3000,
@@ -163,6 +165,7 @@ export default {
     },
     upload() {
       this.loading = true;
+      this.loadingBtn = true;
       const formData = new FormData();
 
       formData.append("about", this.about);
@@ -181,6 +184,7 @@ export default {
           this.files = [];
           this.about = "";
           this.community = [];
+          this.loadingBtn = false;
         })
         .catch(error => {
           console.log(error);

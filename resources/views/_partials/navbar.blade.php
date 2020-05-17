@@ -21,8 +21,12 @@
             </div>
         @else
             <div class="navbar-item">
-                <a href="{{url('new/post')}}" class="button">&#10011; Add Post</a>
-                <a href="{{url('new/podcast')}}" class="button">&#9835; Add Podcast</a>
+                <a href="{{url('new/post')}}" class="button">
+                    <span class="btn-border">Add Post</span>
+                </a>
+                <a href="{{url('new/podcast')}}" class="button">
+                    <span class="btn-border">Add Podcast</span>
+                </a>
                 <div class="auth-user">
                     <v-menu offset-y>
                         <template v-slot:activator="{ on }">

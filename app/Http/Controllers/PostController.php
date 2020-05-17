@@ -26,7 +26,6 @@ class PostController extends Controller
         $updates = Update::orderBy('created_at', 'desc')->paginate(4);
         $posts = Post::with('postdetails', 'community')->orderBy('created_at', 'desc')->paginate(20);
         $events = Event::orderBy('id', 'desc')->paginate(4);
-
         return view('welcome', compact('posts', 'details', 'communities', 'user', 'updates', 'events'));
     }
 
@@ -88,7 +87,7 @@ class PostController extends Controller
 
         $rules = [
             'filename'   => 'image|mimes:jpeg,png,jpg|max:6000',
-            'about'    => 'required'
+            'about'    => 'required',
         ];
         $this->validate($request, $rules);
 
