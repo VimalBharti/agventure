@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="6" class="mx-auto">
+    <v-col>
       <div class="imagePost">
         <v-card class="mb-2" flat>
           <select id="community-select" @change="onChange($event)">
@@ -196,10 +196,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~vue-toastr/src/vue-toastr.scss";
-
-.imagePost {
-  margin-top: 10%;
-}
 
 #community-select {
   width: 100%;

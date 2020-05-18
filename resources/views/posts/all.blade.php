@@ -6,9 +6,16 @@
         <v-card class="box-shadow" flat>
 
             <div class="photoset square portrait">
-                @isset($post->video)
-                    
-                @endisset
+                @isset($post->original_name)
+                    @if($post->processed)
+                        <video src="https://agrishi.s3-ap-south-1.amazonaws.com/{{$post->stream_path}}" controls></video>
+                    @else
+                        <div class="alert alert-info w-100">
+                                Video is currently being processed and will be available shortly
+                        </div>
+                    @endif
+                @endif
+
                 @isset($post->postdetails)
                     @foreach($post->postdetails as $image)
                         <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}')" href="{{route('singlePost', $post->slug)}}"></a>

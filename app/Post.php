@@ -19,7 +19,13 @@ class Post extends Model
     protected $table = 'posts';
     protected $primaryKey = 'id';
     
-    protected $fillable = ['user_id', 'about', 'community_id'];
+    protected $fillable = ['user_id', 'about', 'community_id', 'original_name', 'disk', 'path'];
+
+    protected $dates = [
+        'converted_for_streaming_at',
+    ];
+
+    protected $guarded = [];
     
     use Sluggable, SoftDeletes;
 
@@ -45,11 +51,6 @@ class Post extends Model
 
     public function postdetails(){
         return $this->hasMany('App\PostDetail', 'post_id');
-    }
-
-
-    public function videos(){
-        return $this->hasMany('App\Video', 'post_id');
     }
 
     public function favorited(){

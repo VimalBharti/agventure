@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Response;
 use App\Post;
 use App\PostDetail;
-use App\Video;
 use App\Like;
 use App\Community;
 use App\Update;
@@ -16,6 +15,8 @@ use Auth;
 use Storage;
 use DB;
 use Image;
+use App\Jobs\ConvertVideoForStreaming;
+use App\Http\Requests\StoreVideoRequest;
 
 class PostController extends Controller
 {
@@ -83,13 +84,28 @@ class PostController extends Controller
         $posts = Post::with('postdetails', 'user', 'community')->orderBy('created_at', 'desc')->get();
         return response()->json($posts);
     }
-    public function imageUpload(Request $request){
 
-        $rules = [
-            'filename'   => 'image|mimes:jpeg,png,jpg|max:6000',
-            'about'    => 'required',
-        ];
-        $this->validate($request, $rules);
+    public function videoUpload(StoreVideoRequest $request)
+    {
+        // $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
+        // $videofile = $request->video->store('videos', ['disk' => 's3']);
+        // $name = $request->video->getClientOriginalName();
+
+        $post = Post::create([
+            'user_id' => Auth::user()->id,
+            'about' => $request->about,
+            'community_id' => $request->community,
+            'disk'  => 's3',
+            'original_name' => $request->video->getClientOriginalName(),
+            'path'      =>  $request->video->store('videos', ['disk' => 's3']),
+        ]);
+
+        $this->dispatch(new ConvertVideoForStreaming($post));
+
+        return redirect()->back();
+    }
+
+    public function imageUpload(Request $request){
 
         $post = Post::create([
             'user_id' => Auth::user()->id,

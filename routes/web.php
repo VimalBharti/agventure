@@ -126,7 +126,8 @@ Route::get('/c/{slug}', 'CommunityController@single')->name('community');
 Route::get('new/post', 'PostController@newPost')->middleware('auth');
 Route::get('new/post/mobile', 'PostController@newMobilePost')->middleware('auth');
 Route::get('get_all', 'PostController@getAllPosts');
-Route::post('/images-upload', 'PostController@imageUpload');
+Route::post('/images-upload', 'PostController@imageUpload')->name('upload-new-post');
+Route::post('/video-upload', 'PostController@videoUpload')->name('upload-new-video');
 Route::get('/p/{slug}', 'PostController@single')->name('singlePost');
 Route::get('/m/{slug}', 'PostController@singleMobile')->name('singleMobile');
 /* 
