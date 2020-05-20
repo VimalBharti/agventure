@@ -6,14 +6,8 @@
         <v-card class="box-shadow" flat>
 
             <div class="photoset square portrait">
-                @isset($post->original_name)
-                    @if($post->processed)
-                        <video src="https://agrishi.s3-ap-south-1.amazonaws.com/{{$post->stream_path}}" controls></video>
-                    @else
-                        <div class="alert alert-info w-100">
-                                Video is currently being processed and will be available shortly
-                        </div>
-                    @endif
+                @isset($post->video)
+                    <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls></video>
                 @endif
 
                 @isset($post->postdetails)

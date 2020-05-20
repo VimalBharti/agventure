@@ -19,12 +19,7 @@ class CreatePostsTable extends Migration
             $table->integer('community_id')->unsigned()->nullable();
             $table->longText('about');
             $table->string('slug');
-            $table->string('original_name');
-            $table->string('disk');
-            $table->string('path');
-            $table->string('stream_path')->nullable();
-            $table->boolean('processed')->default(false);
-            $table->datetime('converted_for_streaming_at')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

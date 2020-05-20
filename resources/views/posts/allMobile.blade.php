@@ -31,10 +31,13 @@
         <div class="photoset square portrait">
             @isset($post->postdetails)
                 @foreach($post->postdetails as $image)
-                <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}')"></a>
+                    <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}')"></a>
                 @endforeach
             @endisset
         </div>
+        @isset($post->video)
+            <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls></video>
+        @endif
     </div>
 @endforeach
 

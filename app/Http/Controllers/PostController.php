@@ -15,8 +15,6 @@ use Auth;
 use Storage;
 use DB;
 use Image;
-use App\Jobs\ConvertVideoForStreaming;
-use App\Http\Requests\StoreVideoRequest;
 
 class PostController extends Controller
 {
@@ -85,27 +83,31 @@ class PostController extends Controller
         return response()->json($posts);
     }
 
-    public function videoUpload(StoreVideoRequest $request)
+    public function videoUpload(Request $request)
     {
-        // $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
-        // $videofile = $request->video->store('videos', ['disk' => 's3']);
-        // $name = $request->video->getClientOriginalName();
+        $video = $request->file->store('videos', ['disk' => 's3']);
 
         $post = Post::create([
             'user_id' => Auth::user()->id,
             'about' => $request->about,
             'community_id' => $request->community,
-            'disk'  => 's3',
-            'original_name' => $request->video->getClientOriginalName(),
-            'path'      =>  $request->video->store('videos', ['disk' => 's3']),
+            'video'    =>  $video,
         ]);
-
-        $this->dispatch(new ConvertVideoForStreaming($post));
 
         return redirect()->back();
     }
 
     public function imageUpload(Request $request){
+
+        $rules = [
+            'image'    => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'about'    => 'required',
+        ];
+        $this->validate($request, $rules);
+
+        // $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
+        // $videofile = $request->video->store('videos', ['disk' => 's3']);
+        // $name = $request->video->getClientOriginalName();
 
         $post = Post::create([
             'user_id' => Auth::user()->id,

@@ -16,13 +16,13 @@
                     <v-list-item>
                         <v-list-item-avatar size="45" color="teal">
                             @if($post->user->image)
-                            <v-img
-                                src="/storage/profile/{{$post->user->image}}"
-                                lazy-src="{{asset('images/lazy.jpg')}}"
-                                aspect-ratio="1"
-                            ></v-img>
+                                <v-img
+                                    src="/storage/profile/{{$post->user->image}}"
+                                    lazy-src="{{asset('images/lazy.jpg')}}"
+                                    aspect-ratio="1"
+                                ></v-img>
                             @else
-                            <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
+                                <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
                             @endif
                         </v-list-item-avatar>
                         <v-list-item-content>
@@ -71,6 +71,9 @@
                         </template>
                     </v-img>
                 @endforeach
+                @isset($post->video)
+                    <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls></video>
+                @endif
             </div>
         </div>
         <!-- footer link bar -->

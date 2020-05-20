@@ -17,6 +17,7 @@ Vue.use(Vuetify);
 
 Vue.component("chat", require("./components/chat.vue").default);
 Vue.component("image-upload", require("./components/ImageUpload.vue").default);
+Vue.component("video-upload", require("./components/VideoUpload.vue").default);
 Vue.component("new-podcast", require("./components/NewPodcast.vue").default);
 Vue.component(
     "all-podcast",

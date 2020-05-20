@@ -37,43 +37,27 @@
             </v-row>
             <p v-if="error" class="red--text">{{error}}</p>
 
-            <div
-              class="uploader"
-              @dragenter="onDragEnter"
-              @dragleave="onDragLeave"
-              @dragover.prevent
-              @drop="onDrop"
-              :class="{ dragging: isDragging }"
-              v-show="photos.length"
-            >
-              <div class="images-preview">
-                <div class="img-wrapper" v-for="(image, index) in photos" :key="index">
-                  <img :src="image" :alt="`Agventure ${index}`" />
-                  <div class="details">
-                    <!-- <span class="name" v-text="files[index].name"></span> -->
-                    <span class="size" v-text="getFileSize(files[index].size)"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
             <v-divider></v-divider>
-            <v-progress-linear color="teal" indeterminate rounded height="4" v-if="loading"></v-progress-linear>
+            <v-progress-linear color="teal" height="10" :value="progress" striped></v-progress-linear>
+
             <v-row class="upload-control">
-              <label for="file">
-                <v-icon size="30">mdi-camera</v-icon>
-              </label>
-              <input type="file" id="file" @change="onInputChange" multiple />
+              <input
+                type="file"
+                :rules="rules"
+                accept="video/mp4, video/m3u8, video/mov, video/avi, video/3gp"
+                @change="handleFileUpload"
+              />
 
               <!-- Share Button -->
               <v-spacer></v-spacer>
 
-              <v-btn dark @click="upload" :loading="loadingBtn" color="teal" small>Share Post</v-btn>
+              <v-btn dark @click="submitFile" color="teal" small>Share Post</v-btn>
             </v-row>
           </v-card-text>
         </v-card>
       </div>
     </v-col>
-    <v-snackbar v-model="toaster" :timeout="timeout" top>
+    <v-snackbar v-model="toastr" :timeout="timeout" top>
       {{ text }}
       <v-btn color="teal" text @click="snackbar = false">Close</v-btn>
     </v-snackbar>
@@ -84,19 +68,22 @@
 export default {
   props: ["user"],
   data: () => ({
-    isDragging: false,
-    loading: false,
-    loadingBtn: false,
-    toaster: false,
+    toastr: false,
     text: "Post shared successfully!",
     timeout: 3000,
     error: "",
-    dragCount: 0,
-    files: [],
-    photos: [],
     about: "",
     communities: [],
-    community: ""
+    community: "",
+    filename: "",
+    file: "",
+    progress: "0",
+    rules: [
+      value =>
+        !value ||
+        value.size < 200000000 ||
+        "Video size should be less than 200 MB!"
+    ]
   }),
   created() {
     this.fetchCommunity();
@@ -111,83 +98,42 @@ export default {
         this.communities = response.data;
       });
     },
-    onDragEnter(e) {
+    handleFileUpload(e) {
+      console.log(e.target.files[0]);
+      this.filename = e.target.files[0].name;
+      this.file = e.target.files[0];
+    },
+    submitFile(e) {
       e.preventDefault();
+      let currentObj = this;
 
-      this.dragCount++;
-      this.isDragging = true;
-    },
-    onDragLeave(e) {
-      e.preventDefault();
-
-      this.dragCount--;
-      if (this.dragCount <= 0) this.isDragging = false;
-    },
-    onInputChange(e) {
-      const files = e.target.files;
-
-      Array.from(files).forEach(file => this.addImage(file));
-    },
-    onDrop(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      this.isDragging = false;
-
-      const files = e.dataTransfer.files;
-
-      Array.from(files).forEach(file => this.addImage(file));
-    },
-    addImage(file) {
-      if (!file.type.match("image.*")) {
-        this.$toastr.e(`${file.name} is not an image`);
-        return;
-      }
-
-      this.files.push(file);
-
-      const img = new Image(),
-        reader = new FileReader();
-
-      reader.onload = e => this.photos.push(e.target.result);
-
-      reader.readAsDataURL(file);
-    },
-    getFileSize(size) {
-      const fSExt = ["Bytes", "KB", "MB", "GB"];
-      let i = 0;
-
-      while (size > 900) {
-        size /= 1024;
-        i++;
-      }
-      return `${Math.round(size * 100) / 100} ${fSExt[i]}`;
-    },
-    upload() {
-      this.loading = true;
-      this.loadingBtn = true;
-      const formData = new FormData();
+      let formData = new FormData();
 
       formData.append("about", this.about);
       formData.append("community", this.community);
-
-      this.files.forEach(file => {
-        formData.append("photos[]", file, file.name);
-      });
+      formData.append("file", this.file);
 
       axios
-        .post("/images-upload", formData)
+        .post("/video-upload", formData, {
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          onUploadProgress: e => {
+            if (e.lengthComputable) {
+              this.progress = (e.loaded / e.total) * 100;
+              console.log(this.progress);
+            }
+          }
+        })
         .then(response => {
-          this.toaster = true;
-          this.loading = false;
-          this.photos = [];
-          this.files = [];
-          this.about = "";
-          this.community = [];
-          this.loadingBtn = false;
+          currentObj.success = response.data.success;
+          currentObj.filename = "";
+          this.toastr = true;
+          console.log("SUCCESS!!");
         })
         .catch(error => {
-          console.log(error);
+          currentObj.output = error;
+          console.log("FAILURE!!");
         });
     }
   }
@@ -267,13 +213,16 @@ h4 {
     cursor: pointer;
     margin-right: 12px;
   }
-  input {
-    opacity: 0;
-    visibility: hidden;
-    z-index: -2;
-  }
 }
 .audio-file-input {
   margin-top: 2em;
+}
+input {
+  background: teal;
+  color: #fff;
+}
+input#file-upload-button {
+  background: teal;
+  color: #fff;
 }
 </style>

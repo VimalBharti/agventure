@@ -9,13 +9,16 @@
         <v-col md="8" sm="12" class="center-post-container">
             <v-card flat>
                 <v-list-item>
-                    <v-list-item-avatar color="grey">
-                        <v-img
-                            src="/storage/profile/{{$post->user->image}}"
-                            lazy-src="../images/lazy.jpg"
-                            aspect-ratio="1"
-                            class="grey lighten-2"
-                        ></v-img>
+                    <v-list-item-avatar color="teal">
+                        @if($post->user->image)
+                            <v-img
+                                src="/storage/profile/{{$post->user->image}}"
+                                lazy-src="{{asset('images/lazy.jpg')}}"
+                                aspect-ratio="1"
+                            ></v-img>
+                        @else
+                            <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
+                        @endif
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>
@@ -51,8 +54,11 @@
                 </v-container>
 
                 <div class="gallery">
+                    @isset($post->video)
+                        <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls></video>
+                    @endif
                     @foreach($images as $image)
-                        <a href="https://agrishi.s3-ap-south-1.amazonaws.com/{{$image->filename}}" data-lightbox="mygallery">
+                        <a href="https://d158vexbkkk4m1.cloudfront.net/{{$image->filename}}" data-lightbox="mygallery">
                             <v-img
                                 src="/storage/thumbnails/{{$image->thumb}}"
                                 lazy-src="{{asset('images/lazy.jpg')}}"
@@ -75,11 +81,16 @@
             <v-card>
                 <v-list two-line class="pb-0">
                     <v-list-item>
-                        <v-list-item-avatar>
-                            <v-img
-                            src="/storage/profile/{{$post->user->image}}"
-                            lazy-src="../images/lazy.jpg"
-                            ></v-img>
+                        <v-list-item-avatar color="teal">
+                            @if($post->user->image)
+                                <v-img
+                                    src="/storage/profile/{{$post->user->image}}"
+                                    lazy-src="{{asset('images/lazy.jpg')}}"
+                                    aspect-ratio="1"
+                                ></v-img>
+                            @else
+                                <span class="white--text title">{{Str::limit($post->user->name, 1, '')}}</span>
+                            @endif
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title>{{$post->user->name}}</v-list-item-title>

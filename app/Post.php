@@ -19,13 +19,7 @@ class Post extends Model
     protected $table = 'posts';
     protected $primaryKey = 'id';
     
-    protected $fillable = ['user_id', 'about', 'community_id', 'original_name', 'disk', 'path'];
-
-    protected $dates = [
-        'converted_for_streaming_at',
-    ];
-
-    protected $guarded = [];
+    protected $fillable = ['user_id', 'about', 'community_id', 'video'];
     
     use Sluggable, SoftDeletes;
 
