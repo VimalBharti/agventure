@@ -16,7 +16,7 @@ div.photoset {
     background-size: cover;
     background-position: center;
     border-radius: 4px;
-    max-height: 400px;
+    max-height: 200px;
 }
 div.photoset .photo:after {
     padding-top: 83.33333%;

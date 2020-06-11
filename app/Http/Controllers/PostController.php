@@ -100,7 +100,7 @@ class PostController extends Controller
     public function imageUpload(Request $request){
 
         $rules = [
-            'image'    => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'image'    => 'image|mimes:jpeg,png,jpg,gif,svg',
             'about'    => 'required',
         ];
         $this->validate($request, $rules);
