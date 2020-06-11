@@ -92,7 +92,7 @@
         <span class="showMe"><search></search></span>
         
         <a @click.stop="drawer = !drawer" class="navbar-item showMe">
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon>mdi-sort-variant</v-icon>
         </a>
         <v-navigation-drawer
             v-model="drawer"
