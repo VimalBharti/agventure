@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('css/image-grid.css')}}"> 
 
 @foreach($posts as $post)
 <v-row class="center-post-area">
