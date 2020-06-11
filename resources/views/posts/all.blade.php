@@ -12,11 +12,11 @@
 
                 @isset($post->postdetails)
                     @foreach($post->postdetails as $image)
-                        <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}');max-height: 200px;" href="{{route('singlePost', $post->slug)}}"></a>
+                        <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}');max-height: 200px;"></a>
                     @endforeach
                 @endisset
                 @if(count($post->postdetails) > 3)
-                    <span class="images-count"> + {{count($post->postdetails)}}</span>
+                    <a href="{{route('singlePost', $post->slug)}}"><span class="images-count"> + {{count($post->postdetails)}}</span></a>
                 @endif
             </div>
 
