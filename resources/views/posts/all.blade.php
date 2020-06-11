@@ -11,11 +11,7 @@
 
                 @isset($post->postdetails)
                     @foreach($post->postdetails as $image)
-                        <a class="photo" href="{{route('singlePost', $post->slug)}}">
-                            <v-img
-                                src="/storage/thumbnails/{{$image->thumb}}"
-                            ></v-img>
-                        </a>
+                        <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}')" href="{{route('singlePost', $post->slug)}}"></a>
                     @endforeach
                 @endisset
                 @if(count($post->postdetails) > 3)
