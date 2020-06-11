@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('css/image-grid.css')}}"> 
 
 @foreach($posts as $post)
 <v-row class="center-post-area">
@@ -11,7 +12,7 @@
 
                 @isset($post->postdetails)
                     @foreach($post->postdetails as $image)
-                        <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}')" href="{{route('singlePost', $post->slug)}}"></a>
+                        <a class="photo" style="background-image:url('/storage/thumbnails/{{$image->thumb}}');max-height: 200px;" href="{{route('singlePost', $post->slug)}}"></a>
                     @endforeach
                 @endisset
                 @if(count($post->postdetails) > 3)
