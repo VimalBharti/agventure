@@ -20,14 +20,14 @@
         <div class="single-podcast-mobile-page">
             <v-card flat>
                 <v-img
-                    src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->image}}"
+                    src="https://d158vexbkkk4m1.cloudfront.net/{{$podcast->image}}"
                     class="align-center text-center"
                     max-height="220"
                     gradient="to top, rgba(255,255,255,.4), rgba(255,255,255,1)"
                 >
                     <v-avatar size="200" class="circle-avatar">
                         <v-img
-                            src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->image}}"
+                            src="https://d158vexbkkk4m1.cloudfront.net/{{$podcast->image}}"
                             lazy-src="{{asset('images/lazy.jpg')}}"
                         ></v-img>
                     </v-avatar>
@@ -69,7 +69,7 @@
             </v-card>
             <div class="audio-player-single">
                 <audio class="listen" preload="none" controls>
-                    <source src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->audio}}">
+                    <source src="https://d158vexbkkk4m1.cloudfront.net/{{$podcast->audio}}">
                 </audio>
             </div>
         </div>

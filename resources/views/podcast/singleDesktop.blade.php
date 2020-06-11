@@ -21,7 +21,7 @@
             <div class="single-podcast-mobile-page">
                 <v-card flat>
                     <v-img
-                        src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->image}}"
+                        src="https://d158vexbkkk4m1.cloudfront.net/{{$podcast->image}}"
                         lazy-src="{{asset('images/lazy.jpg')}}"
                         class="align-center text-center"
                         max-height="300"
@@ -29,13 +29,13 @@
                     >
                         <v-avatar size="250" class="circle-avatar">
                             <v-img
-                                src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->image}}"
+                                src="https://d158vexbkkk4m1.cloudfront.net/{{$podcast->image}}"
                                 lazy-src="{{asset('images/lazy.jpg')}}"
                             ></v-img>
                         </v-avatar>
                     </v-img>
                     <div class="audio-player-single-desktop">   
-                        <audio class="audio-player" src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$podcast->audio}}" preload="auto" >
+                        <audio class="audio-player" src="https://d158vexbkkk4m1.cloudfront.net/{{$podcast->audio}}" preload="auto" >
                     </div>
                     <v-card-text>
                         <div class="user-details-single-podcast">
@@ -85,7 +85,7 @@
                 <v-row>
                     <v-col cols="2">
                         <v-img
-                            src="https://agrishi.s3.ap-south-1.amazonaws.com/{{$audio->image}}"
+                            src="https://d158vexbkkk4m1.cloudfront.net/{{$audio->image}}"
                             class="align-center featured-image"
                             justify="center"
                             height="32"

@@ -105,9 +105,6 @@ class PostController extends Controller
         ];
         $this->validate($request, $rules);
 
-        // $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
-        // $videofile = $request->video->store('videos', ['disk' => 's3']);
-        // $name = $request->video->getClientOriginalName();
 
         $post = Post::create([
             'user_id' => Auth::user()->id,
@@ -118,7 +115,6 @@ class PostController extends Controller
         if (count($request->photos)){
             foreach($request->photos as $photo) {
                 
-                // Create thumbnail
                 $image_name = $photo->getClientOriginalName();
                 $destinationPath = storage_path('app/public/thumbnails');
                 $resize_image = Image::make($photo->getRealPath());

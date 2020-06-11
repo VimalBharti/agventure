@@ -32,7 +32,7 @@
             </v-col>
             <v-col>
               <div class="caption podcast-body">
-                <a :href="`../podcast/${podcast.id}`">{{podcast.about.substring(0,120)+"..."}}</a>
+                <a :href="`../podcasts/${podcast.slug}`">{{podcast.about.substring(0,120)+"..."}}</a>
               </div>
             </v-col>
           </v-row>
