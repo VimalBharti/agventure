@@ -1,14 +1,16 @@
 <link rel="stylesheet" href="{{asset('css/image-grid.css')}}"> 
 
 @foreach($posts as $post)
-<v-row class="center-post-area">
-    <v-col class="pt-0 mb-2">
+<div class="center-post-area">
+    <div class="pt-0 mb-2">
         <v-card class="box-shadow" flat>
+            <div class="video-post">
+                @isset($post->video)
+                    <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls preload="metadata" playsinline></video>
+                @endif
+            </div>
 
             <div class="photoset square portrait">
-                @isset($post->video)
-                    <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls></video>
-                @endif
 
                 @isset($post->postdetails)
                     @foreach($post->postdetails as $image)
@@ -58,12 +60,6 @@
                     <v-list-item-subtitle>{{$post->created_at->format('d M, Y')}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-card-actions>
-                    <div class="mr-2">
-                        <a href="{{route('singlePost', $post->slug)}}">
-                            <v-icon size="22" color="grey">mdi-comment-outline</v-icon>
-                        </a>
-                        <span class="grey--text ml-1">{{$post->comments->count()}}</span>
-                    </div>
                     <!-- Save post Icon -->
                     @if (Auth::check())
                         <like
@@ -71,9 +67,7 @@
                             :favorited={{ $post->favorited() ? 'true' : 'false' }}
                         ></like>
                     @else
-                        <v-btn small depressed icon href="login">
-                            <v-icon color="grey">mdi-heart-outline</v-icon>
-                        </v-btn>
+                        <v-img src="{{asset('images/black.png')}}"></v-img>
                     @endif
                     <span class="grey--text ml-1">{{$post->likes->count()}}</span>
                 </v-card-actions>
@@ -88,8 +82,8 @@
             @endisset
 
         </v-card>
-    </v-col>
-</v-row>
+    </div>
+</div>
 @endforeach
 
 <div class="pagination-links">{{$posts->links()}}</div>

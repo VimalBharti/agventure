@@ -33,7 +33,7 @@
     <v-list dense nav class="sidebar-link-box">
       <v-list-item href="/">
         <v-list-item-icon>
-          <v-icon color="grey darken-3">mdi-buffer</v-icon>
+          <img src="{{asset('images/timeline.svg')}}">
         </v-list-item-icon>
         <v-list-content>
           <v-list-item-title>Timeline</v-list-item-title>
@@ -41,7 +41,7 @@
       </v-list-item>
       <v-list-item href="{{route('myaccount', $user->username)}}">
         <v-list-item-icon>
-          <v-icon color="grey darken-3">mdi-account</v-icon>
+          <img src="{{asset('images/account.svg')}}">
         </v-list-item-icon>
         <v-list-content>
           <v-list-item-title>My Account</v-list-item-title>
@@ -49,7 +49,7 @@
       </v-list-item>
       <v-list-item href="{{route('mypost')}}">
         <v-list-item-icon>
-          <v-icon color="grey darken-3">mdi-video</v-icon>
+          <img src="{{asset('images/posts.svg')}}">
         </v-list-item-icon>
         <v-list-content>
           <v-list-item-title>My Post</v-list-item-title>
@@ -57,7 +57,7 @@
       </v-list-item>
       <v-list-item href="{{route('inbox')}}">
         <v-list-item-icon>
-          <v-icon color="grey darken-3">mdi-message-text-outline</v-icon>
+          <img src="{{asset('images/message.png')}}">
         </v-list-item-icon>
         <v-list-content>
           <v-list-item-title>
@@ -67,7 +67,7 @@
       </v-list-item>
       <v-list-item href="{{route('savedpost')}}">
         <v-list-item-icon>
-          <v-icon color="grey darken-3">mdi-bookmark-check</v-icon>
+          <img src="{{asset('images/saved.svg')}}">
         </v-list-item-icon>
         <v-list-content>
           <v-list-item-title>
@@ -92,7 +92,7 @@
       <v-list-item href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
         <v-list-item-icon>
-          <v-icon color="grey darken-3">mdi-logout-variant</v-icon>
+          <img src="{{asset('images/logout.png')}}">
         </v-list-item-icon>
         <v-list-content>
           <v-list-item-title>

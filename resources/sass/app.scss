@@ -1,5 +1,4 @@
 @import "./vuetify.min.css";
-@import "~@mdi/font/css/materialdesignicons.min.css";
 @import "./mobile.scss";
 
 .box-shadow-lg {
@@ -143,6 +142,151 @@ a {
     }
 }
 
+// Navbar
+.primary-navbar {
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+    background: #fff !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    font-size: 15px;
+
+    .navbar-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // height: 52px;
+        // width: 70%;
+        margin: 0 auto;
+
+        a {
+            color: #444;
+        }
+    }
+    .nav-logo {
+        border-right: 1px solid #efefef;
+    }
+    .btn-border {
+        font-size: 13px;
+        border: 1px solid #999;
+        padding: 5px 12px;
+        border-radius: 4px;
+        /* background: teal; */
+        margin-left: 1em;
+    }
+    .navbar-item {
+        display: flex;
+        // padding: 0.4em 1em;
+    }
+    .pad-l-r {
+        padding: 0.4em 1em;
+    }
+    .other-links {
+        border-right: 1px solid #efefef;
+    }
+    .login-fields {
+        input {
+            border: 1px solid #dfdfdf;
+            padding: 5px 8px;
+            margin-right: 2px;
+            border-radius: 3px;
+        }
+        button {
+            background: #008080;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 3px;
+        }
+    }
+    .field {
+        display: flex;
+    }
+    .input {
+        line-height: 38px;
+        background: #efefef;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: 6px 0 0 6px;
+        outline-color: #009688;
+    }
+    .search-button {
+        color: #555 !important;
+        line-height: 36px;
+        // background: #eee;
+        border: 1px solid #999;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: 0 6px 6px 0;
+    }
+    .auth-user {
+        margin-left: 1.5em;
+        cursor: pointer;
+
+        span.username {
+            width: 32px;
+            height: 32px;
+            background: #009688;
+            color: #fff;
+            border-radius: 100%;
+            margin-right: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .auth-avatar {
+        display: flex;
+        align-items: center;
+        img {
+            width: 22px;
+            height: 22px;
+            border-radius: 50px;
+            margin-right: 5px;
+        }
+    }
+}
+
+// Android Footer
+.android-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 52px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    display: flex;
+    overflow-x: auto;
+
+    .nav__link {
+        display: flex;
+        flex-grow: 1;
+        min-width: 50px;
+        overflow: hidden;
+        white-space: nowrap;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            background-color: #eee;
+            padding: 50%;
+            border-radius: 50%;
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+            z-index: -1;
+        }
+    }
+    .nav__link:hover::before {
+        opacity: 1;
+        transition: 0.5s ease-in-out;
+    }
+}
+
 .navigation-drawer {
     min-height: 100vh;
 }
@@ -241,8 +385,8 @@ p.background-line {
 // Right Sidebar
 .right-sidebar {
     // background: #e8edf1;
-    min-height: 95vh;
-    overflow-y: scroll;
+    // min-height: 95vh;
+    // overflow-y: scroll;
 }
 
 // Add New Post Links
@@ -307,9 +451,12 @@ p.background-line {
 }
 
 // Home Page All Post
-video {
-    width: 100%;
+.video-post {
+    video {
+        width: 100%;
+    }
 }
+
 .center-post-area {
     .auth-name {
         color: #333;

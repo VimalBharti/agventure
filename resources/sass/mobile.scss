@@ -1,33 +1,33 @@
 @media (min-width: 1025px) {
     .mobile-nav {
-        display: none;
+        display: none !important;
     }
     .updates-page-footer {
-        display: none;
+        display: none !important;
     }
     .mobile-container {
-        display: none;
+        display: none !important;
     }
-    .login {
-        background-image: linear-gradient(
-                to bottom,
-                rgba(245, 246, 252, 0.3),
-                rgba(0, 0, 0, 0.8)
-            ),
-            url("images/login-bg.jpg");
-        background-size: cover;
-    }
-    .register {
-        background-image: linear-gradient(
-                to bottom,
-                rgba(245, 246, 252, 0.3),
-                rgba(0, 0, 0, 0.5)
-            ),
-            url("https://source.unsplash.com/1600x900/?agriculture");
-        background-size: cover;
-    }
+    // .login {
+    //     background-image: linear-gradient(
+    //             to bottom,
+    //             rgba(245, 246, 252, 0.3),
+    //             rgba(0, 0, 0, 0.8)
+    //         ),
+    //         url("images/login-bg.jpg");
+    //     background-size: cover;
+    // }
+    // .register {
+    //     background-image: linear-gradient(
+    //             to bottom,
+    //             rgba(245, 246, 252, 0.3),
+    //             rgba(0, 0, 0, 0.5)
+    //         ),
+    //         url("https://source.unsplash.com/1600x900/?agriculture");
+    //     background-size: cover;
+    // }
     .only-mobile {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -38,25 +38,28 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .mobile-nav {
-        display: none;
+        display: none !important;
     }
     .only-mobile {
-        display: none;
+        display: none !important;
     }
     .mobile-container {
-        display: none;
+        display: none !important;
     }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
     .event-list-home-page {
-        display: none;
+        display: none !important;
     }
     .boxed-layout {
         width: 100%;
     }
     .only-mobile {
-        display: block;
+        display: block !important;
+    }
+    .only-desktop {
+        display: none !important;
     }
 }
 
@@ -67,14 +70,17 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
     .main-container {
-        display: none;
+        display: none !important;
     }
     .mobile-container {
         min-height: 95vh;
         padding-top: 3em;
     }
     .only-mobile {
-        display: block;
+        display: block !important;
+    }
+    .only-desktop {
+        display: none !important;
     }
     .mobile-nav {
         -webkit-box-shadow: 0 6px 6px -6px #ececec;
@@ -102,24 +108,43 @@
     }
 
     // Home Post
-    // .app-post-mobile-page {
-    //     padding: 0 0.5em 3em 0.5em;
-    //     .single-mobile-post {
-    //         margin-bottom: 1em;
-    //         border-radius: 1.5em;
-    //         .image-box-mobile {
-    //             max-height: 200px;
-    //             overflow: hidden;
-    //             // border-radius: 0.5em;
-    //         }
-    //         .post-body {
-    //             a {
-    //                 color: #444;
-    //                 font-size: 14px;
-    //             }
-    //         }
-    //     }
-    // }
+
+    .single-mobile-post {
+        margin-bottom: 1em;
+        border-radius: 1.5em;
+        .image-box-mobile {
+            max-height: 200px;
+            overflow: hidden;
+            // border-radius: 0.5em;
+        }
+        .post-body {
+            a {
+                color: #444;
+                font-size: 14px;
+            }
+        }
+        .auth-avatar {
+            .username {
+                width: 32px;
+                height: 32px;
+                background: #009688;
+                color: #fff;
+                border-radius: 100%;
+                margin-right: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .auth-details {
+            .author-name {
+                font-size: 14px;
+            }
+            .timestamp {
+                font-size: 11px;
+            }
+        }
+    }
 
     // Single Podcast
     .single-podcast-mobile-page {

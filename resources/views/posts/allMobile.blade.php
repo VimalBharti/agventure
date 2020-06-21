@@ -9,7 +9,7 @@
                 @endif
             </div>
             <div class="auth-details">
-                <div>{{$post->user->name}}</div>
+                <div class="author-name">{{$post->user->name}}</div>
                 <div class="timestamp">{{$post->created_at->format('d M, Y')}}</div>
             </div> 
             <div class="action-btn">
@@ -19,13 +19,13 @@
                         :favorited={{ $post->favorited() ? 'true' : 'false' }}
                     ></like>
                 @else
-                    <v-icon size="22" color="grey">mdi-heart-outline</v-icon>
+                    <v-img src="{{asset('images/black.png')}}"></v-img>
                 @endif
-                <span class="grey--text">{{$post->likes->count()}}</span>
+                <!-- <span class="grey--text">{{$post->likes->count()}}</span> -->
             </div>
         </div>
 
-        <div class="px-3 mb-2 post-body">
+        <div class="post-body" style="padding-left:12px;margin-bottom:12px;">
             <a href="{{route('singleMobile', $post->slug)}}">{{str_limit($post->about, 200, '...')}}</a>
         </div>
         <div class="photoset square portrait">
@@ -36,7 +36,7 @@
             @endisset
         </div>
         @isset($post->video)
-            <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls></video>
+            <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls preload="metadata" style="width:100%"></video>
         @endif
     </div>
 @endforeach

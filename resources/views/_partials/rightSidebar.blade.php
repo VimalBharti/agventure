@@ -1,4 +1,4 @@
-<v-col class="right-sidebar d-none d-md-block d-lg-block" id="myRightSidebar">
+
     @guest
     @else
         @if(empty(Auth::user()->email_verified_at))
@@ -107,5 +107,5 @@
     </v-card>
 
     
-</v-col>
+
 

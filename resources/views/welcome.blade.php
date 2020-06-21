@@ -10,7 +10,9 @@
         </v-col>
         
         <!-- right Sidebar -->
-        @include('_partials.rightSidebar')
+        <v-col cols="4" class="right-sidebar d-none d-md-block d-lg-block">
+            @include('_partials.rightSidebar')
+        </v-col>
     </v-row>
 </div>
 

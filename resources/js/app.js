@@ -45,7 +45,8 @@ const app = new Vue({
         return {
             comment: false,
             drawer: null,
-            enrollNow: false
+            enrollNow: false,
+            videoLazy: false
         };
     }
 });

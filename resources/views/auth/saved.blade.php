@@ -20,19 +20,19 @@
         <v-row>
             @forelse ($myFavorites as $myFavorite)
             <v-col cols="4">
-                <v-card class="pa-1" height="320">
+                <v-card height="200px">
                     <v-card-text>
                         <div class="post-auth-details border-bottom pb-3 mb-2">
-                        <h3 class="indigo--text text--darken-3">Posted on:</h3>
-                        <div>{{$myFavorite->created_at->format('M, Y')}}</div>
+                            <span class="indigo--text text--darken-3">Posted on:</span> 
+                            {{$myFavorite->created_at->format('M, Y')}}
                         </div>
                         <div>
                             <a class="text--primary" href="{{route('singlePost', $myFavorite->slug)}}">
-                                {{str_limit($myFavorite->body, 180, '...')}}
+                                {{str_limit($myFavorite->about, 100, '...')}}
                             </a>
                         </div>
                     </v-card-text>
-                    <v-card-actions>
+                    <v-card-actions class="pt-0">
                         <like
                             :post={{ $myFavorite->id }}
                             :favorited={{ $myFavorite->favorited() ? 'true' : 'false' }}
