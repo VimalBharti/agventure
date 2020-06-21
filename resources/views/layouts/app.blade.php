@@ -21,6 +21,7 @@
     <link rel="apple-touch-icon" href="{{asset('icons/icon-192x192.png')}}">
     <link rel="apple-touch-startup-image" href="{{asset('icons/icon-192x192.png')}}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 
+    <link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet" />
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
@@ -40,6 +41,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
+    <script src="//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"></script>
+    <script src="{{asset('js/vplayer.js')}}"></script>
     @yield('script')
 
 </body>

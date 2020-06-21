@@ -69,7 +69,7 @@
                     ></like>
                 </v-card-actions>
                 <v-divider></v-divider>
-                <div class="body-2 pa-2 grey--text text--darken-3">{{str_limit($myFavorite->body, 180, '...')}}</div>
+                <div class="body-2 pa-2 grey--text text--darken-3">{{str_limit($myFavorite->about, 180, '...')}}</div>
             </v-card>
         @empty
             <p>You have no favorite posts.</p>

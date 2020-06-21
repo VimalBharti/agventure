@@ -285,6 +285,9 @@ a {
         opacity: 1;
         transition: 0.5s ease-in-out;
     }
+    .active-nav {
+        background-color: #eee;
+    }
 }
 
 .navigation-drawer {
@@ -452,9 +455,9 @@ p.background-line {
 
 // Home Page All Post
 .video-post {
-    video {
-        width: 100%;
-    }
+    // video {
+    //     width: 100% !important;
+    // }
 }
 
 .center-post-area {

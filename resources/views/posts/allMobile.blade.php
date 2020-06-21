@@ -36,7 +36,15 @@
             @endisset
         </div>
         @isset($post->video)
-            <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls preload="metadata" style="width:100%"></video>
+            <video 
+                poster="{{asset('images/login-bg.jpg')}}" 
+                class="video-js vjs-big-play-centered vjs-4-3"
+                data-setup="{}" 
+                controls
+                preload="none"
+            >
+                <source src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" type="video/mp4" />
+            </video>
         @endif
     </div>
 @endforeach

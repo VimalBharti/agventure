@@ -6,7 +6,14 @@
         <v-card class="box-shadow" flat>
             <div class="video-post">
                 @isset($post->video)
-                    <video src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" controls preload="metadata" playsinline></video>
+                    <video 
+                        class="video-js vjs-big-play-centered vjs-16-9" 
+                        id="videoPlayer"
+                        data-setup="{}"
+                        preload="metadata"
+                    >
+                        <source src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}#t=25" type="video/mp4" />
+                    </video>
                 @endif
             </div>
 

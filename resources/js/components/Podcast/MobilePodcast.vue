@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-btn class="gradient-btn add-new-post-icon" dark small fab href="../new/podcast">
-          <v-icon>mdi-plus</v-icon>
+          <span style="font-size:22px">+</span>
         </v-btn>
         <v-col v-for="podcast of podcasts" :key="podcast.id" class="single-podcast-home">
           <v-row>
