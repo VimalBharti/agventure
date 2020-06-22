@@ -40,7 +40,7 @@
                 class="video-js vjs-big-play-centered vjs-4-3"
                 data-setup="{}" 
                 controls
-                preload="none"
+                preload="metadata"
             >
                 <source src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}#t=20" type="video/mp4" />
             </video>
