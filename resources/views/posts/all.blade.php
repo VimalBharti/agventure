@@ -11,8 +11,9 @@
                         id="videoPlayer"
                         data-setup="{}"
                         preload="metadata"
+                        controls
                     >
-                        <source src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}#t=25" type="video/mp4" />
+                        <source src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}#t=20" type="video/mp4" />
                     </video>
                 @endif
             </div>
