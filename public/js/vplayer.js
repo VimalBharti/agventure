@@ -4,5 +4,6 @@ var player = videojs("videoPlayer", {
     responsive: true,
     plugins: {
         hotkeys: {}
-    }
+    },
+    techOrder: ["youtube"]
 });

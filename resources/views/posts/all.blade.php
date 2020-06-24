@@ -10,10 +10,11 @@
                         class="video-js vjs-big-play-centered vjs-16-9" 
                         id="videoPlayer"
                         data-setup="{}"
-                        preload="metadata"
+                        preload="none"
                         controls
+                        poster="https://d158vexbkkk4m1.cloudfront.net/videos/{{$post->poster}}"
                     >
-                        <source src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}#t=20" type="video/mp4" />
+                        <source src="https://d158vexbkkk4m1.cloudfront.net/{{$post->video}}" type="video/mp4" />
                     </video>
                 @endif
             </div>

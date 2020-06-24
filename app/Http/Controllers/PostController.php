@@ -87,11 +87,18 @@ class PostController extends Controller
     {
         $video = $request->file->store('videos', ['disk' => 's3']);
 
+        if($request->hasFile('poster')){
+            $poster = $request->poster->store('videos', ['disk' => 's3']);
+        } else {
+            $poster = 'poster.png';
+        }
+
         $post = Post::create([
             'user_id' => Auth::user()->id,
             'about' => $request->about,
             'community_id' => $request->community,
             'video'    =>  $video,
+            'poster' => $poster
         ]);
 
         return redirect()->back();

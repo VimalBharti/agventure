@@ -47,7 +47,7 @@
                                 <img src="/storage/profile/{{Auth::user()->image}}" style="width:35px;height:35px">
                             </a>
                         @else
-                            <a href="{{route('myaccount', $user->username)}}" class="navbar-item">
+                            <a href="{{route('myaccount', $user->username)}}" class="navbar-item" style="padding-right:0.6em">
                                 <span class="username">{{Str::limit(Auth::user()->name, 1, '')}}</span>
                             </a>
                         @endif

@@ -15,18 +15,12 @@
         </v-card>
         <v-card>
           <v-card-text>
-            <h4>
-              <v-icon small>mdi-pencil</v-icon>
-              <span>Share an update!</span>
-            </h4>
-            <v-divider></v-divider>
-
             <v-row>
               <v-col cols="12">
                 <v-textarea
                   required
                   v-model="about"
-                  label="Whats on your mind?"
+                  label="About Video"
                   solo
                   flat
                   rows="2"
@@ -38,20 +32,34 @@
             <p v-if="error" class="red--text">{{error}}</p>
 
             <v-divider></v-divider>
+
             <v-progress-linear color="teal" height="10" :value="progress" striped></v-progress-linear>
 
+            <v-row>
+              <v-col>
+                <input
+                  type="file"
+                  :rules="rules"
+                  class="input-video"
+                  accept="video/mp4, video/m3u8, video/mov, video/avi, video/3gp"
+                  @change="handleFileUpload"
+                />
+              </v-col>
+
+              <v-col>
+                <input
+                  type="file"
+                  :rules="rules"
+                  class="poster"
+                  ref="poster"
+                  accept="image/*"
+                  @change="handlePosterUpload"
+                />
+              </v-col>
+            </v-row>
+
             <v-row class="upload-control">
-              <input
-                type="file"
-                :rules="rules"
-                accept="video/mp4, video/m3u8, video/mov, video/avi, video/3gp"
-                @change="handleFileUpload"
-              />
-
-              <!-- Share Button -->
-              <v-spacer></v-spacer>
-
-              <v-btn dark @click="submitFile" color="teal" small>Share Post</v-btn>
+              <v-btn block dark @click="submitFile" color="teal">Share Post</v-btn>
             </v-row>
           </v-card-text>
         </v-card>
@@ -77,6 +85,7 @@ export default {
     community: "",
     filename: "",
     file: "",
+    poster: "",
     progress: "0",
     rules: [
       value =>
@@ -103,6 +112,10 @@ export default {
       this.filename = e.target.files[0].name;
       this.file = e.target.files[0];
     },
+    handlePosterUpload(e) {
+      console.log(e.target.files[0]);
+      this.poster = e.target.files[0];
+    },
     submitFile(e) {
       e.preventDefault();
       let currentObj = this;
@@ -112,6 +125,7 @@ export default {
       formData.append("about", this.about);
       formData.append("community", this.community);
       formData.append("file", this.file);
+      formData.append("poster", this.poster);
 
       axios
         .post("/video-upload", formData, {
@@ -217,9 +231,11 @@ h4 {
 .audio-file-input {
   margin-top: 2em;
 }
-input {
+input.input-video {
   background: teal;
   color: #fff;
+  height: 40px;
+  padding-top: 6px;
 }
 input#file-upload-button {
   background: teal;
