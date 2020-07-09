@@ -16,6 +16,7 @@
             <a href="/all/updates" class="navbar-item pad-l-r">Updates</a>
             <a href="/all/podcasts" class="navbar-item pad-l-r">Podcast</a>
             <a href="/register" class="navbar-item pad-l-r">Join Now</a>
+            <a href="{{route('all-articles')}}" class="navbar-item pad-l-r">Articles</a>
         </div>
         @guest
             <div class="navbar-item only-desktop login-fields pad-l-r">
@@ -29,8 +30,11 @@
         @else
             <div class="navbar-item only-desktop">
                 <div class="other-links navbar-item">
+                    <a href="{{url('articles/create')}}" class="navbar-item pad-l-r" style="border:1px solid #dfdfdf;border-radius:8px;margin-right:5px">
+                        Publish Article
+                    </a>
                     <a href="{{url('new/post')}}" class="navbar-item pad-l-r" style="border:1px solid #dfdfdf;border-radius:8px">
-                        Add post
+                        Add Post
                     </a>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();" class="navbar-item pad-l-r">

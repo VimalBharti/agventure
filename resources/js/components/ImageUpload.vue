@@ -60,7 +60,7 @@
             <v-progress-linear color="teal" indeterminate rounded height="4" v-if="loading"></v-progress-linear>
             <v-row class="upload-control">
               <label for="file">
-                <v-icon size="30">mdi-camera</v-icon>
+                <v-icon size="30">image</v-icon>
               </label>
               <input type="file" id="file" @change="onInputChange" multiple />
 

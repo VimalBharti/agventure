@@ -70,29 +70,92 @@
                 <v-divider class="mt-8"></v-divider>
                 <!-- Add Events -->
                 <v-row>
-                    <v-col cols="8">
-                        <h3>All Updates</h3>
-                        <v-row>
-                            @foreach($updates as $update)
-                            <v-col cols="4" class="d-flex flex-column">
-                                <v-card class="flex d-flex flex-column">
-                                    <v-img
-                                        class="white--text align-end"
-                                        height="120px"
-                                        src="{{asset('uploads/updates/' . $update->image)}}"
-                                    >
-                                    </v-img>
-                                    <div class="px-3 pt-2">
-                                        <p class="text--primary mb-0">{{$update->title}}</p>
-                                        <p class="caption text--secondary">{{str_limit($update->about, 100, '...')}}</p>
-                                    </div>
-                                    <v-btn block>View</v-btn>
-                                </v-card>
-                            </v-col>
-                            @endforeach
-                        </v-row>
+                    <v-col cols="6">
+                        <v-card class="pa-4 mt-4">
+                            <h3 class="mb-4">Add Market trends</h3>
+                            <form action="{{route('saveMarketTrends')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                                <div>
+                                    <v-text-field
+                                        label="Crop Name"
+                                        outlined
+                                        name="crop"
+                                        dense
+                                    ></v-text-field>
+                                    <v-text-field
+                                        label="Month"
+                                        outlined
+                                        name="month"
+                                        dense
+                                    ></v-text-field>
+                                    <v-text-field
+                                        label="Rate"
+                                        outlined
+                                        name="rate"
+                                        dense
+                                    ></v-text-field>
+                                    <v-card-actions>
+                                        <v-btn outlined color="teal" block type="submit">Save Market Trends</v-btn>
+                                    </v-card-actions>
+                                </div>
+                            </form>
+                        </v-card>
                     </v-col>
-                    <v-col cols="4">
+                    <v-col cols="6">
+                        <v-card class="pa-4 mt-4">
+                            <h3 class="mb-4">Add Short News</h3>
+                            <form action="{{route('saveShortNews')}}" method="POST" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <v-textarea
+                                    outlined
+                                    name="content"
+                                    label="Short News"
+                                    dense
+                                ></v-textarea>
+                                <v-btn block large outlined type="submit">Post News</v-btn>
+                            </form>
+                        </v-card>
+                    </v-col>
+                </v-row>
+
+                <v-divider class="my-8"></v-divider>
+
+                <!-- Add new Community -->
+                <v-row>
+                    <v-col cols="6">
+                        <v-card class="pa-4 mt-4">
+                            <h3 class="mb-4">Add Community</h3>
+                            <form action="/add/community" method="POST" enctype="multipart/form-data">
+                            @csrf
+                                <div>
+                                    <v-text-field
+                                        label="Outlined"
+                                        outlined
+                                        name="title"
+                                    ></v-text-field>
+                                    <v-file-input
+                                        accept="image/png, image/jpeg, image/bmp"
+                                        placeholder="Select featured Image"
+                                        prepend-icon="mdi-camera"
+                                        label="Upload jpg, png"
+                                        name="image"
+                                    ></v-file-input>
+                                    <v-textarea
+                                        required
+                                        name="about"
+                                        label="About Community..."
+                                        outlined
+                                        rows="4"
+                                        auto-grow
+                                    ></v-textarea>
+                                    <v-card-actions class="pa-5">
+                                        <v-btn outlined color="teal" block type="submit">Add Community</v-btn>
+                                    </v-card-actions>
+                                </div>
+                            </form>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="6">
                         <v-card class="pa-4 mt-4">
                             <h3 class="mb-4">Add new update</h3>
                             <form action="{{route('newUpdate')}}" method="POST" enctype="multipart/form-data">
@@ -127,39 +190,25 @@
                         </v-card>
                     </v-col>
                 </v-row>
-
-                <!-- Add new Community -->
+                <h3>All Updates</h3>
                 <v-row>
-                    <v-col cols="6">
-                        <form action="/add/community" method="POST" enctype="multipart/form-data">
-                        @csrf
-                            <div>
-                                <v-text-field
-                                    label="Outlined"
-                                    outlined
-                                    name="title"
-                                ></v-text-field>
-                                <v-file-input
-                                    accept="image/png, image/jpeg, image/bmp"
-                                    placeholder="Select featured Image"
-                                    prepend-icon="mdi-camera"
-                                    label="Upload jpg, png"
-                                    name="image"
-                                ></v-file-input>
-                                <v-textarea
-                                    required
-                                    name="about"
-                                    label="About Community..."
-                                    outlined
-                                    rows="4"
-                                    auto-grow
-                                ></v-textarea>
-                                <v-card-actions class="pa-5">
-                                    <v-btn outlined color="teal" block type="submit">Add Community</v-btn>
-                                </v-card-actions>
+                    @foreach($updates as $update)
+                    <v-col cols="4" class="d-flex flex-column">
+                        <v-card class="flex d-flex flex-column">
+                            <v-img
+                                class="white--text align-end"
+                                height="120px"
+                                src="{{asset('uploads/updates/' . $update->image)}}"
+                            >
+                            </v-img>
+                            <div class="px-3 pt-2">
+                                <p class="text--primary mb-0">{{$update->title}}</p>
+                                <p class="caption text--secondary">{{str_limit($update->about, 100, '...')}}</p>
                             </div>
-                        </form>
+                            <v-btn block>View</v-btn>
+                        </v-card>
                     </v-col>
+                    @endforeach
                 </v-row>
             </v-container>
         </v-col>

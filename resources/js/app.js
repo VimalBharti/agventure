@@ -1,24 +1,20 @@
 require("./bootstrap");
 
 window.Vue = require("vue");
-import moment from "moment";
 
-Vue.filter("formatDate", function(value) {
-    if (value) {
-        return moment(String(value)).format("LL");
-    }
-});
-
-import Toastr from "vue-toastr";
-Vue.use(Toastr);
-
-import Vuetify from "vuetify";
-Vue.use(Vuetify);
-
+import vuetify from "./vuetify";
+import router from "./router";
+Vue.component(
+    "add-article",
+    require("./components/Article/addArticle.vue").default
+);
+Vue.component("leftsidebar", require("./components/Leftsidebar.vue").default);
 Vue.component("chat", require("./components/chat.vue").default);
 Vue.component("image-upload", require("./components/ImageUpload.vue").default);
 Vue.component("video-upload", require("./components/VideoUpload.vue").default);
 Vue.component("new-podcast", require("./components/NewPodcast.vue").default);
+Vue.component("all-post", require("./components/Post/Post.vue").default);
+Vue.component("rightsidebar", require("./components/Rightsidebar.vue").default);
 Vue.component(
     "all-podcast",
     require("./components/Podcast/Podcast.vue").default
@@ -38,9 +34,10 @@ Vue.component(
     require("./components/NewPostMobile.vue").default
 );
 
-const app = new Vue({
+new Vue({
     el: "#app",
-    vuetify: new Vuetify(),
+    vuetify,
+    router,
     data() {
         return {
             comment: false,

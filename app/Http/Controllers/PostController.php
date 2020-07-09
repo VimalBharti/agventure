@@ -79,8 +79,8 @@ class PostController extends Controller
 
     // Post save by axios
     public function getAllPosts(){
-        $posts = Post::with('postdetails', 'user', 'community')->orderBy('created_at', 'desc')->get();
-        return response()->json($posts);
+        $posts = Post::with('postdetails', 'user', 'community')->orderBy('created_at', 'desc')->paginate(2);
+        return response()->json($posts, 200);
     }
 
     public function videoUpload(Request $request)

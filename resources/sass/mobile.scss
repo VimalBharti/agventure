@@ -29,12 +29,10 @@
     .only-mobile {
         display: none !important;
     }
+    .homepage-all-post {
+        margin-top: 3em;
+    }
 }
-
-/* 
-    ##Device = Tablets, Ipads (portrait)
-    ##Screen = B/w 768px to 1024px
-  */
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .mobile-nav {
@@ -45,6 +43,9 @@
     }
     .mobile-container {
         display: none !important;
+    }
+    .homepage-all-post {
+        margin-top: 3em;
     }
 }
 
@@ -61,6 +62,11 @@
     .only-desktop {
         display: none !important;
     }
+    .homepage-all-post {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        margin-top: 1.5em;
+    }
 }
 
 /* 
@@ -76,6 +82,12 @@
         min-height: 95vh;
         padding-top: 3em;
     }
+    .homepage-all-post {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        margin-top: 1.3em !important;
+    }
+
     .only-mobile {
         display: block !important;
     }

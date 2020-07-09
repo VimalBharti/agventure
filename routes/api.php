@@ -37,6 +37,7 @@ Route::post('posts/delete', 'API\PostController@delete')->middleware('auth:api')
 Route::post('posts/update', 'API\PostController@update')->middleware('auth:api');
 Route::get('posts', 'API\PostController@posts');
 
+
 // Comments
 Route::post('comments/create', 'API\CommentController@create')->middleware('auth:api');
 Route::post('comments/delete', 'API\CommentController@delete')->middleware('auth:api');

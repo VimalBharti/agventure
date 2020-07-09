@@ -5,6 +5,7 @@
     <div class="pt-0 mb-2">
         <v-card class="box-shadow" flat>
             <div class="video-post">
+            
                 @isset($post->video)
                     <video 
                         class="video-js vjs-big-play-centered vjs-16-9" 

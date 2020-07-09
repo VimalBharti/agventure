@@ -104,6 +104,30 @@ Route::post('comment', 'CommentController@store')->name('comments.store');
 
 /* 
 ========================================
+---------     SHORT NEWS    -----------
+*/
+Route::post('news', 'AdminController@saveShortNews')->name('saveShortNews');
+Route::get('news', 'AdminController@getShortNews')->name('getShortNews');
+
+
+/* 
+========================================
+---------     MARKET TRENDS    -----------
+*/
+Route::post('market', 'AdminController@saveMarketTrends')->name('saveMarketTrends');
+Route::get('market', 'AdminController@getMarketTrends')->name('getMarketTrends');
+
+/* 
+========================================
+---------     ARTICLE/BLOG    ----------
+*/
+Route::get('articles/create', 'ArticleController@create');
+Route::any('articles/addNew', 'ArticleController@addArticle');
+Route::get('all-articles', 'ArticleController@getAllArticles')->name('all-articles');
+
+
+/* 
+========================================
 ---------------  POST  -----------------
 */
 Route::group(['middleware' => 'auth', 'prefix' => 'post'], function(){
@@ -137,6 +161,7 @@ Route::get('/m/{slug}', 'PostController@singleMobile')->name('singleMobile');
 Route::get('new/podcast', 'PodcastController@newPodcast')->middleware('auth');
 Route::post('new/podcast', 'PodcastController@createPodcast')->middleware('auth');
 Route::get('api-podcasts', 'PodcastController@ApiPodcast');
+Route::get('api-podcasts-home', 'PodcastController@HomePodcast');
 Route::get('m/podcast/{id}', 'PodcastController@SinglePodcast');
 Route::get('podcasts/{slug}', 'PodcastController@SinglePodcastDesktop');
 Route::get('all/podcasts', 'PodcastController@getPodcast')->name('podcast');

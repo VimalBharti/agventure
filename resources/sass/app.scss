@@ -1,4 +1,4 @@
-@import "./vuetify.min.css";
+@import "~vuetify/dist/vuetify.css";
 @import "./mobile.scss";
 
 .box-shadow-lg {
@@ -422,7 +422,7 @@ p.background-line {
 }
 .main-container {
     min-height: 95vh;
-    padding-top: 5%;
+    padding-top: 3%;
 
     .center-post-container {
         -ms-overflow-style: none;
@@ -454,10 +454,8 @@ p.background-line {
 }
 
 // Home Page All Post
-.video-post {
-    // video {
-    //     width: 100% !important;
-    // }
+.app-post-home-page {
+    // padding-top: 3em;
 }
 
 .center-post-area {

@@ -2,27 +2,27 @@
 
 @section('content')
     
-<div class="main-container boxed-layout">
 
+<v-container>
     <v-row class="app-post-home-page">  
-        <v-col cols="8">
-            @include('posts.all')
+        <!-- Left Sidebar -->
+        <v-col md="3" class="d-none d-md-block mt-12">
+            <leftsidebar></leftsidebar>
+        </v-col>
+
+        <v-col md="6" class="homepage-all-post">
+            <all-post></all-post>
         </v-col>
         
         <!-- right Sidebar -->
-        <v-col cols="4" class="right-sidebar d-none d-md-block d-lg-block">
-            @include('_partials.rightSidebar')
+        <v-col md="3" class="right-sidebar d-none d-md-block mt-12">
+            <RightSidebar></RightSidebar>
         </v-col>
     </v-row>
-</div>
+</v-container>
 
-<div class="mobile-container">
-    <!-- App post Mobile screen -->
-    <div class="app-post-mobile-page">
-        @include('posts.allMobile')
-    </div>
-    <!-- footer link bar -->
-    @include('mobile.footer')
+<div class="mobile-nav only-mobile">
+    @include('mobile.footer');
 </div>
 
 @endsection

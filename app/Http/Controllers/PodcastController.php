@@ -14,6 +14,10 @@ class PodcastController extends Controller
         $podcasts = Podcast::with('user')->orderBy('created_at', 'desc')->get();
         return response()->json($podcasts);
     }
+    public function HomePodcast(){
+        $podcasts = Podcast::with('user')->orderBy('created_at', 'desc')->paginate(5);
+        return response()->json($podcasts);
+    }
     public function SinglePodcast($id){
         $podcast = Podcast::where('id', '=', $id)->with('user')->firstOrFail();
         return view('podcast.singlePodcast', compact('podcast'));
